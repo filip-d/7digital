@@ -1,0 +1,7 @@
+Ruby wrapper for 7digital API 
+
+Example usage:
+	sevendigital_client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :country => "GB")
+	artist = sevendigital_client.artist.get_details(1)
+	puts artist.name
+
