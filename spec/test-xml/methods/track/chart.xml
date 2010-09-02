@@ -1,0 +1,150 @@
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<chart>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>20</totalItems>
+		<type>track</type>
+		<fromDate>2008-08-01T00:00:00+01:00</fromDate>
+		<toDate>2008-08-01T00:00:00+01:00</toDate>
+		<chartItem>
+			<position>1</position>
+			<change>Down</change>
+			<track id="2825304">
+				<title>Ultraviolet (Edit)</title>
+				<version></version>
+				<artist id="202721">
+					<name>Stiff Dylans</name>
+					<appearsAs>Stiff Dylans</appearsAs>
+					<url>http://www.7digital.com/artists/stiff-dylans/?partner=712</url>
+				</artist>
+				<release id="264505">
+					<title>Ultraviolet</title>
+					<version></version>
+					<type>Single</type>
+					<barcode>886973254226</barcode>
+					<artist id="202721">
+						<name>Stiff Dylans</name>
+						<appearsAs>Stiff Dylans</appearsAs>
+						<url>http://www.7digital.com/artists/stiff-dylans/?partner=712</url>
+					</artist>
+					<url>http://www.7digital.com/artists/stiff-dylans/ultraviolet/?partner=712</url>
+					<image>http://cdn.7static.com/static/img/sleeveart/00/002/645/0000264505_50.jpg</image>
+				</release>
+				<url>http://www.7digital.com/artists/stiff-dylans/ultraviolet/01-Ultraviolet-(Edit)?partner=712&amp;partner=712
+				</url>
+			</track>
+		</chartItem>
+		<chartItem>
+			<position>2</position>
+			<change>Down</change>
+			<track id="2937488">
+				<title>All Summer Long (Album Version)</title>
+				<version></version>
+				<artist id="40985">
+					<name>Kid Rock</name>
+					<appearsAs>Kid Rock</appearsAs>
+					<url>http://www.7digital.com/artists/kid-rock/?partner=712</url>
+				</artist>
+				<release id="267635">
+					<title>All Summer Long</title>
+					<version></version>
+					<type>Single</type>
+					<barcode>075679990754</barcode>
+					<artist id="40985">
+						<name>Kid Rock</name>
+						<appearsAs>Kid Rock</appearsAs>
+						<url>http://www.7digital.com/artists/kid-rock/?partner=712</url>
+					</artist>
+					<url>http://www.7digital.com/artists/kid-rock/all-summer-long-2/?partner=712</url>
+					<image>http://cdn.7static.com/static/img/sleeveart/00/002/676/0000267635_50.jpg</image>
+				</release>
+				<url>http://www.7digital.com/artists/kid-rock/all-summer-long-2/01-All-Summer-Long-(Album-Version)?partner=712&amp;partner=712</url>
+			</track>
+		</chartItem>
+		<chartItem>
+			<position>3</position>
+			<change>Down</change>
+			<track id="3237369">
+				<title>I Kissed A Girl</title>
+				<version></version>
+				<artist id="132789">
+					<name>Katy Perry</name>
+					<appearsAs>Katy Perry</appearsAs>
+					<url>http://www.7digital.com/artists/katy-perry/?partner=712</url>
+				</artist>
+				<release id="288432">
+					<title>I Kissed A Girl</title>
+					<version></version>
+					<type>Single</type>
+					<barcode>5099923517752</barcode>
+					<artist id="132789">
+						<name>Katy Perry</name>
+						<appearsAs>Katy Perry</appearsAs>
+						<url>http://www.7digital.com/artists/katy-perry/?partner=712</url>
+					</artist>
+					<url>http://www.7digital.com/artists/katy-perry/i-kissed-a-girl-4/?partner=712</url>
+					<image>http://cdn.7static.com/static/img/sleeveart/00/002/884/0000288432_50.jpg</image>
+				</release>
+				<url>http://www.7digital.com/artists/katy-perry/i-kissed-a-girl-4/01-I-Kissed-A-Girl?partner=712&amp;partner=712
+				</url>
+			</track>
+		</chartItem>
+		<chartItem>
+			<position>4</position>
+			<change>Down</change>
+			<track id="3059686">
+				<title>Hometown Glory (High Contrast Remix)</title>
+				<version></version>
+				<artist id="142111">
+					<name>Adele</name>
+					<appearsAs>Adele</appearsAs>
+					<url>http://www.7digital.com/artists/adele/?partner=712</url>
+				</artist>
+				<release id="275260">
+					<title>Hometown Glory</title>
+					<version></version>
+					<type>Single</type>
+					<barcode>634904037468</barcode>
+					<artist id="142111">
+						<name>Adele</name>
+						<appearsAs>Adele</appearsAs>
+						<url>http://www.7digital.com/artists/adele/?partner=712</url>
+					</artist>
+					<url>http://www.7digital.com/artists/adele/hometown-glory/?partner=712</url>
+					<image>http://cdn.7static.com/static/img/sleeveart/00/002/752/0000275260_50.jpg</image>
+				</release>
+				<url>http://www.7digital.com/artists/adele/hometown-glory/02-Hometown-Glory-(High-Contrast-Remix)?partner=712&amp;partner=712</url>
+			</track>
+		</chartItem>
+		<chartItem>
+			<position>5</position>
+			<change>Down</change>
+			<track id="2856175">
+				<title>Dance Wiv Me</title>
+				<version>Extended</version>
+				<artist id="17811">
+					<name>Dizzee Rascal</name>
+					<appearsAs>Dizzee Rascal feat Calvin Harris &amp; Chrome</appearsAs>
+					<url>http://www.7digital.com/artists/dizzee-rascal/?partner=712</url>
+				</artist>
+				<release id="265402">
+					<title>Dance Wiv Me</title>
+					<version></version>
+					<type>Single</type>
+					<barcode>5050954181787</barcode>
+					<artist id="17811">
+						<name>Dizzee Rascal</name>
+						<appearsAs>Dizzee Rascal feat Calvin Harris &amp; Chrome</appearsAs>
+						<url>http://www.7digital.com/artists/dizzee-rascal/?partner=712</url>
+					</artist>
+					<url>http://www.7digital.com/artists/dizzee-rascal/dance-wiv-me/?partner=712</url>
+					<image>http://cdn.7static.com/static/img/sleeveart/00/002/654/0000265402_50.jpg</image>
+				</release>
+				<url>http://www.7digital.com/artists/dizzee-rascal/dance-wiv-me/02-Dance-Wiv-Me?partner=712&amp;partner=712
+				</url>
+			</track>
+		</chartItem>
+	</chart>
+</response>

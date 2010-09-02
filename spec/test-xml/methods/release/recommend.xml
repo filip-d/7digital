@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<recommendations>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>2</totalItems>
+		<recommendedItem>
+			<release id="185992">
+				<title>My World - Your World</title>
+				<version></version>
+				<type>Single</type>
+				<barcode>5051442611960</barcode>
+				<year>2007</year>
+				<explicitContent>false</explicitContent>
+				<artist id="141304">
+					<name>Agenda Zero</name>
+					<appearsAs>Agenda Zero</appearsAs>
+					<url>http://www.7digital.com/artists/agenda-zero/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/agenda-zero/my-world-your-world/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/001/859/0000185992_50.jpg</image>
+				<releaseDate>2007-11-23T00:00:00Z</releaseDate>
+				<addedDate>2007-12-04T14:14:41Z</addedDate>
+				<price>
+					<currency code="GBP">&#163;</currency>
+					<value></value>
+					<formattedPrice>N/A</formattedPrice>
+					<onSale>false</onSale>
+				</price>
+				<formats availableDrmFree="true">
+					<format id="48">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>256</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="257">
+					<name>WM Germany</name>
+				</label>
+			</release>
+		</recommendedItem>
+		<recommendedItem>
+			<release id="108081">
+				<title>Bring Back The Future</title>
+				<version></version>
+				<type>Single</type>
+				<barcode>4014235781449</barcode>
+				<year>2004</year>
+				<explicitContent>false</explicitContent>
+				<artist id="84568">
+					<name>Terra V.</name>
+					<appearsAs>Terra V.</appearsAs>
+					<url>http://www.7digital.com/artists/terra-v/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/terra-v/bring-back-the-future/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/001/080/0000108081_50.jpg</image>
+				<releaseDate>2004-11-24T00:00:00Z</releaseDate>
+				<addedDate>2007-06-18T14:53:45+01:00</addedDate>
+				<price>
+					<currency code="GBP">&#163;</currency>
+					<value></value>
+					<formattedPrice>N/A</formattedPrice>
+					<onSale>false</onSale>
+				</price>
+				<formats availableDrmFree="true">
+					<format id="1">
+						<fileFormat>WMA</fileFormat>
+						<bitRate>192</bitRate>
+						<drmFree>false</drmFree>
+					</format>
+					<format id="2">
+						<fileFormat>M4A</fileFormat>
+						<bitRate>192</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+					<format id="6">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>192</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="2792">
+					<name>Fakten-Records</name>
+				</label>
+			</release>
+		</recommendedItem>
+	</recommendations>
+</response>

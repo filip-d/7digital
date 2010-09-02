@@ -1,0 +1,34 @@
+<track id="1628015">
+	<title>Burning</title>
+	<version />
+	<artist id="29755">
+		<name>The Whitest Boy Alive</name>
+		<appearsAs>The Whitest Boy Alive</appearsAs>
+		<url>http://www.7digital.com/artists/the-whitest-boy-alive/</url>
+	</artist>
+	<trackNumber>1</trackNumber>
+	<duration>189</duration>
+	<explicitContent>false</explicitContent>
+	<isrc>DED620600065</isrc>
+	<release id="155408">
+		<title>Dreams</title>
+		<version>UK</version>
+		<type>Album</type>
+		<artist id="29755">
+			<name>The Whitest Boy Alive</name>
+			<appearsAs>The Whitest Boy Alive</appearsAs>
+			<url>http://www.7digital.com/artists/the-whitest-boy-alive/?partner=123</url>
+		</artist>
+		<url>http://www.7digital.com/artists/the-whitest-boy-alive/dreams-1/?partner=123</url>
+		<image>http://cdn.7static.com/static/img/sleeveart/00/001/554/0000155408_50.jpg</image>
+	</release>
+	<url>http://www.7digital.com/artists/the-whitest-boy-alive/dreams-1/01-Burning/?partner=123</url>
+	<price>
+		<currency code="GBP">£</currency>
+		<value>0.79</value>
+		<formattedPrice>£0.79</formattedPrice>
+		<rrp>0.79</rrp>
+		<formattedRrp>£0.79</formattedRrp>
+		<onSale>false</onSale>
+	</price>
+</track>

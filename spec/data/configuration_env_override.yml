@@ -1,0 +1,5 @@
+common:
+  api_url: test-yml-common.7digital.com
+
+development:
+  api_url: test-yml-development.7digital.com

@@ -1,0 +1,29 @@
+<response status="ok" version="1.2">
+    <tracks>
+        <page>1</page>
+        <pageSize>10</pageSize>
+        <totalItems>2</totalItems>
+        <track id="1628015">
+            <title>Burning</title>
+            <version />
+            <artist id="29755">
+                <name>The Whitest Boy Alive</name>
+                <appearsAs>The Whitest Boy Alive</appearsAs>
+            </artist>
+						<release id="123">
+							<title>Test</title>
+						</release>
+        </track>
+			 <track id="1628016">
+            <title>Burning</title>
+            <version />
+            <artist id="29755">
+                <name>The Whitest Boy Alive</name>
+                <appearsAs>The Whitest Boy Alive</appearsAs>
+            </artist>
+						<release id="123">
+							<title>Test</title>
+						</release>
+        </track>
+    </tracks>
+</response>

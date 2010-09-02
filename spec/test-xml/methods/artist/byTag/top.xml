@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<taggedResults>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>35</totalItems>
+		<type>artist</type>
+		<taggedItem>
+			<artist id="382">
+				<name>Gorillaz</name>
+				<sortName>Gorillaz</sortName>
+				<url>http://www.7digital.com/artists/gorillaz/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/003/0000000382_150.jpg</image>
+			</artist>
+		</taggedItem>
+		<taggedItem>
+			<artist id="1244">
+				<name>Pearl Jam</name>
+				<sortName>Pearl Jam</sortName>
+				<url>http://www.7digital.com/artists/pearl-jam/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/012/0000001244_150.jpg</image>
+			</artist>
+		</taggedItem>
+		<taggedItem>
+			<artist id="8329">
+				<name>Oasis</name>
+				<sortName>Oasis</sortName>
+				<url>http://www.7digital.com/artists/oasis/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/083/0000008329_150.jpg</image>
+			</artist>
+		</taggedItem>
+		<taggedItem>
+			<artist id="922">
+				<name>Kasabian</name>
+				<sortName>Kasabian</sortName>
+				<url>http://www.7digital.com/artists/kasabian/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/009/0000000922_150.jpg</image>
+			</artist>
+		</taggedItem>
+		<taggedItem>
+			<artist id="12231">
+				<name>The Coral</name>
+				<sortName>Coral, The</sortName>
+				<url>http://www.7digital.com/artists/the-coral/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/122/0000012231_150.jpg</image>
+			</artist>
+		</taggedItem>
+	</taggedResults>
+</response>

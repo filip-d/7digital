@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+  <tracks>
+    <page>1</page>
+    <pageSize>10</pageSize>
+    <totalItems>13</totalItems>
+    <track id="1535">
+      <title>Somewhere Only We Know</title>
+      <version></version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>1</trackNumber>
+      <duration>237</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBAAN0300664</isrc>
+      <release id="112">
+        <title>Hopes And Fears</title>
+        <version>UK version</version>
+        <type>Album</type>
+        <barcode>00602498665732</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/hopes-and-fears-uk-version/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/000/001/0000000112_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/hopes-and-fears-uk-version/01-Somewhere-Only-We-Know/?partner=712</url>
+    </track>
+    <track id="359744">
+      <title>Is It Any Wonder?</title>
+      <version></version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>1</trackNumber>
+      <duration>188</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM70600560</isrc>
+      <release id="33521">
+        <title>Is It Any Wonder?</title>
+        <version>Album version</version>
+        <type>Single</type>
+        <barcode>00602498583166</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/is-it-any-wonder-album-version/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/000/335/0000033521_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/is-it-any-wonder-album-version/01-Is-It-Any-Wonder-/?partner=712</url>
+    </track>
+    <track id="3502899">
+      <title>Spiralling</title>
+      <version>Radio Edit</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>1</trackNumber>
+      <duration>204</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM70812249</isrc>
+      <release id="309745">
+        <title>Spiralling</title>
+        <version>Radio Edit</version>
+        <type>Single</type>
+        <barcode>00602517834934</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/spiralling/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/003/097/0000309745_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/spiralling/01-Spiralling/?partner=712</url>
+    </track>
+    <track id="6944493">
+      <title>Everybody's Changing</title>
+      <version></version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>4</trackNumber>
+      <duration>217</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBAAN0400092</isrc>
+      <release id="625642">
+        <title>Hopes and Fears</title>
+        <version>Deluxe Edition</version>
+        <type>Album</type>
+        <barcode>00600753225530</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/hopes-and-fears-3/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/006/256/0000625642_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/hopes-and-fears-3/04-Everybodys-Changing/?partner=712</url>
+    </track>
+    <track id="8837180">
+      <title>House Lights</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>1</trackNumber>
+      <duration>84</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000080</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/01-House-Lights/?partner=712</url>
+    </track>
+    <track id="8837181">
+      <title>Back In Time</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>2</trackNumber>
+      <duration>232</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000081</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/02-Back-In-Time/?partner=712</url>
+    </track>
+    <track id="8837186">
+      <title>Clear Skies</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>4</trackNumber>
+      <duration>293</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000083</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/04-Clear-Skies/?partner=712</url>
+    </track>
+    <track id="8837194">
+      <title>Your Love</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>6</trackNumber>
+      <duration>277</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000085</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/06-Your-Love/?partner=712</url>
+    </track>
+    <track id="8837202">
+      <title>My Shadow</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>8</trackNumber>
+      <duration>289</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000089</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/08-My-Shadow/?partner=712</url>
+    </track>
+    <track id="8837199">
+      <title>Looking Back</title>
+      <version>Album Version</version>
+      <artist id="1">
+        <name>Keane</name>
+        <appearsAs>Keane</appearsAs>
+        <url>http://www.7digital.com/artists/keane/?partner=712</url>
+      </artist>
+      <trackNumber>7</trackNumber>
+      <duration>226</duration>
+      <explicitContent>false</explicitContent>
+      <isrc>GBUM71000086</isrc>
+      <release id="799025">
+        <title>Night Train</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>00602527392622</barcode>
+        <artist id="1">
+          <name>Keane</name>
+          <appearsAs>Keane</appearsAs>
+          <url>http://www.7digital.com/artists/keane/?partner=712</url>
+        </artist>
+        <url>http://www.7digital.com/artists/keane/night-train/?partner=712</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+      </release>
+      <url>http://www.7digital.com/artists/keane/night-train/07-Looking-Back/?partner=712</url>
+    </track>
+  </tracks>
+</response>

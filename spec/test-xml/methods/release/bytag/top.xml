@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<taggedResults>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>9366</totalItems>
+		<type>release</type>
+		<taggedItem>
+			<release id="473005">
+				<title>West Ryder Pauper Lunatic Asylum</title>
+				<version></version>
+				<type>Album</type>
+				<barcode></barcode>
+				<year></year>
+				<explicitContent>false</explicitContent>
+				<artist id="922">
+					<name>Kasabian</name>
+					<appearsAs>Kasabian</appearsAs>
+					<url>http://www.7digital.com/artists/kasabian/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/kasabian/west-ryder-pauper-lunatic-asylum-1/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/004/730/0000473005_50.jpg</image>
+				<releaseDate>2009-06-07T00:00:00+01:00</releaseDate>
+				<formats availableDrmFree="true">
+					<format id="17">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>320</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="592">
+					<name>Columbia</name>
+				</label>
+			</release>
+		</taggedItem>
+		<taggedItem>
+			<release id="591881">
+				<title>In This Light And On This Evening</title>
+				<version></version>
+				<type>Album</type>
+				<barcode></barcode>
+				<year></year>
+				<explicitContent>false</explicitContent>
+				<artist id="1606">
+					<name>Editors</name>
+					<appearsAs>Editors</appearsAs>
+					<url>http://www.7digital.com/artists/editors/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/editors/in-this-light-and-on-this-evening/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/005/918/0000591881_50.jpg</image>
+				<releaseDate>2009-10-12T00:00:00+01:00</releaseDate>
+				<formats availableDrmFree="true">
+					<format id="17">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>320</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="460">
+					<name>Kitchenware</name>
+				</label>
+			</release>
+		</taggedItem>
+		<taggedItem>
+			<release id="493367">
+				<title>Horehound</title>
+				<version></version>
+				<type>Album</type>
+				<barcode></barcode>
+				<year></year>
+				<explicitContent>false</explicitContent>
+				<artist id="363150">
+					<name>The Dead Weather</name>
+					<appearsAs>The Dead Weather</appearsAs>
+					<url>http://www.7digital.com/artists/the-dead-weather/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/the-dead-weather/horehound/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/004/933/0000493367_50.jpg</image>
+				<releaseDate>2009-07-12T00:00:00+01:00</releaseDate>
+				<formats availableDrmFree="true">
+					<format id="17">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>320</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="592">
+					<name>Columbia</name>
+				</label>
+			</release>
+		</taggedItem>
+		<taggedItem>
+			<release id="398603">
+				<title>It's Blitz!</title>
+				<version></version>
+				<type>Album</type>
+				<barcode></barcode>
+				<year></year>
+				<explicitContent>false</explicitContent>
+				<artist id="892">
+					<name>Yeah Yeah Yeahs</name>
+					<appearsAs>Yeah Yeah Yeahs</appearsAs>
+					<url>http://www.7digital.com/artists/yeah-yeah-yeahs/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/yeah-yeah-yeahs/its-blitz-1/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/003/986/0000398603_50.jpg</image>
+				<releaseDate>2009-03-08T00:00:00Z</releaseDate>
+				<formats availableDrmFree="true">
+					<format id="17">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>320</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="41180">
+					<name>Universal Music Portugal SA</name>
+				</label>
+			</release>
+		</taggedItem>
+		<taggedItem>
+			<release id="602105">
+				<title>Miike Snow</title>
+				<version></version>
+				<type>Album</type>
+				<barcode></barcode>
+				<year></year>
+				<explicitContent>false</explicitContent>
+				<artist id="313205">
+					<name>Miike Snow</name>
+					<appearsAs>Miike Snow</appearsAs>
+					<url>http://www.7digital.com/artists/miike-snow/?partner=712</url>
+				</artist>
+				<url>http://www.7digital.com/artists/miike-snow/miike-snow-5/?partner=712</url>
+				<image>http://cdn.7static.com/static/img/sleeveart/00/006/021/0000602105_50.jpg</image>
+				<releaseDate>2009-10-26T00:00:00Z</releaseDate>
+				<formats availableDrmFree="true">
+					<format id="17">
+						<fileFormat>MP3</fileFormat>
+						<bitRate>320</bitRate>
+						<drmFree>true</drmFree>
+					</format>
+				</formats>
+				<label id="592">
+					<name>Columbia</name>
+				</label>
+			</release>
+		</taggedItem>
+	</taggedResults>
+</response>

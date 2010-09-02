@@ -1,0 +1,40 @@
+<release id="155408">
+	    <title>Dreams</title>
+        <version>UK</version>
+        <type>Album</type>
+        <barcode>00602517512078</barcode>
+        <year>2007</year>
+        <explicitContent>false</explicitContent>
+        <artist id="29755">
+                <name>The Whitest Boy Alive</name>
+                <appearsAs>The Whitest Boy Alive</appearsAs>
+                <url>http://www.7digital.com/artists/the-whitest-boy-alive/?partner=123</url>
+        </artist>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/001/554/0000155408_50.jpg</image>
+        <url>http://www.7digital.com/artists/the-whitest-boy-alive/dreams-(1)/?partner=123</url>
+        <releaseDate>2007-10-22T00:00:00+01:00</releaseDate>
+        <addedDate>2007-10-11T12:18:29+01:00</addedDate>
+        <price>
+                <currency code="GBP">£</currency>
+                <value>5</value>
+                <formattedPrice>£5.00</formattedPrice>
+                <rrp>7.79</rrp>
+                <formattedRrp>£7.79</formattedRrp>
+                <onSale>true</onSale>
+        </price>
+        <formats>
+                <format id="17">
+                        <fileFormat>MP3</fileFormat>
+                        <bitRate>320</bitRate>
+                        <drmFree>True</drmFree>
+                </format>
+                <format id="1">
+                        <fileFormat>WMA</fileFormat>
+                        <bitRate>192</bitRate>
+                        <drmFree>False</drmFree>
+                </format>
+        </formats>
+        <label id="40">
+                <name>Universal-Island Records Ltd.</name>
+        </label>
+</release>

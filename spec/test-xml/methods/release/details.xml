@@ -1,0 +1,49 @@
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<release id="123456">
+		<title>Bar Itaca Ibiza</title>
+		<version></version>
+		<type>Single</type>
+		<barcode>882330002882</barcode>
+		<year>2002</year>
+		<explicitContent>false</explicitContent>
+		<artist id="98023">
+			<name>Skywalker</name>
+			<appearsAs>Skywalker</appearsAs>
+			<url>http://www.7digital.com/artists/skywalker-(1)/?partner=712</url>
+		</artist>
+		<url>http://www.7digital.com/artists/skywalker-(1)/bar-itaca-ibiza/?partner=712</url>
+		<image>http://cdn.7static.com/static/img/sleeveart/00/001/234/0000123456_50.jpg</image>
+		<releaseDate>2007-01-01T00:00:00Z</releaseDate>
+		<addedDate>2007-08-22T11:34:31+01:00</addedDate>
+		<price>
+			<currency code="GBP">&#163;</currency>
+			<value>2.99</value>
+			<formattedPrice>&#163;2.99</formattedPrice>
+			<rrp>2.99</rrp>
+			<formattedRrp>&#163;2.99</formattedRrp>
+			<onSale>false</onSale>
+		</price>
+		<formats availableDrmFree="true">
+			<format id="6">
+				<fileFormat>MP3</fileFormat>
+				<bitRate>192</bitRate>
+				<drmFree>true</drmFree>
+			</format>
+			<format id="2">
+				<fileFormat>M4A</fileFormat>
+				<bitRate>192</bitRate>
+				<drmFree>true</drmFree>
+			</format>
+			<format id="1">
+				<fileFormat>WMA</fileFormat>
+				<bitRate>192</bitRate>
+				<drmFree>false</drmFree>
+			</format>
+		</formats>
+		<label id="2768">
+			<name>Alphabet City</name>
+		</label>
+	</release>
+</response>

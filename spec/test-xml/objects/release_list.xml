@@ -1,0 +1,19 @@
+<results>
+	<page>1</page>
+	<pageSize>2</pageSize>
+	<totalItems>50</totalItems>
+	<release id="123">
+		<title>expected release title</title>
+		<artist id="345">
+			<name>expected artist name</name>
+			<appearsAs>expected displayed artist name</appearsAs>
+		</artist>
+	</release>
+	<release id="456">
+		<title>expected release title</title>
+		<artist id="789">
+			<name>expected artist name</name>
+			<appearsAs>expected displayed artist name</appearsAs>
+		</artist>
+	</release>
+</results>

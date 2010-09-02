@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<artists>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>26</totalItems>
+		<artist id="14">
+			<name>The Charlatans</name>
+			<sortName>Charlatans, The</sortName>
+			<url>http://www.7digital.com/artists/the-charlatans/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/artistimages/00/000/000/0000000014_150.jpg</image>
+		</artist>
+		<artist id="20">
+			<name>Coldplay</name>
+			<sortName>Coldplay</sortName>
+			<url>http://www.7digital.com/artists/coldplay/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/artistimages/00/000/000/0000000020_150.jpg</image>
+		</artist>
+		<artist id="106">
+			<name>U2</name>
+			<sortName>U2</sortName>
+			<url>http://www.7digital.com/artists/u2/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/artistimages/00/000/001/0000000106_150.jpg</image>
+		</artist>
+		<artist id="110">
+			<name>Thirteen Senses</name>
+			<sortName>Thirteen Senses</sortName>
+			<url>http://www.7digital.com/artists/thirteen-senses/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/artistimages/00/000/001/0000000110_150.jpg</image>
+		</artist>
+		<artist id="117">
+			<name>The Thrills</name>
+			<sortName>Thrills, The</sortName>
+			<url>http://www.7digital.com/artists/the-thrills/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/artistimages/00/000/001/0000000117_150.jpg</image>
+		</artist>
+	</artists>
+</response>

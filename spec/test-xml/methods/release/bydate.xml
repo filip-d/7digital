@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<releases>
+		<page>1</page>
+		<pageSize>5</pageSize>
+		<totalItems>5</totalItems>
+		<release id="957720">
+			<title>Housewife</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>05055036252713</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+			<artist id="5766">
+				<name>The Cribs</name>
+				<appearsAs>The Cribs</appearsAs>
+				<url>http://www.7digital.com/artists/the-cribs/?partner=712</url>
+			</artist>
+			<url>http://www.7digital.com/artists/the-cribs/housewife-1/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/009/577/0000957720_50.jpg</image>
+			<releaseDate>2010-08-30T00:00:00+01:00</releaseDate>
+			<addedDate>2010-08-20T12:10:47+01:00</addedDate>
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+			<formats availableDrmFree="true">
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+			</formats>
+			<label id="20348">
+				<name>Universal Music GmbH</name>
+			</label>
+		</release>
+		<release id="949582">
+			<title>Fleur de Paris</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>5099960850157</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+			<artist id="24458">
+				<name>DIE 12 CELLISTEN DER BERLINER PHILHARMONIKER</name>
+				<appearsAs>DIE 12 CELLISTEN DER BERLINER PHILHARMONIKER</appearsAs>
+				<url>http://www.7digital.com/artists/die-12-cellisten-der-berliner-philharmoniker/?partner=712</url>
+			</artist>
+			<url>http://www.7digital.com/artists/die-12-cellisten-der-berliner-philharmoniker/fleur-de-paris/?partner=712
+			</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/009/495/0000949582_50.jpg</image>
+			<releaseDate>2010-08-30T00:00:00+01:00</releaseDate>
+			<addedDate>2010-08-11T15:43:42+01:00</addedDate>
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>7.99</value>
+				<formattedPrice>&#163;7.99</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+			<formats availableDrmFree="true">
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+			</formats>
+			<label id="410">
+				<name>EMI Classics</name>
+			</label>
+		</release>
+		<release id="956623">
+			<title>Xirhandza Thyaka Remix</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>5099990828256</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+			<artist id="299795">
+				<name>George Maluleke Navanwanati Sisters</name>
+				<appearsAs>George Maluleke Navanwanati Sisters</appearsAs>
+				<url>http://www.7digital.com/artists/george-maluleke-navanwanati-sisters/?partner=712</url>
+			</artist>
+			<url>http://www.7digital.com/artists/george-maluleke-navanwanati-sisters/xirhandza-thyaka-remix/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/009/566/0000956623_50.jpg</image>
+			<releaseDate>2010-08-30T00:00:00+01:00</releaseDate>
+			<addedDate>2010-08-19T14:14:49+01:00</addedDate>
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>7.99</value>
+				<formattedPrice>&#163;7.99</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+			<formats availableDrmFree="true">
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+			</formats>
+			<label id="1095">
+				<name>EMI South Africa</name>
+			</label>
+		</release>
+		<release id="956661">
+			<title>10 YEARS CELEBRATION</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>5099990907555</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+			<artist id="213636">
+				<name>Lord Comforters</name>
+				<appearsAs>Lord Comforters</appearsAs>
+				<url>http://www.7digital.com/artists/lord-comforters/?partner=712</url>
+			</artist>
+			<url>http://www.7digital.com/artists/lord-comforters/10-years-celebration/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/009/566/0000956661_50.jpg</image>
+			<releaseDate>2010-08-30T00:00:00+01:00</releaseDate>
+			<addedDate>2010-08-19T14:20:43+01:00</addedDate>
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>7.99</value>
+				<formattedPrice>&#163;7.99</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+			<formats availableDrmFree="true">
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+			</formats>
+			<label id="1095">
+				<name>EMI South Africa</name>
+			</label>
+		</release>
+		<release id="949741">
+			<title>The Song's Been Sung</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>5099990938252</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+			<artist id="784270">
+				<name>Tony Terran</name>
+				<appearsAs>Tony Terran</appearsAs>
+				<url>http://www.7digital.com/artists/tony-terran/?partner=712</url>
+			</artist>
+			<url>http://www.7digital.com/artists/tony-terran/the-songs-been-sung/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/009/497/0000949741_50.jpg</image>
+			<releaseDate>2010-08-30T00:00:00+01:00</releaseDate>
+			<addedDate>2010-08-11T18:24:55+01:00</addedDate>
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>7.99</value>
+				<formattedPrice>&#163;7.99</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+			<formats availableDrmFree="true">
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+			</formats>
+			<label id="30649">
+				<name>Capitol Catalog</name>
+			</label>
+		</release>
+	</releases>
+</response>

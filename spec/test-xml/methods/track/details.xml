@@ -1,0 +1,31 @@
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<track id="123456">
+		<title>Sleeping In My Car (Single Version)</title>
+		<version></version>
+		<artist id="7018">
+			<name>Roxette</name>
+			<appearsAs>Roxette</appearsAs>
+			<url>http://www.7digital.com/artists/roxette/?partner=712</url>
+		</artist>
+		<trackNumber>9</trackNumber>
+		<duration>213</duration>
+		<explicitContent>false</explicitContent>
+		<isrc>SEAMA9301032</isrc>
+		<release id="12134">
+			<title>The Pop Hits</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>0724358215557</barcode>
+			<artist id="7018">
+				<name>Roxette</name>
+				<appearsAs>Roxette</appearsAs>
+				<url>http://www.7digital.com/artists/roxette/?partner=712</url>
+			</artist>	
+			<url>http://www.7digital.com/artists/roxette/the-pop-hits/?partner=712</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/000/121/0000012134_50.jpg</image>
+		</release>
+		<url>http://www.7digital.com/artists/roxette/the-pop-hits/09-Sleeping-In-My-Car-(Single-Version)/?partner=712</url>
+	</track>
+</response>

@@ -1,0 +1,545 @@
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+
+
+	<releases>
+
+		<page>1</page>
+		<pageSize>10</pageSize>
+		<totalItems>62</totalItems>
+
+
+		<release id="799025">
+
+			<title>Night Train</title>
+			<version></version>
+			<type>Album</type>
+			<barcode>00602527392622</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/night-train/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/007/990/0000799025_50.jpg</image>
+			<releaseDate>2010-05-10T00:00:00+01:00</releaseDate>
+
+			<addedDate>2010-04-12T14:41:51+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>5.49</value>
+				<formattedPrice>&#163;5.49</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="36440">
+				<name>Universal Music Oy</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="813455">
+
+			<title>Perfect Symmetry</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602527391441</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/perfect-symmetry-10/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/008/134/0000813455_50.jpg</image>
+			<releaseDate>2010-04-19T00:00:00+01:00</releaseDate>
+
+			<addedDate>2010-04-23T01:04:10+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="809793">
+
+			<title>Somewhere Only We Know</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602527390062</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/somewhere-only-we-know-5/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809793_50.jpg</image>
+			<releaseDate>2010-04-19T00:00:00+01:00</releaseDate>
+
+			<addedDate>2010-04-21T16:21:11+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="820897">
+
+			<title>Bend &amp; Break</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602527414225</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/bend-and-break-1/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/008/208/0000820897_50.jpg</image>
+			<releaseDate>2010-04-26T00:00:00+01:00</releaseDate>
+
+			<addedDate>2010-04-30T16:33:50+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="174161">
+
+			<title>Live</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602517543638</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/live/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/001/741/0000174161_50.jpg</image>
+			<releaseDate>2010-04-21T00:00:00+01:00</releaseDate>
+
+			<addedDate>2007-11-09T13:11:35Z</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>2.29</value>
+				<formattedPrice>&#163;2.29</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="4">
+					<fileFormat>WMV</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>false</drmFree>
+				</format>
+
+
+				<format id="9">
+					<fileFormat>MP4</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+
+				<format id="13">
+					<fileFormat>WMV</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>false</drmFree>
+				</format>
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+
+				<format id="21">
+					<fileFormat>MP4</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="40">
+				<name>Universal-Island Records Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="828855">
+
+			<title>Stop For A Minute</title>
+			<version>Making Of The Video</version>
+			<type>Video</type>
+			<barcode>00602527405193</barcode>
+			<year>2010</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane / K'NAAN</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/stop-for-a-minute-1/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/008/288/0000828855_50.jpg</image>
+			<releaseDate>2010-04-14T00:00:00+01:00</releaseDate>
+
+			<addedDate>2010-05-10T17:30:52+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="4">
+					<fileFormat>WMV</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>false</drmFree>
+				</format>
+
+
+				<format id="9">
+					<fileFormat>MP4</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+
+				<format id="13">
+					<fileFormat>WMV</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>false</drmFree>
+				</format>
+
+
+				<format id="21">
+					<fileFormat>MP4</fileFormat>
+					<bitRate></bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="40">
+				<name>Universal-Island Records Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="625642">
+
+			<title>Hopes and Fears</title>
+			<version>Deluxe Edition</version>
+			<type>Album</type>
+			<barcode>00600753225530</barcode>
+			<year>2009</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/hopes-and-fears-3/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/006/256/0000625642_50.jpg</image>
+			<releaseDate>2009-11-09T00:00:00Z</releaseDate>
+
+			<addedDate>2009-10-27T16:59:05Z</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value>9.99</value>
+				<formattedPrice>&#163;9.99</formattedPrice>
+				<onSale>true</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="809800">
+
+			<title>Better Than This</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602527391465</barcode>
+			<year>2009</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/better-than-this-1/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/008/098/0000809800_50.jpg</image>
+			<releaseDate>2009-03-16T00:00:00Z</releaseDate>
+
+			<addedDate>2010-04-21T16:22:09+01:00</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="353305">
+
+			<title>Perfect Symmetry</title>
+			<version>Frankmusik Remix</version>
+			<type>Single</type>
+			<barcode>00602517968530</barcode>
+			<year>2008</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/perfect-symmetry-5/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/003/533/0000353305_50.jpg</image>
+			<releaseDate>2008-12-28T00:00:00Z</releaseDate>
+
+			<addedDate>2008-12-17T12:42:19Z</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+		<release id="353302">
+
+			<title>Perfect Symmetry</title>
+			<version></version>
+			<type>Single</type>
+			<barcode>00602517969414</barcode>
+			<year>2008</year>
+			<explicitContent>false</explicitContent>
+
+			<artist id="1">
+				<name>Keane</name>
+
+				<appearsAs>Keane</appearsAs>
+
+				<url>http://www.7digital.com/artists/keane/</url>
+			</artist>
+			<url>http://www.7digital.com/artists/keane/perfect-symmetry-4/</url>
+			<image>http://cdn.7static.com/static/img/sleeveart/00/003/533/0000353302_50.jpg</image>
+			<releaseDate>2008-12-21T00:00:00Z</releaseDate>
+
+			<addedDate>2008-12-17T12:41:45Z</addedDate>
+
+			<price>
+				<currency code="GBP">&#163;</currency>
+				<value></value>
+				<formattedPrice>N/A</formattedPrice>
+				<onSale>false</onSale>
+			</price>
+
+
+			<formats availableDrmFree="true">
+
+
+				<format id="17">
+					<fileFormat>MP3</fileFormat>
+					<bitRate>320</bitRate>
+					<drmFree>true</drmFree>
+				</format>
+
+			</formats>
+			<label id="3309">
+				<name>Universal Music Ireland Ltd.</name>
+			</label>
+
+
+		</release>
+
+
+	</releases>
+
+
+</response>

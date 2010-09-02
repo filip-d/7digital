@@ -1,0 +1,8 @@
+<price>
+	<currency code="GBP">&#163;</currency>
+	<value>1.79</value>
+	<formattedPrice>&#163;1.79</formattedPrice>
+	<rrp>1.99</rrp>
+	<formattedRrp>&#163;1.99</formattedRrp>
+	<onSale>true</onSale>
+</price>
