@@ -1,4 +1,4 @@
-require 'spec'
+ï»¿require 'spec'
 require 'date'
 require File.join(File.dirname(__FILE__), %w[../spec_helper])
 require "sevendigital"
@@ -59,11 +59,11 @@ XML
     release.release_date.should == DateTime.new(2007,10,22,0,0,0, 1.quo(24))
     release.added_date.should == DateTime.new(2007,10,11,11,18,29, 0)
     release.price.currency_code.should == :GBP
-    release.price.currency_symbol.should == "£"
+    release.price.currency_symbol.should == "Â£"
     release.price.value.should == 5
-    release.price.formatted_price.should == "£5.00"
+    release.price.formatted_price.should == "Â£5.00"
     release.price.rrp.should == 7.79
-    release.price.formatted_rrp.should == "£7.79"
+    release.price.formatted_rrp.should == "Â£7.79"
     release.price.on_sale.should == true
     release.formats.size.should == 2
     release.formats[0].id.should == 17

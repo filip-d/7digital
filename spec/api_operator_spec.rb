@@ -25,7 +25,7 @@ describe "ApiOperator" do
     uri = @api_operator.create_request_uri(api_request)
 
     uri.kind_of?(URI).should == true
-    uri.to_s.should == "http://base.api.url/version/api/method?oauth_consumer_key=oauth_consumer_key&param1=value&paramTwo=2"
+    uri.to_s.should == "http://base.api.url/version/api/method?oauth_consumer_key=oauth_consumer_key&param1=value&paramTwo=2&country=sk"
 
   end
 
@@ -61,6 +61,16 @@ describe "ApiOperator" do
 
   end
 
+  it "should throw an exception if response is not ok" do
+
+    Net::HTTP.stub(:get_response).and_return(fake_api_response)
+    failed_response = fake_digested_response(false)
+    @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
+
+    running { @api_operator.call_api(@stub_api_request) }.should raise_error Sevendigital::SevendigitalError
+
+  end
+
   def test_configuration
     configuration = OpenStruct.new
     configuration.api_url = "base.api.url"
@@ -69,12 +79,14 @@ describe "ApiOperator" do
     return configuration
   end
 
-  def fake_api_response
-    return Net::HTTP.new("1.1", 200, "response_body")
+  def fake_api_response(code = 200, body = "response_body")
+    return Net::HTTP.new("1.1", code, body)
   end
 
-  def fake_digested_response
-    return Peachy::Proxy.new("<response><content>test</content></response>")
+  def fake_digested_response(is_ok = true)
+    proxy =  Peachy::Proxy.new('<response status="ok"><content>test</content></response>')
+    proxy.stub!(:ok?).and_return(is_ok)
+    proxy
   end
 
   def stub_api_client(configuration, response_digestor)

@@ -1,4 +1,4 @@
-require "spec"
+﻿require "spec"
 require "sevendigital"
 
 describe "PriceDigestor" do
@@ -22,18 +22,18 @@ XML
 
     xml_response = <<XML 
 <price>
-  <currency code="GBP">a</currency>
+  <currency code="GBP">£</currency>
   <value>1.79</value>
-  <formattedPrice>a1.79</formattedPrice>
+  <formattedPrice>£1.79</formattedPrice>
   <onSale>true</onSale>
 </price>
 XML
 
     price = @price_digestor.from_xml(xml_response)
     price.currency_code.should == :GBP
-    price.currency_symbol.should == "a"
+    price.currency_symbol.should == "£"
     price.value.should == 1.79
-    price.formatted_price.should == "a1.79"
+    price.formatted_price.should == "£1.79"
     price.rrp.should == nil
     price.formatted_rrp.should == nil
     price.on_sale.should == true

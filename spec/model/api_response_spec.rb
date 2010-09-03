@@ -8,7 +8,7 @@ describe "ApiResponse" do
     response = Sevendigital::ApiResponse.new
     response.error_code = 0
     response.content = '<xml></xml>'
-    response.is_ok?.should == true
+    response.ok?.should == true
 
   end
 
@@ -17,7 +17,7 @@ describe "ApiResponse" do
     response = Sevendigital::ApiResponse.new
     response.error_code = 5
     response.content = '<xml></xml>'
-    response.is_ok?.should == false
+    response.ok?.should == false
 
     end
 
@@ -25,7 +25,7 @@ describe "ApiResponse" do
 
     response = Sevendigital::ApiResponse.new
     response.error_code = 0
-    response.is_ok?.should == false
+    response.ok?.should == false
 
   end
 

@@ -48,7 +48,11 @@ module Sevendigital
 
     def initialize(configuration=nil, api_operator=nil)
       @configuration = load_configurations(configuration)
-      @api_operator = api_operator || ApiOperator.new(self)
+      @api_operator = api_operator || hire_api_operator
+    end
+  
+    def hire_api_operator
+       @configuration.cache ? ApiOperatorCached.new(self, @configuration.cache) : ApiOperator.new(self)
     end
 
     def artist

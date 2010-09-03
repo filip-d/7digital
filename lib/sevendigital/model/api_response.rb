@@ -4,7 +4,7 @@ module Sevendigital
 
     attr_accessor :error_code, :error_message, :content
 
-    def is_ok?
+    def ok?
       return (@error_code == 0 && !@content.nil?)
     end
 

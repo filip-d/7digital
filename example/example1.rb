@@ -1,8 +1,19 @@
 require '../lib/sevendigital'
 
-  client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :lazy_load? => true, :country => "ES")
+class VerySimpleCache < Hash
+  def set(key, value) store(key, value);  end
+  def get(key) has_key?(key) ? fetch(key) : nil;  end
+end
 
-  artist = client.artist.get_details(1)
+  sevendigital_client = Sevendigital::Client.new(
+          :oauth_consumer_key => "YOUR_KEY_HERE",
+          :lazy_load? => true,
+          :country => "ES",
+          :cache => VerySimpleCache.new
+  )
+
+  artist = sevendigital_client.artist.get_details(1)
+  artist = sevendigital_client.artist.get_details(1)
 
   puts artist.name
 
@@ -11,7 +22,7 @@ require '../lib/sevendigital'
     puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
   end
 
-  recommendations = client.release.get_top_by_tag("alternative-indie")
+  recommendations = sevendigital_client.release.get_top_by_tag("alternative-indie")
 
   recommendations.each do |release|
     puts "\n"
@@ -20,5 +31,3 @@ require '../lib/sevendigital'
     puts "Label: #{release.label.name}"
     puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
   end
-
-
