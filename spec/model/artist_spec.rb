@@ -89,7 +89,53 @@ describe "Artist" do
     }
     @artist.get_similar(expected_options)
 
+   end
+
+  it "should be a various artist if name contains various" do
+
+    @artist.name = "various"
+    @artist.various?.should == true
+
   end
+
+  it "should be a various artist if appears as contains various" do
+
+    @artist.name = "mr"
+    @artist.appears_as = "mr various"
+    @artist.various?.should == true
+
+  end
+
+  it "should be a various artist if resembles various artist" do
+
+    @artist.name = "v.a."
+    @artist.various?.should == true
+    @artist.name = "vario"
+    @artist.various?.should == true
+    @artist.name = "vaious"
+    @artist.various?.should == true
+    @artist.name = "varios"
+    @artist.various?.should == true
+    @artist.name = "aaaa"
+    @artist.various?.should == false
+    @artist.name = "vaious"
+    @artist.various?.should == true
+    @artist.name = "varoius"
+    @artist.various?.should == true
+    @artist.name = "variuos"
+    @artist.various?.should == true
+
+  end
+
+  it "should not be a various artist if it doesn't resemble various artist" do
+
+    @artist.name = "mr small"
+    @artist.appears_as = "mr big"
+    @artist.various?.should == false
+
+  end
+
+
 
   def fake_track_list
     tracks = Array.new
