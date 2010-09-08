@@ -16,8 +16,8 @@ module Sevendigital
     end
 
     def similar?(the_other_track)
-      return the_other_track && short_title == the_other_track.short_title \
-            && the_other_track.artist && artist.name == the_other_track.artist.name
+      return the_other_track && short_title.downcase == the_other_track.short_title.downcase \
+            && the_other_track.artist && artist.name.downcase == the_other_track.artist.name.downcase
     end
 
   end

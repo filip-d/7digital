@@ -63,8 +63,8 @@ describe "Track" do
     end
 
     it "should be similar to another track if artist names and titles match"  do
-      @artist2.name = "artist 1"
-      @track2.title = "track 1"
+      @artist2.name = "Artist 1"
+      @track2.title = "Track 1"
 
       @track1.similar?(@track2).should == true
     end
@@ -72,8 +72,8 @@ describe "Track" do
     it "should be similar to another track if artist names and short titles match"  do
       @track1.title = "track 1 (uk version)"
      
-      @artist2.name = "artist 1"
-      @track2.title = "track 1 (us remix)"
+      @artist2.name = "Artist 1"
+      @track2.title = "TRACK 1 (us remix)"
 
       @track1.similar?(@track2).should == true
     end
