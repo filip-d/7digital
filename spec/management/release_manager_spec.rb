@@ -172,7 +172,29 @@ describe "ReleaseManager" do
     releases = @release_manager.get_top_by_tag(tags)
     releases.should == a_release_list
 
-  end
+    end
+
+    it "search should call release/search api method and digest the nested release list from response" do
+
+      query = "radiohead"
+      api_response = fake_api_response("release/search")
+      a_release_list = []
+
+      mock_client_digestor(@client, :release_digestor) \
+        .should_receive(:nested_list_from_xml) \
+        .with(api_response.content.search_results, :search_result, :search_results) \
+        .and_return(a_release_list)
+
+      @client.operator.should_receive(:call_api) { |api_request|
+         api_request.api_method.should == "release/search"
+         api_request.parameters[:q].should == query
+         api_response
+      }
+
+      releases = @release_manager.search(query)
+      releases.should == a_release_list
+
+    end
 
 
 end

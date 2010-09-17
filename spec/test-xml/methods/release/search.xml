@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+  <searchResults>
+    <page>1</page>
+    <pageSize>5</pageSize>
+    <totalItems>66</totalItems>
+    <searchResult>
+      <type>release</type>
+      <release id="188863">
+        <title>In Rainbows</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>093624988298</barcode>
+        <year>2007</year>
+        <explicitContent>false</explicitContent>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <url>http://eu.7digital.com/artists/radiohead/in-rainbows/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/001/888/0000188863_50.jpg</image>
+        <releaseDate>2007-12-31T00:00:00Z</releaseDate>
+        <addedDate>2007-12-19T13:31:02Z</addedDate>
+        <price>
+          <currency code="EUR">€</currency>
+          <value>9.99</value>
+          <formattedPrice>9,99€</formattedPrice>
+          <onSale>true</onSale>
+        </price>
+        <formats availableDrmFree="true">
+          <format id="17">
+            <fileFormat>MP3</fileFormat>
+            <bitRate>320</bitRate>
+            <drmFree>true</drmFree>
+          </format>
+        </formats>
+        <label id="13496">
+          <name>Warner/Chappell Music</name>
+        </label>
+      </release>
+    </searchResult>
+    <searchResult>
+      <type>release</type>
+      <release id="257658">
+        <title>The Best Of</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>5099921210754</barcode>
+        <year>2008</year>
+        <explicitContent>false</explicitContent>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <url>http://eu.7digital.com/artists/radiohead/the-best-of/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/002/576/0000257658_50.jpg</image>
+        <releaseDate>2008-06-02T00:00:00+01:00</releaseDate>
+        <addedDate>2008-05-19T10:44:21+01:00</addedDate>
+        <price>
+          <currency code="EUR">€</currency>
+          <value>8.99</value>
+          <formattedPrice>8,99€</formattedPrice>
+          <onSale>true</onSale>
+        </price>
+        <formats availableDrmFree="true">
+          <format id="17">
+            <fileFormat>MP3</fileFormat>
+            <bitRate>320</bitRate>
+            <drmFree>true</drmFree>
+          </format>
+        </formats>
+        <label id="77">
+          <name>EMI UK</name>
+        </label>
+      </release>
+    </searchResult>
+    <searchResult>
+      <type>release</type>
+      <release id="257676">
+        <title>The Best Of</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>5099921644054</barcode>
+        <year>2008</year>
+        <explicitContent>false</explicitContent>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <url>http://eu.7digital.com/artists/radiohead/the-best-of-1/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/002/576/0000257676_50.jpg</image>
+        <releaseDate>2008-06-02T00:00:00+01:00</releaseDate>
+        <addedDate>2008-05-19T10:45:14+01:00</addedDate>
+        <price>
+          <currency code="EUR">€</currency>
+          <value>9.79</value>
+          <formattedPrice>9,79€</formattedPrice>
+          <onSale>true</onSale>
+        </price>
+        <formats availableDrmFree="true">
+          <format id="17">
+            <fileFormat>MP3</fileFormat>
+            <bitRate>320</bitRate>
+            <drmFree>true</drmFree>
+          </format>
+        </formats>
+        <label id="77">
+          <name>EMI UK</name>
+        </label>
+      </release>
+    </searchResult>
+    <searchResult>
+      <type>release</type>
+      <release id="257712">
+        <title>Kid A</title>
+        <version></version>
+        <type>Album</type>
+        <barcode>5099922722355</barcode>
+        <year>2008</year>
+        <explicitContent>false</explicitContent>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <url>http://eu.7digital.com/artists/radiohead/kid-a-1/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/002/577/0000257712_50.jpg</image>
+        <releaseDate>2008-06-02T00:00:00+01:00</releaseDate>
+        <addedDate>2008-05-19T10:46:41+01:00</addedDate>
+        <price>
+          <currency code="EUR">€</currency>
+          <value>9.79</value>
+          <formattedPrice>9,79€</formattedPrice>
+          <onSale>true</onSale>
+        </price>
+        <formats availableDrmFree="true">
+          <format id="17">
+            <fileFormat>MP3</fileFormat>
+            <bitRate>320</bitRate>
+            <drmFree>true</drmFree>
+          </format>
+        </formats>
+        <label id="77">
+          <name>EMI UK</name>
+        </label>
+      </release>
+    </searchResult>
+    <searchResult>
+      <type>release</type>
+      <release id="268855">
+        <title>Stop Whispering</title>
+        <version></version>
+        <type>Video</type>
+        <barcode>5099922767752</barcode>
+        <year>2008</year>
+        <explicitContent>false</explicitContent>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <url>http://eu.7digital.com/artists/radiohead/stop-whispering/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/sleeveart/00/002/688/0000268855_50.jpg</image>
+        <releaseDate>2008-06-02T00:00:00+01:00</releaseDate>
+        <addedDate>2008-06-18T12:33:02+01:00</addedDate>
+        <price>
+          <currency code="EUR">€</currency>
+          <value></value>
+          <formattedPrice>N/A</formattedPrice>
+          <onSale>false</onSale>
+        </price>
+        <formats availableDrmFree="true">
+          <format id="9">
+            <fileFormat>MP4</fileFormat>
+            <bitRate></bitRate>
+            <drmFree>true</drmFree>
+          </format>
+          <format id="21">
+            <fileFormat>MP4</fileFormat>
+            <bitRate></bitRate>
+            <drmFree>true</drmFree>
+          </format>
+        </formats>
+        <label id="77">
+          <name>EMI UK</name>
+        </label>
+      </release>
+    </searchResult>
+  </searchResults>
+</response>

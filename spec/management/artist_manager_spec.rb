@@ -122,8 +122,8 @@ describe "ArtistManager" do
        api_response
     }
 
-    releases = @artist_manager.search(query)
-    releases.should == an_artist_list
+    artists = @artist_manager.search(query)
+    artists.should == an_artist_list
 
   end
 

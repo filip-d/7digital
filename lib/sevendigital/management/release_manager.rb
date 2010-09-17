@@ -46,6 +46,12 @@ module Sevendigital
       api_response.content.tagged_results, :tagged_item, :tagged_results )
     end
 
+    def search(query, options={})
+      api_request = Sevendigital::ApiRequest.new("release/search", {:q => query}, options)
+      api_response = @api_client.operator.call_api(api_request)
+      @api_client.release_digestor.nested_list_from_xml(api_response.content.search_results, :search_result, :search_results)
+    end
+
   end
 
 end
