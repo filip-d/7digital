@@ -11,6 +11,7 @@ module Sevendigital
     end
 
     def get_tracks(release_id, options = {})
+      options[:page_size] ||= 100
       api_request = Sevendigital::ApiRequest.new("release/tracks", {:releaseId => release_id}, options)
       api_response = @api_client.operator.call_api(api_request)
       @api_client.track_digestor.list_from_xml(api_response.content.tracks)

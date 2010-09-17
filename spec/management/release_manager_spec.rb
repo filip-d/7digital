@@ -32,6 +32,27 @@ describe "ReleaseManager" do
   end
 
   it "get_tracks should call release/tracks api method and digest the track list from response" do
+    expected_options = {:page_size => 20}
+    a_release_id = 123
+    api_response = fake_api_response("release/tracks")
+    a_track_list = []
+
+    mock_client_digestor(@client, :track_digestor) \
+      .should_receive(:list_from_xml).with(api_response.content.tracks).and_return(a_track_list)
+
+    @client.operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == "release/tracks"
+       api_request.parameters[:releaseId].should  == a_release_id
+       api_request.parameters[:pageSize].should  == 20
+       api_response
+    }
+
+    tracks = @release_manager.get_tracks(a_release_id, expected_options)
+    tracks.should == a_track_list
+
+  end
+
+  it "get_tracks should call use page size 100 by default" do
 
     a_release_id = 123
     api_response = fake_api_response("release/tracks")
@@ -43,6 +64,7 @@ describe "ReleaseManager" do
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "release/tracks"
        api_request.parameters[:releaseId].should  == a_release_id
+       api_request.parameters[:pageSize].should  == 100
        api_response
     }
 
@@ -50,6 +72,7 @@ describe "ReleaseManager" do
     tracks.should == a_track_list
 
   end
+
 
   it "get_chart should call release/chart api method and digest the release list from response" do
 
