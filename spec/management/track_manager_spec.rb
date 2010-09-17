@@ -63,5 +63,27 @@ describe "TrackManager" do
     preview_url.should == fake_preview_url
   end
 
+  it "search should call track/search api method and digest the nested track list from response" do
+
+    query = "radiohead"
+    api_response = fake_api_response("track/search")
+    a_track_list = [Sevendigital::Track.new(@client)]
+
+    mock_client_digestor(@client, :track_digestor) \
+      .should_receive(:nested_list_from_xml) \
+      .with(api_response.content.search_results, :search_result, :search_results) \
+      .and_return(a_track_list)
+
+    @client.operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == "track/search"
+       api_request.parameters[:q].should == query
+       api_response
+    }
+
+    tracks = @track_manager.search(query)
+    tracks.should == a_track_list
+
+  end
+
 
 end

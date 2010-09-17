@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+  <searchResults>
+    <page>1</page>
+    <pageSize>5</pageSize>
+    <totalItems>239</totalItems>
+    <searchResult>
+      <type>track</type>
+      <track id="2748235">
+        <title>Creep</title>
+        <version></version>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <trackNumber>4</trackNumber>
+        <duration>235</duration>
+        <explicitContent>false</explicitContent>
+        <isrc>GBAYE9200070</isrc>
+        <release id="257676">
+          <title>The Best Of</title>
+          <version></version>
+          <type>Album</type>
+          <barcode>5099921644054</barcode>
+          <artist id="304">
+            <name>Radiohead</name>
+            <appearsAs>Radiohead</appearsAs>
+            <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+          </artist>
+          <url>http://eu.7digital.com/artists/radiohead/the-best-of-1/?partner=827</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/002/576/0000257676_50.jpg</image>
+        </release>
+        <url>http://eu.7digital.com/artists/radiohead/the-best-of-1/04-Creep/?partner=827</url>
+      </track>
+    </searchResult>
+    <searchResult>
+      <type>track</type>
+      <track id="2747777">
+        <title>Creep</title>
+        <version></version>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <trackNumber>4</trackNumber>
+        <duration>235</duration>
+        <explicitContent>false</explicitContent>
+        <isrc>GBAYE9200070</isrc>
+        <release id="257658">
+          <title>The Best Of</title>
+          <version></version>
+          <type>Album</type>
+          <barcode>5099921210754</barcode>
+          <artist id="304">
+            <name>Radiohead</name>
+            <appearsAs>Radiohead</appearsAs>
+            <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+          </artist>
+          <url>http://eu.7digital.com/artists/radiohead/the-best-of/?partner=827</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/002/576/0000257658_50.jpg</image>
+        </release>
+        <url>http://eu.7digital.com/artists/radiohead/the-best-of/04-Creep/?partner=827</url>
+      </track>
+    </searchResult>
+    <searchResult>
+      <type>track</type>
+      <track id="2052636">
+        <title>15 Step</title>
+        <version></version>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <trackNumber>1</trackNumber>
+        <duration>237</duration>
+        <explicitContent>false</explicitContent>
+        <isrc>GBSTK0700001</isrc>
+        <release id="188863">
+          <title>In Rainbows</title>
+          <version></version>
+          <type>Album</type>
+          <barcode>093624988298</barcode>
+          <artist id="304">
+            <name>Radiohead</name>
+            <appearsAs>Radiohead</appearsAs>
+            <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+          </artist>
+          <url>http://eu.7digital.com/artists/radiohead/in-rainbows/?partner=827</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/001/888/0000188863_50.jpg</image>
+        </release>
+        <url>http://eu.7digital.com/artists/radiohead/in-rainbows/01-15-Step/?partner=827</url>
+      </track>
+    </searchResult>
+    <searchResult>
+      <type>track</type>
+      <track id="2052649">
+        <title>All I Need</title>
+        <version></version>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <trackNumber>5</trackNumber>
+        <duration>229</duration>
+        <explicitContent>false</explicitContent>
+        <isrc>GBSTK0700005</isrc>
+        <release id="188863">
+          <title>In Rainbows</title>
+          <version></version>
+          <type>Album</type>
+          <barcode>093624988298</barcode>
+          <artist id="304">
+            <name>Radiohead</name>
+            <appearsAs>Radiohead</appearsAs>
+            <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+          </artist>
+          <url>http://eu.7digital.com/artists/radiohead/in-rainbows/?partner=827</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/001/888/0000188863_50.jpg</image>
+        </release>
+        <url>http://eu.7digital.com/artists/radiohead/in-rainbows/05-All-I-Need/?partner=827</url>
+      </track>
+    </searchResult>
+    <searchResult>
+      <type>track</type>
+      <track id="2967017">
+        <title>Creep</title>
+        <version></version>
+        <artist id="304">
+          <name>Radiohead</name>
+          <appearsAs>Radiohead</appearsAs>
+          <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        </artist>
+        <trackNumber>1</trackNumber>
+        <duration>160</duration>
+        <explicitContent>false</explicitContent>
+        <isrc>GB0409200350</isrc>
+        <release id="268857">
+          <title>Creep</title>
+          <version></version>
+          <type>Video</type>
+          <barcode>5099922767851</barcode>
+          <artist id="304">
+            <name>Radiohead</name>
+            <appearsAs>Radiohead</appearsAs>
+            <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+          </artist>
+          <url>http://eu.7digital.com/artists/radiohead/creep/?partner=827</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/002/688/0000268857_50.jpg</image>
+        </release>
+        <url>http://eu.7digital.com/artists/radiohead/creep/01-Creep/?partner=827</url>
+      </track>
+    </searchResult>
+  </searchResults>
+</response>
