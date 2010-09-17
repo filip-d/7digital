@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+  <searchResults>
+    <page>1</page>
+    <pageSize>205</pageSize>
+    <totalItems>1</totalItems>
+    <searchResult>
+      <type>artist</type>
+      <artist id="304">
+        <name>Radiohead</name>
+        <sortName>Radiohead</sortName>
+        <url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+        <image>http://cdn.7static.com/static/img/artistimages/00/000/003/0000000304_150.jpg</image>
+      </artist>
+    </searchResult>
+  </searchResults>
+</response>
