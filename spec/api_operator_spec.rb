@@ -1,12 +1,12 @@
 require "spec"
-require 'sevendigital'
+require File.join(File.dirname(__FILE__), %w[spec_helper])
 require 'ostruct'
 
 describe "ApiOperator" do
 
   before do
     response_digestor = stub(Sevendigital::ApiResponseDigestor)
-    response_digestor.stub!(:from_http_response).and_return(fake_digested_response)
+    response_digestor.stub!(:from_http_response). and_return(fake_digested_response)
 
     stub_api_client(test_configuration, response_digestor)
 
@@ -25,7 +25,12 @@ describe "ApiOperator" do
     uri = @api_operator.create_request_uri(api_request)
 
     uri.kind_of?(URI).should == true
-    uri.to_s.should == "http://base.api.url/version/api/method?oauth_consumer_key=oauth_consumer_key&param1=value&paramTwo=2&country=sk"
+
+
+
+    uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method\?oauth_consumer_key=oauth_consumer_key/
+    uri.to_s.should =~ /\&param1=value/
+    uri.to_s.should =~ /\&paramTwo=2/
 
   end
 
@@ -49,15 +54,15 @@ describe "ApiOperator" do
   it "should digest the HTTP response and get it out" do
 
     http_response = fake_api_response
+    digested_response = fake_digested_response
 
     Net::HTTP.stub!(:get_response).and_return(http_response)
 
-    @client.api_response_digestor.should_receive(:from_http_response).with(http_response).and_return(fake_digested_response)
+    @client.api_response_digestor.should_receive(:from_http_response).with(http_response).and_return(digested_response)
 
     response = @api_operator.call_api(@stub_api_request)
 
-    response.kind_of?(Peachy::Proxy).should == true
-    response.to_s.should == fake_digested_response.to_s
+    response.should == digested_response
 
   end
 
@@ -65,9 +70,11 @@ describe "ApiOperator" do
 
     Net::HTTP.stub(:get_response).and_return(fake_api_response)
     failed_response = fake_digested_response(false)
-    @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
+    failed_response.stub!(:error_code).and_return("4000")
+    failed_response.stub!(:error_message).and_return("error")
+      @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
 
-    running { @api_operator.call_api(@stub_api_request) }.should raise_error Sevendigital::SevendigitalError
+    running { @api_operator.call_api(@stub_api_request) }.should raise_error(Sevendigital::SevendigitalError)
 
   end
 
@@ -84,7 +91,7 @@ describe "ApiOperator" do
   end
 
   def fake_digested_response(is_ok = true)
-    proxy =  Peachy::Proxy.new('<response status="ok"><content>test</content></response>')
+    proxy =  stub(Peachy::Proxy)#.new('<response status="ok"><content>test</content></response>')
     proxy.stub!(:ok?).and_return(is_ok)
     proxy
   end

@@ -20,5 +20,10 @@ module Sevendigital
             && the_other_track.artist && artist.name.downcase == the_other_track.artist.name.downcase
     end
 
+     def preview_url(options={})
+      #url = "http://previews.7digital.com/clips/34/#{id}.clip.mp3"
+      @api_client.track.build_preview_url(@id, options)
+    end
+
   end
 end

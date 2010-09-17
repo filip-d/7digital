@@ -33,6 +33,20 @@ describe "Track" do
 
   end
 
+  it "preview_url should get preview URL from manager" do
+    expected_options = {:country => "mx"}
+    fake_preview_url = "http://preview.com/trackid/123456"
+
+    @track_manager.should_receive(:build_preview_url) { |track_id, options|
+      track_id.should == @track.id
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fake_preview_url
+    }
+    
+    @track.preview_url(expected_options).should == fake_preview_url
+
+  end
+
   it "should have a short title without any version in brackets" do
 
     @track.title = "track 1 (lp version)"

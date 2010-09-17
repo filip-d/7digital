@@ -14,5 +14,10 @@ module Sevendigital
       @api_client.chart_item_digestor.list_from_xml(api_response.content.chart)
     end
 
+    def build_preview_url(id, options={})
+      api_request = Sevendigital::ApiRequest.new("track/preview", {:trackId => id}, options)
+      @api_client.operator.create_request_uri(api_request)
+    end
+
   end
 end

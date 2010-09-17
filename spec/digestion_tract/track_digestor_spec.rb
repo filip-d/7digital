@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'spec'
 require 'date'
 require File.join(File.dirname(__FILE__), %w[../spec_helper])
@@ -18,7 +17,7 @@ describe "TrackDigestor" do
     </artist>
 XML
 
-    running {@track_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@track_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest track xml and populate minimum available properties" do

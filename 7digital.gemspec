@@ -1,9 +1,7 @@
 # -*- encoding: utf-8 -*-
-require 'lib/sevendigital/version'
-
 Gem::Specification.new do |s|
   s.name = "7digital"
-  s.version = Sevendigital::VERSION
+  s.version = '0.0.1'
 
   s.authors = ["filip7d"]
   s.email = ["filip@7digital.com"]

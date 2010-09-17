@@ -5,6 +5,12 @@ require 'spec'
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib sevendigital]))
 
+require "peachy"
+require "peachy_spec_helper_patch"
+
+Peachy.be_quiet
+Peachy.whine
+
 Spec::Runner.configure do |config|
   # == Mock Framework
   #

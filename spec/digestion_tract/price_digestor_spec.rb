@@ -1,4 +1,4 @@
-﻿require "spec"
+require "spec"
 require "sevendigital"
 
 describe "PriceDigestor" do

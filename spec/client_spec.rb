@@ -1,6 +1,5 @@
 require "spec"
 require File.join(File.dirname(__FILE__), %w[spec_helper])
-require 'sevendigital'
 
 describe "Client" do
 

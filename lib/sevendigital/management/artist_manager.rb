@@ -4,8 +4,8 @@ module Sevendigital
 
   class ArtistManager < Manager
 
-     def get_details(id)
-        api_request = Sevendigital::ApiRequest.new("artist/details", {:artistId => id})
+     def get_details(id, options={})
+        api_request = Sevendigital::ApiRequest.new("artist/details", {:artistId => id}, options)
         api_response = @api_client.operator.call_api(api_request)
         @api_client.artist_digestor.from_xml(api_response.content.artist)
       end

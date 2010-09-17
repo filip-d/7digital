@@ -29,6 +29,11 @@
 				<bitRate>320</bitRate>
 				<drmFree>true</drmFree>
 			</format>
+			<format id="17">
+				<fileFormat>MP3</fileFormat>
+				<bitRate>320</bitRate>
+				<drmFree>true</drmFree>
+			</format>
 		</formats>
 	</release>
 </chartItem>

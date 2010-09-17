@@ -48,5 +48,20 @@ describe "TrackManager" do
     chart.should == a_chart
   end
 
+  it "build_preview_url should return URL for track/preview api request" do
+    track_id = 123456
+    fake_preview_url = "http://7digital.com/track/preview"
+
+    @client.operator.should_receive(:create_request_uri) { |api_request|
+       api_request.api_method.should == "track/preview"
+       api_request.parameters[:trackId].should  == track_id
+       fake_preview_url
+    }
+
+    preview_url = @track_manager.build_preview_url(track_id)
+
+    preview_url.should == fake_preview_url
+  end
+
 
 end

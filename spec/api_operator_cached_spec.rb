@@ -1,5 +1,5 @@
 require "spec"
-require 'sevendigital'
+require File.join(File.dirname(__FILE__), %w[spec_helper])
 require 'ostruct'
 
 describe "ApiOperatorCached" do
