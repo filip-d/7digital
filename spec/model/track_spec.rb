@@ -61,7 +61,7 @@ describe "Track" do
     @track.short_title.should == "track  1"
   end
 
-  describe "similar?" do
+  describe "alternate_version?" do
 
     before do
       @artist1 = Sevendigital::Artist.new(@client)
@@ -76,34 +76,34 @@ describe "Track" do
 
     end
 
-    it "should be similar to another track if artist names and titles match"  do
+    it "should be considered alternate version if artist names and titles match"  do
       @artist2.name = "Artist 1"
       @track2.title = "Track 1"
 
-      @track1.similar?(@track2).should == true
+      @track1.alternate_version_of?(@track2).should == true
     end
 
-    it "should be similar to another track if artist names and short titles match"  do
+    it "should be considered alternate version if artist names and short titles match"  do
       @track1.title = "track 1 (uk version)"
      
       @artist2.name = "Artist 1"
       @track2.title = "TRACK 1 (us remix)"
 
-      @track1.similar?(@track2).should == true
+      @track1.alternate_version_of?(@track2).should == true
     end
 
-    it "should not be similar to another track if artist names don't match" do
+    it "should not be considered alternate version if artist names don't match" do
       @artist2.name = "artist 2"
       @track2.title = "track 1"
 
-      @track1.similar?(@track2).should == false
+      @track1.alternate_version_of?(@track2).should == false
     end
 
-    it "should not be similar to another track if short titles match" do
+    it "should not be considered alternate version if short titles don't match" do
       @artist2.name = "artist 1"
       @track2.title = "track 2"
 
-      @track1.similar?(@track2).should == false
+      @track1.alternate_version_of?(@track2).should == false
     end
 
 

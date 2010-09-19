@@ -15,9 +15,9 @@ module Sevendigital
       return title.gsub(/\s+\(.*\s(version|mix|remix|edit)\s*\)/, "")
     end
 
-    def similar?(the_other_track)
-      return the_other_track && short_title.downcase == the_other_track.short_title.downcase \
-            && the_other_track.artist && artist.name.downcase == the_other_track.artist.name.downcase
+    def alternate_version_of?(another_track)
+      return another_track && short_title.downcase == another_track.short_title.downcase \
+            && another_track.artist && artist.name.downcase == another_track.artist.name.downcase
     end
 
      def preview_url(options={})
