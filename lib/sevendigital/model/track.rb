@@ -12,7 +12,7 @@ module Sevendigital
     
     def short_title
   #   return title.gsub(/\s+[\(\[](album|lp|single|short|edit|radio)\s+version[\)\]]/, "")
-      return title.gsub(/\s+\(.*\s(version|mix|remix|edit)\s*\)/, "")
+      return title.gsub(/\s+\(.*\s(version|mix|remix|edit)\s*\)/i, "")
     end
 
     def alternate_version_of?(another_track)
