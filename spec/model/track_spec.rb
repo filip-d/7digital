@@ -51,12 +51,22 @@ describe "Track" do
 
     @track.title = "Girl With One Eye (Bayou Percussion Version)"
     @track.short_title.should == "Girl With One Eye"
+
+    @track.title = "The Thing I Like Best About Him Is His Girlfriend (Gr's Man-Made Island Edition)"
+    @track.short_title.should == "The Thing I Like Best About Him Is His Girlfriend"
+
+    @track.title = "Your Head to Your Toes (Live at the BBC)"
+    @track.short_title.should == "Your Head to Your Toes"
+
     @track.title = "(lp version)"
     @track.short_title.should == "(lp version)"
+
     @track.title = "track 1 (something else)"
     @track.short_title.should == "track 1 (something else)"
+
     @track.title = "track 1 (dj remix)"
     @track.short_title.should == "track 1"
+
     @track.title = "track  1  (  dj mix  )"
     @track.short_title.should == "track  1"
  end
