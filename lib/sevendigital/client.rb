@@ -119,6 +119,18 @@ module Sevendigital
       @country = country_code
     end
 
+    def verbose?
+      !(@verbose || @configuration.verbose).nil?
+    end
+
+    def very_verbose?
+      verbose? && (@verbose || @configuration.verbose).to_s == "very_verbose"
+    end
+
+    def verbose=(verbosity)
+      @verbose = verbosity
+    end
+
   end
 
 end

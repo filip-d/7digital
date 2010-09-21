@@ -6,6 +6,8 @@ describe "ApiOperatorCached" do
 
   before do
     @client = stub(Sevendigital::Client)
+    @client.stub!(:verbose?).and_return(false)
+    @client.stub!(:very_verbose?).and_return(false)
     @cache = stub(Hash)
     @cached_operator = Sevendigital::ApiOperatorCached.new(@client, @cache)
   end

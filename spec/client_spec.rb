@@ -42,4 +42,36 @@ describe "Client" do
     Object.instance_eval{ remove_const :RAILS_ROOT }
   end
 
+  it "should not be verbose if not told to so" do
+    configuration = OpenStruct.new
+    client = Sevendigital::Client.new(configuration)
+    client.verbose?.should == false
+    client.very_verbose?.should == false
+  end
+
+  it "should be verbose if told to be verbose in configuration" do
+    configuration = OpenStruct.new
+    configuration.verbose = true
+    client = Sevendigital::Client.new(configuration)
+    client.verbose?.should == true
+    client.very_verbose?.should == false
+  end
+
+  it "should be very verbose if told to be very verbose in configruation" do
+    configuration = OpenStruct.new
+    configuration.verbose = :very_verbose
+    client = Sevendigital::Client.new(configuration)
+    client.verbose?.should == true
+    client.very_verbose?.should == true
+  end
+
+    it "should be verbose if told so" do
+    configuration = OpenStruct.new
+    configuration.verbose = false
+    client = Sevendigital::Client.new(configuration)
+    client.verbose = true
+    client.verbose?.should == true
+    client.very_verbose?.should == false
+  end
+
 end

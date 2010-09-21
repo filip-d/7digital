@@ -58,8 +58,14 @@ describe "Track" do
     @track.title = "Your Head to Your Toes (Live at the BBC)"
     @track.short_title.should == "Your Head to Your Toes"
 
+    @track.title = "Welcome To The World of The Plastic Beach (Feat. Snoop Dogg and Hypnotic Brass Ensemble)"
+    @track.short_title.should == "Welcome To The World of The Plastic Beach"
+
     @track.title = "(lp version)"
     @track.short_title.should == "(lp version)"
+
+    @track.title = "What's the Story (Morning Glory)"
+    @track.short_title.should == "What's the Story (Morning Glory)"
 
     @track.title = "track 1 (something else)"
     @track.short_title.should == "track 1 (something else)"
