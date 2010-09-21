@@ -9,10 +9,13 @@ module Sevendigital
   end
 
   def call_api(api_request)
-    make_http_request_and_digest(create_request_uri(api_request))
+    api_response = make_http_request_and_digest(create_request_uri(api_request))
+    puts api_response if @client.very_verbose?
+    api_response
   end
 
   def make_http_request_and_digest(uri)
+    puts "ApiOperator: Calling #{uri}" if @client.verbose?
     http_response = Net::HTTP.get_response(uri)
     api_response = @client.api_response_digestor.from_http_response(http_response)
     raise Sevendigital::SevendigitalError, "#{api_response.error_code} - #{api_response.error_message}" if !api_response.ok?

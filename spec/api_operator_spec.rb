@@ -25,8 +25,6 @@ describe "ApiOperator" do
 
     uri.kind_of?(URI).should == true
 
-
-
     uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method\?oauth_consumer_key=oauth_consumer_key/
     uri.to_s.should =~ /\&param1=value/
     uri.to_s.should =~ /\&paramTwo=2/
@@ -100,6 +98,9 @@ describe "ApiOperator" do
   @client.stub!(:configuration).and_return(configuration)
   @client.stub!(:api_response_digestor).and_return(response_digestor)
   @client.stub!(:country).and_return("sk")
+  @client.stub!(:verbose?).and_return(false)
+  @client.stub!(:very_verbose?).and_return(false)
+
 end
 
 def stub_api_request

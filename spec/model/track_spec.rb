@@ -48,17 +48,33 @@ describe "Track" do
 
   it "should have a short title without any version in brackets" do
 
-    @track.title = "track 1 (lp version)"
-    @track.short_title.should == "track 1"
+    @track.title = "Girl With One Eye (Bayou Percussion Version)"
+    @track.short_title.should == "Girl With One Eye"
+
+    @track.title = "The Thing I Like Best About Him Is His Girlfriend (Gr's Man-Made Island Edition)"
+    @track.short_title.should == "The Thing I Like Best About Him Is His Girlfriend"
+
+    @track.title = "Your Head to Your Toes (Live at the BBC)"
+    @track.short_title.should == "Your Head to Your Toes"
+
+    @track.title = "Welcome To The World of The Plastic Beach (Feat. Snoop Dogg and Hypnotic Brass Ensemble)"
+    @track.short_title.should == "Welcome To The World of The Plastic Beach"
+
     @track.title = "(lp version)"
     @track.short_title.should == "(lp version)"
+
+    @track.title = "What's the Story (Morning Glory)"
+    @track.short_title.should == "What's the Story (Morning Glory)"
+
     @track.title = "track 1 (something else)"
     @track.short_title.should == "track 1 (something else)"
+
     @track.title = "track 1 (dj remix)"
     @track.short_title.should == "track 1"
+
     @track.title = "track  1  (  dj mix  )"
     @track.short_title.should == "track  1"
-  end
+ end
 
   describe "alternate_version?" do
 
