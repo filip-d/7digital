@@ -1,8 +1,6 @@
 # coding: utf-8
-require 'spec'
 require 'date'
 require File.join(File.dirname(__FILE__), %w[../spec_helper])
-require "sevendigital"
 
 describe "TrackDigestor" do
 
