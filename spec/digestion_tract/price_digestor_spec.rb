@@ -1,6 +1,5 @@
 # coding: utf-8
-require "spec"
-require "sevendigital"
+require File.join(File.dirname(__FILE__), %w[../spec_helper])
 
 describe "PriceDigestor" do
 

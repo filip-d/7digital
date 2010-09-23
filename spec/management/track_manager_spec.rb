@@ -1,7 +1,6 @@
 # encoding: UTF-8
-require 'spec'
 require 'date'
-require 'sevendigital'
+require File.join(File.dirname(__FILE__), %w[../spec_helper])
 
 describe "TrackManager" do
 

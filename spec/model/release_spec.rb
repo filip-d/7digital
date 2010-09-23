@@ -1,6 +1,5 @@
-require "spec"
 require "date"
-require 'sevendigital'
+require File.join(File.dirname(__FILE__), %w[../spec_helper])
 
 describe "Release" do
 
