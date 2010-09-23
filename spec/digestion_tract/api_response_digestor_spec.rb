@@ -38,7 +38,7 @@ describe "ApiResponseDigestor" do
   it "should create a response with body from xml ok response" do
 
     xml_response = <<XML
-    <response status="ok"><test></test></response>
+    <response status="ok"><test>aaa</test></response>
 XML
     response = @api_response_digestor.from_xml(xml_response)
     response.error_code.should == 0
@@ -61,7 +61,13 @@ XML
     response = @api_response_digestor.from_xml(xml_response)
     response.error_code.should == 10000
     response.error_message.should == 'Invalid 7digital API response'
+
+    xml_response = '<response><test /></response>'
+    response = @api_response_digestor.from_xml(xml_response)
+    response.error_code.should == 10000
+    response.error_message.should == 'Invalid 7digital API response'
   end
+
 
     it "should create a response with error details from valid xml response with invalid status" do
 
