@@ -15,7 +15,7 @@ module Sevendigital
     def self._load(properties)
       response = ApiResponse.new
       response.error_code, response.error_message, content_xml = Marshal.load(properties)
-      response.content = Peachy::Proxy.new(content_xml)
+      response.content = Peachy::Proxy.new(content_xml).response
       response
     end
 

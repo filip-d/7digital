@@ -30,7 +30,8 @@ describe "ApiResponse" do
   end
 
   it "should be serializable" do
-    original_response = Sevendigital::ApiResponseDigestor.new(@client).from_xml("<response status='ok'><test /></response>")
+    original_response = Sevendigital::ApiResponseDigestor.new(@client).from_xml\
+      ("<response status='ok'><testElement id='123'>value</testElement></response>")
     original_response.error_code = 99
 
     tmp = Marshal.dump(original_response)
@@ -38,6 +39,7 @@ describe "ApiResponse" do
 
     restored_response.error_code.should == original_response.error_code
     restored_response.content.should == original_response.content
+    restored_response.content.test_element.value.should == "value"
 
   end
 
