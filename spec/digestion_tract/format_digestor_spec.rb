@@ -16,7 +16,7 @@ describe "FormatDigestor" do
 </zzz>
 XML
 
-    running {@format_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@format_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate all properties" do

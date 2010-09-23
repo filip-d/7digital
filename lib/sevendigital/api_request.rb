@@ -2,11 +2,15 @@ module Sevendigital
 
 class ApiRequest
 
-  attr_reader :api_method, :parameters
+  attr_reader :api_method, :parameters, :signed, :access_token
 
   def initialize(api_method, parameters, options = {})
     @api_method = api_method
     @parameters = comb_parameters(options.merge(parameters))
+  end
+
+  def require_signature
+    @signed = true
   end
 
   def comb_parameters(parameters)

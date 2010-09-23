@@ -15,7 +15,7 @@ describe "PriceDigestor" do
      </xxx>
 XML
 
-    running {@price_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@price_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate minimum available properties" do

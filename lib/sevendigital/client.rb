@@ -95,6 +95,14 @@ module Sevendigital
       @track_digestor ||= TrackDigestor.new(self)
     end
 
+    def user
+      @user_manager ||= UserManager.new(self)
+    end
+
+    def request_token_digestor
+      @request_token_digestor ||= RequestTokenDigestor.new(self)
+    end
+
     def api_response_digestor
       @api_response_digestor ||= ApiResponseDigestor.new(self)
     end

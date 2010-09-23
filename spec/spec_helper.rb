@@ -1,5 +1,5 @@
-$: << 'sevendigital'
-$: << 'spec'
+#$: << 'sevendigital'
+#$: << 'spec'
 
 require 'spec'
 require File.expand_path(

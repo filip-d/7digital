@@ -15,7 +15,7 @@ describe "PagerDigestor" do
     </release>
 XML
 
-    running {@pager_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@pager_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
     end
 
  it "should not digest if paging info is missing from xml but spit out nil" do

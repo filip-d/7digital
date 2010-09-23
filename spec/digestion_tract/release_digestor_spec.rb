@@ -16,7 +16,7 @@ describe "ReleaseDigestor" do
     </artist>
 XML
 
-    running {@release_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@release_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest release xml and populate minimum available properties" do

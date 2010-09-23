@@ -14,7 +14,7 @@ describe "ArtistDigestor" do
     </release>
 XML
 
-    running {@artist_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@artist_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
 
   end
 
@@ -75,7 +75,7 @@ XML
     </release>
 XML
 
-    running {@artist_digestor.list_from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@artist_digestor.list_from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
 
   end
 

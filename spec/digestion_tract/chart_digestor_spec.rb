@@ -14,7 +14,7 @@ describe "ChartItemDigestor" do
     </release>
 XML
 
-    running {@chart_item_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@chart_item_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest artist chart item" do

@@ -1,8 +1,9 @@
 module Sevendigital
 
   require 'net/http'
+  require 'oauth'
   
-  class ApiOperator
+  class ApiOperatorSecure
 
   def initialize(client)
     @client = client
@@ -27,10 +28,6 @@ module Sevendigital
     params = api_request.parameters.collect{ |a,v| "&#{a}=#{v}" }.join
     URI.parse("http://#{@client.configuration.api_url}/#{@client.configuration.api_version}/#{api_request.api_method}"+
               "?oauth_consumer_key=#{@client.configuration.oauth_consumer_key}#{params}")
-  end
-
-  def create_signed_request_uri(api_request)
-
   end
 
 end

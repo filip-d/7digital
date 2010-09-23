@@ -15,7 +15,7 @@ describe "LabelDigestor" do
     </release>
 XML
 
-    running {@label_digestor.from_xml(xml_response)}.should raise_error Sevendigital::DigestiveProblem
+    running {@label_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
     end
   
   it "should digest label xml and populate all properties" do
