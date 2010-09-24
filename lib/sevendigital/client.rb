@@ -99,6 +99,10 @@ module Sevendigital
       @user_manager ||= UserManager.new(self)
     end
 
+    def oauth
+      @oauth_manager ||= OAuthManager.new(self)
+    end
+
     def oauth_request_token_digestor
       @oauth_request_token_digestor ||= OAuthTokenDigestor.new(self)
     end
