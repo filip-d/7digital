@@ -37,7 +37,7 @@ describe "ApiResponse" do
     restored_response = Marshal.load(tmp)
 
     restored_response.error_code.should == original_response.error_code
-    restored_response.content.should == original_response.content
+    restored_response.content.to_s.should == original_response.content.to_s
     restored_response.content.test_element.value.should == "value"
 
   end

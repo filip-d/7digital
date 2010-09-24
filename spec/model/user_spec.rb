@@ -12,13 +12,13 @@ describe "User" do
   end
 
   it "should not be authorised if does not have access_token" do
-    @user.access_token = nil
-    @user.authorised?.should == false
+    @user.oauth_access_token = nil
+    @user.authenticated?.should == false
   end
 
   it "should be authorised if does have access_token" do
-    @user.access_token = "something"
-    @user.authorised?.should == true
+    @user.oauth_access_token = "something"
+    @user.authenticated?.should == true
   end
 
 end
