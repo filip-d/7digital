@@ -36,7 +36,8 @@ module Sevendigital
     def various?
       joined_names = "#{name} #{appears_as}".downcase
 
-      various_variations = ["vario", "v???????????????rio", "v.a", "vaious", "varios" "vaious", "varoius", "variuos" ]
+      various_variations = ["vario", "v???????????????rio", "v.a", "vaious", "varios" "vaious", "varoius", "variuos", \
+                            "soundtrack", "karaoke", "original cast"]
       various_variations.each{|various_variation| return true if joined_names.include?(various_variation)}
       return false
     end
