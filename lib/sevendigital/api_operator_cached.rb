@@ -12,7 +12,7 @@ class ApiOperatorCached < ApiOperator
     api_response = @cache.get(uri.to_s)
     puts "ApiOperatorCached: Got from cache #{uri}" if api_response if @client.verbose?
     if (!api_response) then
-      api_response = make_http_request_and_digest(uri)
+      api_response = make_http_request_and_digest(api_request)
       @cache.set(uri.to_s, api_response)
     end
     puts api_response if @client.very_verbose?    

@@ -10,6 +10,10 @@ class ApiRequest
     @parameters = comb_parameters(options.merge(parameters))
   end
 
+  def requires_signature?
+    @signed == true
+  end
+
   def require_signature
     @signed = true
   end

@@ -10,11 +10,11 @@ module Sevendigital
     end
 
     def get_access_token(request_token)
-      api_request = Sevendigital::ApiRequest.new("oauth/requestToken", {})
+      api_request = Sevendigital::ApiRequest.new("oauth/accessToken", {})
       api_request.require_signature
       api_request.token = request_token
       api_response = @api_client.operator.call_api(api_request)
-      @api_client.oauth_request_token_digestor.from_xml(api_response.content.oauth_request_token, :oauth_access_token)
+      @api_client.oauth_request_token_digestor.from_xml(api_response.content.oauth_access_token, :oauth_access_token)
     end
 
     def authorise_request_token(username, password, request_token)

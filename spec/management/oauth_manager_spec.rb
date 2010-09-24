@@ -33,15 +33,15 @@ describe "OAuthManager" do
 
     a_request_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
     fake_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
-    api_response = fake_api_response("oauth/requesttoken")
+    api_response = fake_api_response("oauth/accessToken")
 
     digestor = mock(Sevendigital::OAuthTokenDigestor)
     @client.stub!(:oauth_request_token_digestor).and_return(digestor)
 
-    digestor.should_receive(:from_xml).with(api_response.content.oauth_request_token, :oauth_access_token).and_return(fake_token)
+    digestor.should_receive(:from_xml).with(api_response.content.oauth_access_token, :oauth_access_token).and_return(fake_token)
 
     @client.operator.should_receive(:call_api) { |api_request|
-       api_request.api_method.should == "oauth/requestToken"
+       api_request.api_method.should == "oauth/accessToken"
        api_request.token.should == a_request_token
        api_request.signed.should == true
        api_response
