@@ -29,7 +29,7 @@ describe "OAuthManager" do
 
   end
 
-    it "get_oauth_access_token should call oauth/accessToken api method and digest the access_token from response" do
+  it "get_oauth_access_token should call oauth/accessToken api method and digest the access_token from response" do
 
     a_request_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
     fake_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
@@ -49,6 +49,26 @@ describe "OAuthManager" do
 
     token = @oauth_manager.get_access_token(a_request_token)
     token.should == fake_token
+
+  end
+
+  it "authorise_request_token should call oauth/requestToken/authorise api method" do
+
+    a_request_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
+    an_email_address = "email"
+    a_password = "password"
+    api_response = fake_api_response("oauth/requesttoken")
+
+    @client.operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == "oauth/requestToken/authorise"
+       api_request.parameters[:username].should  == an_email_address
+       api_request.parameters[:password].should  == a_password
+       api_request.signed.should == true
+       api_response
+    }
+
+    authorised = @oauth_manager.authorise_request_token(an_email_address, a_password, a_request_token)
+    authorised.should == true
 
   end
 

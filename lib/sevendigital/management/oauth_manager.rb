@@ -17,6 +17,14 @@ module Sevendigital
       @api_client.oauth_request_token_digestor.from_xml(api_response.content.oauth_request_token, :oauth_access_token)
     end
 
+    def authorise_request_token(username, password, request_token)
+      api_request = Sevendigital::ApiRequest.new("oauth/requestToken/authorise", \
+        {:username => username, :password => password, :token => request_token.token})
+      api_request.require_signature
+      api_response = @api_client.operator.call_api(api_request)
+      api_response.ok?
+    end
+
 
   end
 
