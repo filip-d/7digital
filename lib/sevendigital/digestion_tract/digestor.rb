@@ -44,7 +44,8 @@ module Sevendigital
       end
 
       def paginate_results(xml_results, list)
-        @api_client.pager_digestor.from_xml(xml_results).paginate_list(list)
+        pager = @api_client.pager_digestor.from_xml(xml_results)
+        pager.paginate_list(list) if pager
       end
 
       def make_sure_not_eating_nil(proxy)

@@ -1,5 +1,3 @@
-require "peachy"
-
 module Sevendigital
 
   class Format

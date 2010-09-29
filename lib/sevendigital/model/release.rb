@@ -1,6 +1,3 @@
-require "peachy"
-require "will_paginate"
-
 module Sevendigital
 
   class Release < SevendigitalObject

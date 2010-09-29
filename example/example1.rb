@@ -6,18 +6,32 @@ class VerySimpleCache < Hash
 end
 
   sevendigital_client = Sevendigital::Client.new(
-          :oauth_consumer_key => "YOUR_KEY_HERE",
+          :oauth_consumer_key => "7digital_mobile",
+          :oauth_consumer_secret => "0a41737acfeba433",
           :lazy_load? => true,
-          :country => "ES",
-          :cache => VerySimpleCache.new
+          :country => "GB",
+          :cache => VerySimpleCache.new,
+          :verbose => "very_verbose"
   )
 
-  artist = sevendigital_client.artist.get_details(1)
-  artist = sevendigital_client.artist.get_details(1)
+#  artist = sevendigital_client.artist.search("radiohead").first
+#  artist = sevendigital_client.artist.get_details(1)
 
-  puts artist.name
 
-  artist.releases.each do |release|
+user = sevendigital_client.user.authenticate("filip%407digital.com", "aaa")
+
+puts user.oauth_access_token
+
+#  puts artist.name
+
+  sevendigital_client.track.search("radiohead").each do |track|
+    puts "#{track.title} [#{track.version}]"
+    puts track.release.year.to_s + " - " + track.release.title
+#    puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
+  end
+
+
+  sevendigital_client.release.search("radiohead").each do |release|
     puts release.year.to_s + " - " + release.title
     puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
   end
@@ -31,3 +45,4 @@ end
     puts "Label: #{release.label.name}"
     puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
   end
+

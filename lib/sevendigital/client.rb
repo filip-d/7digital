@@ -78,6 +78,14 @@ module Sevendigital
     def format_digestor
       @format_digestor ||= FormatDigestor.new(self)
     end
+
+    def locker_release_digestor
+      @locker_release_digestor ||= LockerReleaseDigestor.new(self)
+    end
+
+    def locker_track_digestor
+      @locker_track_digestor ||= LockerTrackDigestor.new(self)
+    end
     
     def price_digestor
       @price_digestor ||= PriceDigestor.new(self)
