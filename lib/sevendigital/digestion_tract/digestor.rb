@@ -22,7 +22,7 @@ module Sevendigital
         if object_list_proxy.send(default_element_name) then
           object_list_proxy.send(default_element_name).each { |object_proxy| list << from_proxy(object_proxy) }
         end
-        return paginate_results(object_list_proxy, list)
+        paginate_results(object_list_proxy, list)
       end
 
       #nested parsing for api methods that return standard object inside containers with no additional (useful) information
@@ -45,7 +45,8 @@ module Sevendigital
 
       def paginate_results(xml_results, list)
         pager = @api_client.pager_digestor.from_xml(xml_results)
-        pager.paginate_list(list) if pager
+        return list if !pager
+        pager.paginate_list(list)
       end
 
       def make_sure_not_eating_nil(proxy)

@@ -62,7 +62,11 @@ module Sevendigital
     def artist_digestor
       @artist_digestor ||= ArtistDigestor.new(self)
     end
-    
+
+    def download_url_digestor
+      @download_url_digestor ||= DownloadUrlDigestor.new(self)
+    end
+
     def release
       @release_manager ||= ReleaseManager.new(self)
     end

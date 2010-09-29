@@ -1,12 +1,12 @@
 module Sevendigital 
 
   class Track < SevendigitalObject
-    attr_accessor :id, :title, :version, :artist
+    attr_accessor :id, :title, :version, :release, :artist
                   
-    sevendigital_basic_property :track_number,:duration, :explicit_content, :isrc, :release, :url, :price
+    sevendigital_basic_property :track_number,:duration, :explicit_content, :isrc, :url, :price
 
     def get_details(options={})
-      track_with_details = @api_client.track.get_details(@id, options)
+      track_with_details = @api_client.track.get_details_from_release(@id, @release.id, options)
       copy_basic_properties_from(track_with_details)
     end
     
