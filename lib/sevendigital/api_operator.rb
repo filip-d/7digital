@@ -22,7 +22,7 @@ module Sevendigital
     http_client = Net::HTTP.new(@client.configuration.api_url, 80)
     http_request = Net::HTTP::Get.new(create_request_query(api_request))
 
-    request.oauth!( \
+    http_request.oauth!( \
       http_client, \
       OAuth::Consumer.new( @client.configuration.oauth_consumer_key, @client.configuration.oauth_consumer_secret), \
       api_request.token \
