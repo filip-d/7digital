@@ -10,14 +10,17 @@ describe "Track" do
     
     @track = Sevendigital::Track.new(@client)
     @track.id = 1234
+    @track.release = Sevendigital::Release.new(@client)
+    @track.release.id = 5678
   end
 
-  it "get_details should get track's basic details from manager" do
+  it "get_details should get track's basic details from track manager " do
     expected_options = {:page => 2}
     fresh_track = fake_track_with_details
 
-    @track_manager.should_receive(:get_details) { |track_id, options|
+    @track_manager.should_receive(:get_details_from_release) { |track_id, release_id, options|
       track_id.should == @track.id
+      release_id.should == @track.release.id
       (options.keys & expected_options.keys).should == expected_options.keys
       fresh_track
     }
@@ -27,7 +30,7 @@ describe "Track" do
     @track.duration.should == fresh_track.duration
     @track.explicit_content.should == fresh_track.explicit_content
     @track.isrc.should == fresh_track.isrc
-    @track.release.should == fresh_track.release
+    @track.release.id.should == fresh_track.release.id
     @track.url.should == fresh_track.url
 
   end
@@ -134,6 +137,7 @@ describe "Track" do
     track.explicit_content = true
     track.isrc = "7D"
     track.release = Sevendigital::Release.new(@client)
+    track.release.id = 5678
     track.url = "http://aaa.bbb.ccc/"
     track
   end

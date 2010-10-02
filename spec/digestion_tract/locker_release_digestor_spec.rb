@@ -32,7 +32,7 @@ XML
     locker_release.locker_tracks[0].track.id.should == 3544116
     locker_release.locker_tracks[0].track.title.should == "Gloria"
     locker_release.locker_tracks[0].remaining_downloads.should == 355
-    locker_release.locker_tracks[0].download_urls.url.should == "http://media3.7digital.com/media/user/downloadtrack?"
+    locker_release.locker_tracks[0].download_urls[0].url.should == "http://media3.7digital.com/media/user/downloadtrack?"
 
   end
 
@@ -50,13 +50,12 @@ XML
 
   it "should digest xml containing single item list of locker releases and return a paginated array" do
 
-    xml_response = load_sample_object_xml("locker_release_list")
+    xml_response = load_sample_object_xml("locker_release_one_item_list")
 
-    releases = @locker_release_digestor.list_from_xml(xml_response, :locker_releases)
-   locker_releases[0].release.id.should == 302123
+    locker_releases = @locker_release_digestor.list_from_xml(xml_response, :locker_releases)
+    locker_releases[0].release.id.should == 302123
     locker_releases[0].locker_tracks[0].track.id.should == 3544116
     locker_releases.size.should == 1
-    locker_releases.total_entries.should == 1
   end
 
   it "should digest xml containing empty list of locker releases and return an empty paginated array" do

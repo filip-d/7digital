@@ -1,5 +1,49 @@
 <lockerReleases>
+	<page>1</page>
+	<pageSize>2</pageSize>
+	<totalItems>50</totalItems>
   <lockerRelease>
+    <release id="302123">
+      <title>Original Album Classics</title>
+      <version></version>
+      <type>Album</type>
+      <artist id="1194">
+        <name>Patti Smith</name>
+        <appearsAs>Patti Smith</appearsAs>
+        <url>http://www.7digital.com/artists/patti-smith/?partner=712</url>
+      </artist>
+      <url>http://www.7digital.com/artists/patti-smith/original-album-classics-2/?partner=712</url>
+      <image>http://cdn.7static.com/static/img/sleeveart/00/003/021/0000302123_50.jpg</image>
+      <releaseDate>2008-06-16T00:00:00+01:00</releaseDate>
+    </release>
+    <lockerTracks>
+      <lockerTrack>
+        <track id="3544116">
+          <title>Gloria</title>
+          <version>Digitally Remastered 1996</version>
+          <artist id="1194">
+            <name>Patti Smith</name>
+            <appearsAs>Patti Smith</appearsAs>
+            <url>http://www.7digital.com/artists/patti-smith/?partner=712</url>
+          </artist>
+          <url>http://www.7digital.com/artists/patti-smith/original-album-classics-2/01-Gloria?partner=712&amp;partner=712</url>
+        </track>
+        <remainingDownloads>355</remainingDownloads>
+        <purchaseDate>2009-07-22T11:41:41+01:00</purchaseDate>
+        <downloadUrls>
+          <downloadUrl>
+            <url>http://media3.7digital.com/media/user/downloadtrack?</url>
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </downloadUrl>
+        </downloadUrls>
+      </lockerTrack>
+    </lockerTracks>
+  </lockerRelease>
+	<lockerRelease>
     <release id="302123">
       <title>Original Album Classics</title>
       <version></version>

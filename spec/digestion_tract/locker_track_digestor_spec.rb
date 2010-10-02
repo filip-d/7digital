@@ -28,7 +28,7 @@ XML
     locker_track.track.id.should == 3544116
     locker_track.track.title.should == "Gloria"
     locker_track.remaining_downloads.should == 355
-    locker_track.purchase_date.should == '355'
+    locker_track.purchase_date.should == DateTime.new(2009,7,22,11,41,41, 1.quo(24))
     locker_track.download_urls.size.should == 1
     locker_track.download_urls[0].url.should == "http://media3.7digital.com/media/user/downloadtrack?"
 
