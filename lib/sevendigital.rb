@@ -45,6 +45,7 @@ module Sevendigital
 end  # module 7digital
 
 require 'peachy'
+require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'peachy_patch')
 Peachy.be_quiet
 require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'management', 'manager')
 require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'digestion_tract', 'digestor')
