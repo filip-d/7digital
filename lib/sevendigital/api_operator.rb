@@ -44,7 +44,7 @@ module Sevendigital
   end
 
   def log_request(request)
-    puts "ApiOperator: Calling #{query}"
+    puts "ApiOperator: Calling #{request}"
   end
 
 end

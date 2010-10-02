@@ -67,20 +67,16 @@ module Sevendigital
       @download_url_digestor ||= DownloadUrlDigestor.new(self)
     end
 
-    def release
-      @release_manager ||= ReleaseManager.new(self)
-    end
-
-    def release_digestor
-      @release_digestor ||= ReleaseDigestor.new(self)
+    def format_digestor
+      @format_digestor ||= FormatDigestor.new(self)
     end
 
     def label_digestor
       @label_digestor ||= LabelDigestor.new(self)
     end
 
-    def format_digestor
-      @format_digestor ||= FormatDigestor.new(self)
+    def locker_digestor
+      @locker_digestor ||= LockerDigestor.new(self)
     end
 
     def locker_release_digestor
@@ -90,13 +86,21 @@ module Sevendigital
     def locker_track_digestor
       @locker_track_digestor ||= LockerTrackDigestor.new(self)
     end
-    
+
     def price_digestor
       @price_digestor ||= PriceDigestor.new(self)
     end
 
     def pager_digestor
       @pager_digestor ||= PagerDigestor.new(self)
+    end
+
+    def release
+      @release_manager ||= ReleaseManager.new(self)
+    end
+
+    def release_digestor
+      @release_digestor ||= ReleaseDigestor.new(self)
     end
 
     def track

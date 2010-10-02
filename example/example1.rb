@@ -10,17 +10,22 @@ end
           :oauth_consumer_secret => "0a41737acfeba433",
           :lazy_load? => true,
           :country => "GB",
-          :cache => VerySimpleCache.new,
-          :verbose => "very_verbose"
+         # :cache => VerySimpleCache.new,
+          :verbose => "verbose"
   )
 
 #  artist = sevendigital_client.artist.search("radiohead").first
 #  artist = sevendigital_client.artist.get_details(1)
 
 
-user = sevendigital_client.user.authenticate("filip%407digital.com", "aaa")
+  user = sevendigital_client.user.authenticate("filip%407digital.com", "cheche")
 
-puts user.oauth_access_token
+  puts user.oauth_access_token
+
+  user.locker.locker_releases.each do |locker_release|
+    puts locker_release.release.title 
+    puts locker_release.locker_tracks[0].purchase_date
+  end
 
 #  puts artist.name
 

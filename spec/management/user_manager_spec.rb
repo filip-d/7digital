@@ -63,5 +63,23 @@ describe "UserManager" do
     token
   end
 
+  it "get_locker should call user/locker api method and return digested locker" do
+    an_api_response = fake_api_response("user/locker")
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+
+    mock_client_digestor(@client, :locker_digestor) \
+      .should_receive(:from_xml).with(an_api_response.content.locker).and_return(fake_locker)
+
+    @client.operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == "user/locker"
+       api_request.token.should  == a_token
+       an_api_response
+    }
+
+    @user_manager.get_locker(a_token).should == fake_locker
+
+  end
+
 
 end

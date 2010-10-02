@@ -21,4 +21,26 @@ describe "User" do
     @user.authenticated?.should == true
   end
 
+  it "should get user's locker from locker manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+    expected_options = {:page => 2}
+
+    @user_manager.should_receive(:get_locker) { |token, options|
+      token.should == @user.oauth_access_token
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fake_locker
+    }
+    locker = @user.get_locker(expected_options)
+    locker.should == fake_locker
+  end
+
+  it "should raise Sevendigital::Error if user is not authenticated" do
+    expected_options = {:page => 2}
+
+    running {@user.get_locker}.should raise_error(Sevendigital::SevendigitalError)
+
+
+  end
+
 end

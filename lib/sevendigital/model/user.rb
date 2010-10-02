@@ -3,9 +3,16 @@ module Sevendigital
   class User < SevendigitalObject
 
     attr_accessor :oauth_access_token
-    
+
+    sevendigital_extended_property :locker
+
     def authenticated?
       return !@oauth_access_token.nil?
+    end
+
+    def get_locker(options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      return @api_client.user.get_locker(@oauth_access_token, options)
     end
 
   end
