@@ -17,11 +17,25 @@ describe "ApiOperator" do
 
   end
 
-  it "should create request URI based on api method and client configuration" do
+  it "should create request query based on api method and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
 
-    uri = @api_operator.create_request_uri(api_request)
+    uri = @api_operator.create_request_query(api_request)
+
+    uri.kind_of?(URI).should == true
+
+    uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method\?oauth_consumer_key=oauth_consumer_key/
+    uri.to_s.should =~ /\&param1=value/
+    uri.to_s.should =~ /\&paramTwo=2/
+
+  end
+
+  it "should create request query based on api method and client configuration" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+
+    uri = @api_operator.create_request_query(api_request)
 
     uri.kind_of?(URI).should == true
 

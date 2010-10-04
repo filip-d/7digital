@@ -1,6 +1,7 @@
 module Sevendigital
 
   require 'net/http'
+  require 'uri'
   
   class ApiOperator
 
@@ -19,15 +20,15 @@ module Sevendigital
   end
 
   def make_http_request(api_request)
-    http_client = Net::HTTP.new(@client.configuration.api_url, 80)
-    http_request = Net::HTTP::Get.new(create_request_query(api_request))
 
-    http_request.oauth!( \
-      http_client, \
-      OAuth::Consumer.new( @client.configuration.oauth_consumer_key, @client.configuration.oauth_consumer_secret), \
-      api_request.token \
-    )
+    if (api_request.requires_signature?) then
+      http_client, http_request = create_signed_http_request(api_request)
+    else
+      http_client, http_request = create_standard_http_request(api_request)
+    end
+    http_client.set_debug_output($stdout) if @client.very_verbose?
     log_request(http_request) if @client.verbose?
+
     http_client.request(http_request)
   end
 
@@ -37,14 +38,44 @@ module Sevendigital
     api_response
   end
 
-  def create_request_query(api_request)
+  def create_signed_http_request(api_request)
+    request_uri = create_request_uri(api_request)
+    http_client = Net::HTTP.new(request_uri.host, request_uri.port)
+    http_request = Net::HTTP::Get.new(request_uri.request_uri)
+    http_client.use_ssl = true
+    http_client.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    puts "Prepared request #{request_uri.to_s}" if @client.verbose?
+    puts http_request.signature_base_string(http_client, @client.oauth_consumer, api_request.token) if @client.very_verbose?
+    http_request.oauth!( \
+      http_client, \
+      @client.oauth_consumer, \
+      api_request.token \
+    )
+    return http_client, http_request
+  end
+
+  def create_standard_http_request(api_request)
+    request_uri = create_request_uri(api_request)
+    request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key
+    http_client = Net::HTTP.new(request_uri.host, request_uri.port)
+    http_request = Net::HTTP::Get.new(request_uri.request_uri)
+    return http_client, http_request
+  end
+
+  def create_request_uri(api_request)
     api_request.ensure_country_is_set(@client.country)
-    query = "/#{@client.configuration.api_version}/#{api_request.api_method}?" + api_request.parameters.map{ |k,v| "#{k}=#{v}" }.join("&") 
-    query
+    host = @client.configuration.api_url
+    path = "/#{@client.configuration.api_version}/#{api_request.api_method}"
+    query = api_request.parameters.map{ |k,v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}" }.join("&")
+    if api_request.requires_signature? then
+      URI::HTTPS.build(:host => host, :path => path, :query =>query)
+    else
+      URI::HTTP.build(:host => host, :path => path, :query =>query)
+    end
   end
 
   def log_request(request)
-    puts "ApiOperator: Calling #{request}"
+    puts "ApiOperator: Calling #{request.inspect}"
   end
 
 end
