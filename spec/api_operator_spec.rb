@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), %w[spec_helper])
 require 'ostruct'
+require 'oauth'
 
 describe "ApiOperator" do
 

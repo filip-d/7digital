@@ -8,7 +8,6 @@ module Sevendigital
       @api_client.track_digestor.from_xml(api_response.content.track)
     end
 
-    #TODO TEST THIS METHOD
     def get_details_from_release(track_id, release_id, options={})
       @api_client.release.get_tracks(release_id, options).find {|track| track.id = track_id}
     end

@@ -30,6 +30,24 @@ describe "TrackManager" do
 
   end
 
+  it "get_details_from_release should get all tracks from the release and pick the relevant one" do
+
+    @client.stub!(:release).and_return(mock(Sevendigital::ReleaseManager))
+
+    options = []
+    track_1 = Sevendigital::Track.new(@client)
+    track_1.id = 1
+    track_2 = Sevendigital::Track.new(@client)
+    track_2.id = 2
+    a_track_list = [track_1, track_2]
+    a_release_id = 123456
+
+    @client.release.should_receive(:get_tracks).with(a_release_id, options).and_return(a_track_list)
+
+    track = @track_manager.get_details_from_release(track_1.id, a_release_id, options)
+    track.should == track_1
+  end
+
   it "get_chart should call track/chart api method and digest the release list from response" do
 
     api_response = fake_api_response("track/chart")
