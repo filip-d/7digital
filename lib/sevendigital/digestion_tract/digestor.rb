@@ -19,6 +19,7 @@ module Sevendigital
       def list_from_proxy(object_list_proxy)
         make_sure_not_eating_nil(object_list_proxy)
         list = []
+        return list if object_list_proxy.kind_of?(Peachy::SimpleContent)
         if object_list_proxy.send(default_element_name) then
           object_list_proxy.send(default_element_name).each { |object_proxy| list << from_proxy(object_proxy) }
         end
