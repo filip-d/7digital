@@ -17,31 +17,32 @@ describe "ApiOperator" do
 
   end
 
-  it "should create request query based on api method and client configuration" do
+  it "should create http request uri based on api method and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
 
-    uri = @api_operator.create_request_query(api_request)
+    uri = @api_operator.create_request_uri(api_request)
 
     uri.kind_of?(URI).should == true
 
-    uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method\?oauth_consumer_key=oauth_consumer_key/
-    uri.to_s.should =~ /\&param1=value/
-    uri.to_s.should =~ /\&paramTwo=2/
+    uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method/
+    uri.to_s.should =~ /[\?\&]param1=value/
+    uri.to_s.should =~ /[\?\&]paramTwo=2/
 
   end
 
-  it "should create request query based on api method and client configuration" do
+  it "should create HTTPS request uri based on api method that requires signature and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.require_signature
 
-    uri = @api_operator.create_request_query(api_request)
+    uri = @api_operator.create_request_uri(api_request)
 
     uri.kind_of?(URI).should == true
 
-    uri.to_s.should =~ /http:\/\/base.api.url\/version\/api\/method\?oauth_consumer_key=oauth_consumer_key/
-    uri.to_s.should =~ /\&param1=value/
-    uri.to_s.should =~ /\&paramTwo=2/
+    uri.to_s.should =~ /https:\/\/base.api.url\/version\/api\/method/
+    uri.to_s.should =~ /[\?\&]param1=value/
+    uri.to_s.should =~ /[\?\&]paramTwo=2/
 
   end
 
@@ -50,15 +51,24 @@ describe "ApiOperator" do
 
     @stub_api_request.should_receive(:ensure_country_is_set).with("sk")
     
-    @api_operator.call_api(@stub_api_request)
+    @api_operator.create_request_uri(@stub_api_request)
 
   end
 
-  it "should make HTTP request and get response" do
+  it "should make HTTP request and get http response" do
 
-    Net::HTTP.should_receive(:get_response).with(@api_operator.create_request_uri(@stub_api_request))
+    http_response = fake_api_response
 
-    @api_operator.call_api(@stub_api_request)
+    @stub_http_request = stub(Net::HTTP::Get)
+    @stub_http_client =  stub(Net::HTTP)
+
+    @api_operator.should_receive(:create_http_request).with(@stub_api_request).and_return([@stub_http_client, @stub_http_request])
+
+    @stub_http_client.should_receive(:request).with(@stub_http_request).and_return(http_response)
+
+    response = @api_operator.make_http_request(@stub_api_request)
+
+    response.should == http_response
 
   end
 
@@ -67,7 +77,20 @@ describe "ApiOperator" do
     http_response = fake_api_response
     digested_response = fake_digested_response
 
-    Net::HTTP.stub!(:get_response).and_return(http_response)
+    @client.api_response_digestor.should_receive(:from_http_response).with(http_response).and_return(digested_response)
+
+    response = @api_operator.digest_http_response(http_response)
+
+    response.should == digested_response
+
+  end
+
+    it "should call API by making an http request and digesting the response" do
+
+    http_response = fake_api_response
+    digested_response = fake_digested_response
+
+    @api_operator.should_receive(:make_http_request).and_return(http_response)
 
     @client.api_response_digestor.should_receive(:from_http_response).with(http_response).and_return(digested_response)
 
@@ -79,15 +102,54 @@ describe "ApiOperator" do
 
   it "should throw an exception if response is not ok" do
 
-    Net::HTTP.stub(:get_response).and_return(fake_api_response)
     failed_response = fake_digested_response(false)
     failed_response.stub!(:error_code).and_return("4000")
     failed_response.stub!(:error_message).and_return("error")
-      @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
+    @api_operator.should_receive(:make_http_request).and_return(fake_api_response)
+    @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
 
     running { @api_operator.call_api(@stub_api_request) }.should raise_error(Sevendigital::SevendigitalError)
 
   end
+
+  it "should create a 2-legged signed HTTP request" do
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.require_signature
+    http_client, http_request = @api_operator.create_http_request(api_request)
+    http_client.inspect.should =~ /base\.api\.url:443/
+    http_client.use_ssl?.should == true
+    http_client.verify_mode.should == OpenSSL::SSL::VERIFY_NONE
+    http_request.path.should =~ /api\/method/
+    http_request.path.should =~ /param1=value/
+    http_request["Authorization"].should =~ /OAuth oauth_consumer_key="oauth_consumer_key"/
+    http_request["Authorization"].should =~ / oauth_signature=/
+  end
+
+  it "should create a 3-legged signed HTTP request" do
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.require_signature
+    api_request.token = OAuth::AccessToken.new(@client.oauth_consumer, "token", "secret")
+    http_client, http_request = @api_operator.create_http_request(api_request)
+    http_client.inspect.should =~ /base\.api\.url:443/
+    http_client.use_ssl?.should == true
+    http_client.verify_mode.should == OpenSSL::SSL::VERIFY_NONE
+    http_request.path.should =~ /api\/method/
+    http_request.path.should =~ /param1=value/
+    http_request["Authorization"].should =~ /OAuth oauth_consumer_key="oauth_consumer_key"/
+    http_request["Authorization"].should =~ / oauth_signature=/
+    http_request["Authorization"].should =~ / oauth_token="token"/
+  end
+
+  it "should create a standard HTTP request" do
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    http_client, http_request = @api_operator.create_http_request(api_request)
+    http_client.inspect.should =~ /base\.api\.url:80/
+    http_client.use_ssl?.should == false
+    http_request.path.should =~ /api\/method/
+    http_request.path.should =~ /param1=value/
+    http_request.path.should =~ /oauth_consumer_key=oauth_consumer_key/
+  end
+
 
   def test_configuration
     configuration = OpenStruct.new
@@ -110,6 +172,7 @@ describe "ApiOperator" do
   def stub_api_client(configuration, response_digestor)
   @client = stub(Sevendigital::Client)
   @client.stub!(:configuration).and_return(configuration)
+  @client.stub!(:oauth_consumer).and_return(OAuth::Consumer.new( configuration.oauth_consumer_key, configuration.oauth_consumer_secret))
   @client.stub!(:api_response_digestor).and_return(response_digestor)
   @client.stub!(:country).and_return("sk")
   @client.stub!(:verbose?).and_return(false)
@@ -122,6 +185,7 @@ def stub_api_request
 
   api_request.stub!(:parameters).and_return({})
   api_request.stub!(:api_method).and_return("m")
+  api_request.stub!(:requires_signature?).and_return(false)
   api_request.stub!(:ensure_country_is_set)
   return api_request
 end

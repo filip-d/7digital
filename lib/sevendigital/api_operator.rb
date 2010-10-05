@@ -21,11 +21,8 @@ module Sevendigital
 
   def make_http_request(api_request)
 
-    if (api_request.requires_signature?) then
-      http_client, http_request = create_signed_http_request(api_request)
-    else
-      http_client, http_request = create_standard_http_request(api_request)
-    end
+    http_client, http_request = create_http_request(api_request)
+
     http_client.set_debug_output($stdout) if @client.very_verbose?
     log_request(http_request) if @client.verbose?
 
@@ -38,6 +35,15 @@ module Sevendigital
     api_response
   end
 
+  def create_http_request(api_request)
+    if (api_request.requires_signature?) then
+      http_client, http_request = create_signed_http_request(api_request)
+    else
+      http_client, http_request = create_standard_http_request(api_request)
+    end
+    return http_client, http_request
+  end
+
   def create_signed_http_request(api_request)
     request_uri = create_request_uri(api_request)
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
@@ -47,7 +53,7 @@ module Sevendigital
     puts "Prepared request #{request_uri.to_s}" if @client.verbose?
     puts http_request.signature_base_string(http_client, @client.oauth_consumer, api_request.token) if @client.very_verbose?
     http_request.oauth!( \
-      http_client, \
+    http_client, \
       @client.oauth_consumer, \
       api_request.token \
     )
