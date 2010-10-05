@@ -31,7 +31,7 @@ module Sevendigital
 
   def digest_http_response(http_response)
     api_response = @client.api_response_digestor.from_http_response(http_response)
-    raise Sevendigital::SevendigitalError, "#{api_response.error_code} - #{api_response.error_message}" if !api_response.ok?
+    raise Sevendigital::SevendigitalError.new(api_response.error_code, api_response.error_message), "#{api_response.error_code} - #{api_response.error_message}" if !api_response.ok?
     api_response
   end
 

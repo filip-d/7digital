@@ -107,8 +107,10 @@ describe "ApiOperator" do
     failed_response.stub!(:error_message).and_return("error")
     @api_operator.should_receive(:make_http_request).and_return(fake_api_response)
     @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
+    
+    expected_error = Sevendigital::SevendigitalError.new(4000, "error")
 
-    running { @api_operator.call_api(@stub_api_request) }.should raise_error(Sevendigital::SevendigitalError)
+    running { @api_operator.call_api(@stub_api_request) }.should raise_error(expected_error, "4000 - error" )
 
   end
 
