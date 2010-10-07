@@ -21,6 +21,18 @@ describe "UserManager" do
     @user_manager = Sevendigital::UserManager.new(@client)
   end
 
+  it "should log in user using an existing access token" do
+    an_access_token = OAuth::AccessToken.new("aaa", "bbb", nil)
+    @user = @user_manager.login(an_access_token)
+    @user.authenticated?.should == true
+  end
+
+  it "should not log in user using an request token but raise an exception" do
+    a_request_token = OAuth::RequestToken.new("aaa", "bbb", nil)
+    running {@user = @user_manager.login(a_request_token)}.should raise_exception Sevendigital::SevendigitalError
+    @user.nil?.should == true
+  end
+
   it "authenticate should return an authenticated user if supplied with valid login details" do
     user = @user_manager.authenticate("email", "password")
     user.kind_of?(Sevendigital::User).should == true

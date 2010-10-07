@@ -32,7 +32,7 @@ describe "OAuthManager" do
   it "get_oauth_access_token should call oauth/accessToken api method and digest the access_token from response" do
 
     a_request_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
-    fake_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
+    fake_token = OAuth::AccessToken.new("aaa", "bbb", "ccc")
     api_response = fake_api_response("oauth/accessToken")
 
     digestor = mock(Sevendigital::OAuthTokenDigestor)

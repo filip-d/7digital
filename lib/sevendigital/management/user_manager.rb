@@ -2,6 +2,13 @@ module Sevendigital
 
   class UserManager < Manager
 
+    def login(access_token)
+      raise Sevendigital::SevendigitalError if !access_token.kind_of? OAuth::AccessToken
+      user = Sevendigital::User.new(@api_client)
+      user.oauth_access_token = access_token
+      user
+    end
+
     def authenticate(email, password)
       request_token = @api_client.oauth.get_request_token
       return nil unless @api_client.oauth.authorise_request_token(email, password, request_token)
