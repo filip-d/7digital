@@ -12,7 +12,12 @@ module Sevendigital
 
     def get_locker(options={})
       raise Sevendigital::SevendigitalError if !authenticated?
-      return @api_client.user.get_locker(@oauth_access_token, options)
+      @api_client.user.get_locker(@oauth_access_token, options)
+    end
+
+    def purchase!(release_id, track_id, price, options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user.purchase(release_id, track_id, price, @oauth_access_token, options)
     end
 
   end

@@ -1,7 +1,10 @@
 module Sevendigital
 
   require 'net/http'
+  require 'net/https'
+  require 'oauth'
   require 'uri'
+  require 'cgi'
   
   class ApiOperator
 

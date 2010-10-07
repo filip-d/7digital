@@ -1,0 +1,49 @@
+<response status="ok" version="1.2">
+  <purchase id="123">
+    <purchaseDate>2009-08-10T11:00:00+01:00</purchaseDate>
+    <lockerReleases>
+      <lockerRelease>
+        <release id="1">
+          <title>Ill Communication</title>
+          <version></version>
+          <type>Album</type>
+          <artist id="357">
+            <name>Beastie Boys</name>
+            <appearsAs>Beastie Boys</appearsAs>
+            <url>http://www.7digital.com/artists/beastie-boys</url>
+          </artist>
+          <url>http://www.7digital.com/artists/beastie-boys</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/004/915/0000491573_350.jpg</image>
+        </release>
+        <lockerTracks>
+          <lockerTrack>
+            <track id="456">
+              <title>Sabotage</title>
+              <version></version>
+              <artist id="0">
+                <name>Beastie Boys</name>
+                <appearsAs>Beastie Boys</appearsAs>
+                <url>http://www.7digital.com/artists/beastie-boys</url>
+              </artist>
+              <url>
+                http://www.7digital.com/artists/beastie-boys/ill-communication-remastered-version/06-Sabotage-(2009-Digital-Remaster)/
+              </url>
+            </track>
+            <remainingDownloads>3</remainingDownloads>
+            <purchaseDate>2009-08-10T11:00:00+01:00</purchaseDate>
+            <downloadUrls>
+              <downloadUrl>
+                <url>http://media3.7digital.com/media/user/downloadtrack?formatid=1&amp;oauth_consumer_key=YOUR_KEY_HERE&amp;oauth_nonce=3254252&amp;oauth_signature_method=HMAC-SHA1&amp;oauth_timestamp=1249379136&amp;oauth_token=123456&amp;shopid=34&amp;trackid=456&amp;oauth_signature=9XyVW0dUqn%2FbrZjEzzFVbXiOYGk%3D</url>
+                <format id="1">
+                  <fileFormat>MP3</fileFormat>
+                  <bitRate>320</bitRate>
+                  <drmFree>true</drmFree>
+                </format>
+              </downloadUrl>
+            </downloadUrls>
+          </lockerTrack>
+        </lockerTracks>
+      </lockerRelease>
+    </lockerReleases>
+  </purchase>
+</response>

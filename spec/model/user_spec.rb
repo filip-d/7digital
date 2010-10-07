@@ -35,6 +35,26 @@ describe "User" do
     locker.should == fake_locker
   end
 
+  it "should get user manager to make a purchase" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    a_release_id = 123
+    a_track_id = 456
+    a_price = 1.29
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+    expected_options = {:page => 2}
+
+    @user_manager.should_receive(:purchase) { |release_id, track_id, price, token, options|
+      token.should == @user.oauth_access_token
+      release_id.should == a_release_id
+      track_id.should == a_track_id
+      price.should == a_price
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fake_locker
+    }
+    purchase_locker = @user.purchase!(a_release_id, a_track_id, a_price, expected_options)
+    purchase_locker.should == fake_locker
+  end
+
   it "should raise Sevendigital::Error if user is not authenticated" do
     expected_options = {:page => 2}
 

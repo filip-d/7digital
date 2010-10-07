@@ -12,10 +12,18 @@ module Sevendigital
 
     def get_locker(token, options={})
         api_request = Sevendigital::ApiRequest.new("user/locker", {}, options)
-        api_request.require_signature
+        api_request.require_signature                                                                                     
         api_request.token = token
         api_response = @api_client.operator.call_api(api_request)
         @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
+    end
+
+    def purchase(release_id, track_id, price, token, options={})
+        api_request = Sevendigital::ApiRequest.new("user/purchase/item", {:releaseId => release_id, :trackId => track_id, :price => price}, options)
+        api_request.require_signature
+        api_request.token = token
+        api_response = @api_client.operator.call_api(api_request)
+        @api_client.locker_digestor.from_xml(api_response.content.purchase)
     end
 
   end

@@ -81,5 +81,29 @@ describe "UserManager" do
 
   end
 
+  it "purchase should call user/purchase/item api method and return digested locker items" do
+    an_api_response = fake_api_response("user/purchase/item")
+    a_track_id = 123456
+    a_release_id = 56879
+    a_price = 0.99
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+
+    mock_client_digestor(@client, :locker_digestor) \
+      .should_receive(:from_xml).with(an_api_response.content.purchase).and_return(fake_locker)
+
+    @client.operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == "user/purchase/item"
+       api_request.parameters[:trackId].should  == a_track_id
+       api_request.parameters[:releaseId].should  == a_release_id
+       api_request.parameters[:price].should  == a_price
+       api_request.token.should  == a_token
+       an_api_response
+    }
+
+    @user_manager.purchase(a_release_id, a_track_id, a_price, a_token).should == fake_locker
+
+  end
+
 
 end
