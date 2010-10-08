@@ -63,6 +63,18 @@ module Sevendigital
       @artist_digestor ||= ArtistDigestor.new(self)
     end
 
+    def basket
+      @basket_manager ||= BasketManager.new(self)
+    end
+
+    def basket_digestor
+      @basket_digestor ||= BasketDigestor.new(self)
+    end
+
+    def basket_item_digestor
+      @basket_item_digestor ||= BasketItemDigestor.new(self)
+    end
+
     def download_url_digestor
       @download_url_digestor ||= DownloadUrlDigestor.new(self)
     end
