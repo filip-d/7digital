@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class OAuthTokenDigestor < Digestor
+  class OAuthRequestTokenDigestor < Digestor
 
     def default_element_name; :oauth_request_token end
 

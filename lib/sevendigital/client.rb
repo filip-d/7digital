@@ -124,7 +124,7 @@ module Sevendigital
     end
 
     def oauth_request_token_digestor
-      @oauth_request_token_digestor ||= OAuthTokenDigestor.new(self)
+      @oauth_request_token_digestor ||= OAuthRequestTokenDigestor.new(self)
     end
 
     def oauth_access_token_digestor

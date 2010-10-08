@@ -13,7 +13,7 @@ describe "OAuthManager" do
     fake_token = OAuth::RequestToken.new("aaa", "bbb", "ccc")
     api_response = fake_api_response("oauth/requesttoken")
 
-    digestor = mock(Sevendigital::OAuthTokenDigestor)
+    digestor = mock(Sevendigital::OAuthRequestTokenDigestor)
     @client.stub!(:oauth_request_token_digestor).and_return(digestor)
     
     digestor.should_receive(:from_xml).with(api_response.content.oauth_request_token, :oauth_request_token).and_return(fake_token)
@@ -35,8 +35,8 @@ describe "OAuthManager" do
     fake_token = OAuth::AccessToken.new("aaa", "bbb", "ccc")
     api_response = fake_api_response("oauth/accessToken")
 
-    digestor = mock(Sevendigital::OAuthTokenDigestor)
-    @client.stub!(:oauth_request_token_digestor).and_return(digestor)
+    digestor = mock(Sevendigital::OAuthAccessTokenDigestor)
+    @client.stub!(:oauth_access_token_digestor).and_return(digestor)
 
     digestor.should_receive(:from_xml).with(api_response.content.oauth_access_token, :oauth_access_token).and_return(fake_token)
 
