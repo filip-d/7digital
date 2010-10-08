@@ -15,7 +15,7 @@ module Sevendigital
         price.formatted_price= price_proxy.formatted_price.value
         price.rrp= price_proxy.rrp.value.to_f if price_proxy.rrp
         price.formatted_rrp= price_proxy.formatted_rrp.value if price_proxy.formatted_rrp
-        price.on_sale = price_proxy.on_sale.value.to_s.downcase == "true"
+        price.on_sale = price_proxy.on_sale.value.to_s.downcase == "true" if price_proxy.on_sale
 
         return price
       end

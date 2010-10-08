@@ -34,9 +34,6 @@ XML
     price.currency_symbol.should == "£"
     price.value.should == 1.79
     price.formatted_price.should == "£1.79"
-    price.rrp.should == nil
-    price.formatted_rrp.should == nil
-    price.on_sale.should == true
 
   end
 

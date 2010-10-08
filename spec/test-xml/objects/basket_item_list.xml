@@ -1,0 +1,26 @@
+<basketItems>
+  <basketItem id="15284882">
+    <type>track</type>
+    <itemName>Test</itemName>
+    <artistName>Ghetto</artistName>
+    <trackId>2458384</trackId>
+    <releaseId>224820</releaseId>
+    <price>
+      <currency code="EUR">€</currency>
+      <value>0.99</value>
+      <formattedPrice>0,99€</formattedPrice>
+    </price>
+  </basketItem>
+  <basketItem id="15284883">
+    <type>release</type>
+    <itemName>Test2</itemName>
+    <artistName>Ghetto</artistName>
+    <trackId />
+    <releaseId>224820</releaseId>
+    <price>
+      <currency code="EUR">€</currency>
+      <value>9.99</value>
+      <formattedPrice>9,99€</formattedPrice>
+    </price>
+  </basketItem>
+</basketItems>
