@@ -51,18 +51,6 @@ describe "Release" do
 
   end
 
-  it "get_tracks should link all tracks back to release itself" do
-
-    @release_manager.should_receive(:get_tracks) { |release_id, options|
-      release_id.should == @release.id
-      fake_track_list
-    }
-
-    tracks = @release.get_tracks()
-
-    tracks.all?{|track| track.release == @release}.should == true
-
-  end
 
    it "get_recommendations should get recommendations from manager" do
     expected_options = {:page => 2}

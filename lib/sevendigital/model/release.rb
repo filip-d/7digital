@@ -16,10 +16,7 @@ module Sevendigital
     end
     
     def get_tracks(options={})
-      @tracks = @api_client.release.get_tracks(@id, options).collect do |track|
-        track.release = self
-        track
-      end
+      @api_client.release.get_tracks(@id, options)
     end
 
     def get_recommendations(options={})

@@ -41,18 +41,6 @@ describe "Artist" do
 
   end
 
-  it "get_releases should link all releases back to artist itself" do
-
-    @artist_manager.should_receive(:get_releases) { |artist_id, options|
-      artist_id.should == @artist.id
-      fake_release_list
-    }
-
-    releases = @artist.get_releases()
-    releases.all?{|release| release.artist == @artist}.should == true
-
-  end
-  
    it "get_top_tracks should get tracks from manager" do
     expected_options = {:page => 2}
    
@@ -62,19 +50,6 @@ describe "Artist" do
       fake_track_list
     }
     @artist.get_top_tracks(expected_options)
-
-  end
-
-  it "get_top_tracks should link all tracks back to artist itself" do
-
-    @artist_manager.should_receive(:get_top_tracks) { |artist_id, options|
-      artist_id.should == @artist.id
-      fake_track_list
-    }
-
-    tracks = @artist.get_top_tracks()
-
-    tracks.all?{|track| track.artist == @artist}.should == true
 
   end
 
