@@ -21,6 +21,14 @@ describe "ApiRequest" do
     request.parameters[:page].should == 5
     request.parameters[:pageSize].should == 3
 
+  end
+
+    it "should not contain nil parameters" do
+
+      request = Sevendigital::ApiRequest.new('method', {:key1 => "value", :key2 => nil}, {:page => 5, :per_page => 3 })
+      request.parameters[:key1].should == "value"
+      request.parameters.has_key?(:key2).should == false
+
 	end
 
 end

@@ -1,0 +1,11 @@
+<response status="ok" version="1.2">
+  <basket id="00000000-0000-0000-0000-000000000000">
+    <itemCount>1</itemCount>
+    <price>
+      <currency code="EUR">€</currency>
+      <value>0.00</value>
+      <formattedPrice>0,00€</formattedPrice>
+    </price>
+    <basketItems/>
+  </basket>
+</response>

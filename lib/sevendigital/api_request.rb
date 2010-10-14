@@ -22,7 +22,12 @@ class ApiRequest
     page_size = parameters[:page_size] || parameters[:per_page]
     parameters.delete(:page_size)
     parameters[:pageSize] ||= page_size if page_size
+    parameters = remove_nils(parameters)
     return parameters
+  end
+
+  def remove_nils(parameters)
+    parameters.delete_if { |key, value| value.nil? }
   end
 
   def ensure_country_is_set(country)
