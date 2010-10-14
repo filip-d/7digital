@@ -117,5 +117,21 @@ describe "UserManager" do
 
   end
 
+  it "should get stream track URI" do
+    a_stream_track_uri = "http://media.com/streamtrack"
+    a_track_id = 123456
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+
+    @client.operator.should_receive(:get_request_uri) { |api_request|
+       api_request.api_method.should == "user/streamtrack"
+       api_request.parameters[:trackId].should  == a_track_id
+       api_request.token.should  == a_token
+       a_stream_track_uri
+    }
+
+    @user_manager.get_stream_track_url(a_track_id, a_token).should == a_stream_track_uri
+
+  end
+
 
 end

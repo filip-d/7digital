@@ -33,6 +33,14 @@ module Sevendigital
         @api_client.locker_digestor.from_xml(api_response.content.purchase)
     end
 
+    def get_stream_track_url(track_id, token, options={})
+        api_request = Sevendigital::ApiRequest.new("user/streamtrack", {:trackId => track_id}, options)
+        api_request.require_signature
+        api_request.token = token
+        @api_client.operator.get_request_uri(api_request)
+    end
+
+
   end
 
 end
