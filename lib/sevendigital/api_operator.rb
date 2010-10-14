@@ -18,6 +18,14 @@ module Sevendigital
     api_response
   end
 
+  def get_request_uri(api_request)
+    api_request.signature_scheme = :query_string if api_request.requires_signature?
+    http_client, http_request = create_http_request(api_request)
+    path = http_request.instance_variable_get("@path")
+    host = http_client.instance_variable_get("@address")
+    return "http://#{host}#{path}"
+  end
+
   def make_http_request_and_digest(api_request)
       digest_http_response(make_http_request(api_request))
   end
@@ -48,7 +56,10 @@ module Sevendigital
   end
 
   def create_signed_http_request(api_request)
-    request_uri = create_request_uri(api_request)
+    create_signed_http_request_from_uri(create_request_uri(api_request), api_request.token, api_request.signature_scheme)
+  end
+
+  def create_signed_http_request_from_uri(request_uri, token, scheme=:header)
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
     http_request = Net::HTTP::Get.new(request_uri.request_uri)
     http_client.use_ssl = true
@@ -58,7 +69,8 @@ module Sevendigital
     http_request.oauth!( \
     http_client, \
       @client.oauth_consumer, \
-      api_request.token \
+      token, \
+      {:scheme => scheme}
     )
     return http_client, http_request
   end

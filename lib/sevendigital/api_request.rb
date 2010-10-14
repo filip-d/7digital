@@ -4,10 +4,12 @@ class ApiRequest
 
   attr_reader :api_method, :parameters, :signed
   attr_accessor :token
+  attr_accessor :signature_scheme
 
   def initialize(api_method, parameters, options = {})
     @api_method = api_method
     @parameters = comb_parameters(options.merge(parameters))
+    @signature_scheme = :header
   end
 
   def requires_signature?

@@ -154,6 +154,29 @@ describe "ApiOperator" do
     http_request.path.should =~ /oauth_consumer_key=oauth_consumer_key/
   end
 
+  it "get_request_uri should return oauth sign URI if api request requires signature" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    api_request.require_signature
+    signed_uri =  @api_operator.get_request_uri(api_request)
+
+    signed_uri.should =~ /oauth_signature=/
+    signed_uri.should =~ /oauth_consumer_key=oauth_consumer_key&/
+    signed_uri.should =~ /oauth_token=token&/
+    signed_uri.should =~ /http:\/\/base.api.url\/version\/api\/method/
+  end
+
+  it "get_request_uri should return simple request URI if api request does not require signature" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    signed_uri =  @api_operator.get_request_uri(api_request)
+
+    signed_uri.match(/oauth_signature=/).should == nil
+    signed_uri.should =~ /oauth_consumer_key=oauth_consumer_key/
+    signed_uri.should =~ /http:\/\/base.api.url\/version\/api\/method/
+  end
+
 
   def test_configuration
     configuration = OpenStruct.new

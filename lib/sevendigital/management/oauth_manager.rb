@@ -25,7 +25,6 @@ module Sevendigital
       api_response.ok?
     end
 
-
   end
 
 end

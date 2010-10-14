@@ -4,6 +4,7 @@ describe "OAuthManager" do
 
   before do
     @client = stub(Sevendigital::Client)
+
     @client.stub!(:operator).and_return(mock(Sevendigital::ApiOperator))
     @oauth_manager = Sevendigital::OAuthManager.new(@client)
   end
