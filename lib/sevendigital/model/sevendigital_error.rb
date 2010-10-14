@@ -1,6 +1,6 @@
 module Sevendigital
   class SevendigitalError < StandardError;
-    attr :error_code, :error_message
+    attr_accessor :error_code, :error_message
 
     def initialize(error_code = 10000, error_message=nil)
       @error_code = error_code

@@ -104,14 +104,15 @@ describe "ApiOperator" do
   it "should throw an exception if response is not ok" do
 
     failed_response = fake_digested_response(false)
-    failed_response.stub!(:error_code).and_return("4000")
+    failed_response.stub!(:error_code).and_return(4000)
     failed_response.stub!(:error_message).and_return("error")
     @api_operator.should_receive(:make_http_request).and_return(fake_api_response)
     @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
     
-    expected_error = Sevendigital::SevendigitalError.new(4000, "error")
-
-    running { @api_operator.call_api(@stub_api_request) }.should raise_error(expected_error, "4000 - error" )
+    running { @api_operator.call_api(@stub_api_request) }.should raise_error(Sevendigital::SevendigitalError) { |error|
+      error.error_code.should == 4000
+      error.error_message.should == "error"
+    }
 
   end
 
