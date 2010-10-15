@@ -21,7 +21,8 @@ describe "OAuthManager" do
 
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "oauth/requestToken"
-       api_request.signed.should == true
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
        api_response
     }
 
@@ -43,8 +44,9 @@ describe "OAuthManager" do
 
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "oauth/accessToken"
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
        api_request.token.should == a_request_token
-       api_request.signed.should == true
        api_response
     }
 
@@ -62,9 +64,10 @@ describe "OAuthManager" do
 
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "oauth/requestToken/authorise"
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
        api_request.parameters[:username].should  == an_email_address
        api_request.parameters[:password].should  == a_password
-       api_request.signed.should == true
        api_response
     }
 

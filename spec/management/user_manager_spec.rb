@@ -85,6 +85,8 @@ describe "UserManager" do
 
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "user/locker"
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
        api_request.token.should  == a_token
        an_api_response
     }
@@ -106,6 +108,8 @@ describe "UserManager" do
 
     @client.operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == "user/purchase/item"
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
        api_request.parameters[:trackId].should  == a_track_id
        api_request.parameters[:releaseId].should  == a_release_id
        api_request.parameters[:price].should  == a_price
@@ -124,6 +128,8 @@ describe "UserManager" do
 
     @client.operator.should_receive(:get_request_uri) { |api_request|
        api_request.api_method.should == "user/streamtrack"
+       api_request.requires_secure_connection?.should == false
+       api_request.requires_signature?.should == true
        api_request.parameters[:trackId].should  == a_track_id
        api_request.token.should  == a_token
        a_stream_track_uri

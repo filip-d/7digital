@@ -20,6 +20,14 @@ class ApiRequest
     @signed = true
   end
 
+  def requires_secure_connection?
+    @secure == true
+  end
+
+  def require_secure_connection
+    @secure = true
+  end
+
   def comb_parameters(parameters)
     page_size = parameters[:page_size] || parameters[:per_page]
     parameters.delete(:page_size)

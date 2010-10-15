@@ -32,10 +32,10 @@ describe "ApiOperator" do
 
   end
 
-  it "should create HTTPS request uri based on api method that requires signature and client configuration" do
+  it "should create HTTPS request uri based on api method that requires secure connection and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
-    api_request.require_signature
+    api_request.require_secure_connection
 
     uri = @api_operator.create_request_uri(api_request)
 
@@ -120,9 +120,7 @@ describe "ApiOperator" do
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_signature
     http_client, http_request = @api_operator.create_http_request(api_request)
-    http_client.inspect.should =~ /base\.api\.url:443/
-    http_client.use_ssl?.should == true
-    http_client.verify_mode.should == OpenSSL::SSL::VERIFY_NONE
+    http_client.use_ssl?.should == false
     http_request.path.should =~ /api\/method/
     http_request.path.should =~ /param1=value/
     http_request["Authorization"].should =~ /OAuth oauth_consumer_key="oauth_consumer_key"/
@@ -132,6 +130,20 @@ describe "ApiOperator" do
   it "should create a 3-legged signed HTTP request" do
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_signature
+    api_request.token = OAuth::AccessToken.new(@client.oauth_consumer, "token", "secret")
+    http_client, http_request = @api_operator.create_http_request(api_request)
+    http_client.use_ssl?.should == false
+    http_request.path.should =~ /api\/method/
+    http_request.path.should =~ /param1=value/
+    http_request["Authorization"].should =~ /OAuth oauth_consumer_key="oauth_consumer_key"/
+    http_request["Authorization"].should =~ / oauth_signature=/
+    http_request["Authorization"].should =~ / oauth_token="token"/
+  end
+
+  it "should create a 3-legged signed HTTPS request" do
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.require_signature
+    api_request.require_secure_connection
     api_request.token = OAuth::AccessToken.new(@client.oauth_consumer, "token", "secret")
     http_client, http_request = @api_operator.create_http_request(api_request)
     http_client.inspect.should =~ /base\.api\.url:443/
@@ -159,12 +171,13 @@ describe "ApiOperator" do
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
     api_request.token = OAuth::AccessToken.new(nil, "token", "token_secret")
     api_request.require_signature
+    api_request.require_secure_connection
     signed_uri =  @api_operator.get_request_uri(api_request)
 
     signed_uri.should =~ /oauth_signature=/
     signed_uri.should =~ /oauth_consumer_key=oauth_consumer_key&/
     signed_uri.should =~ /oauth_token=token&/
-    signed_uri.should =~ /http:\/\/base.api.url\/version\/api\/method/
+    signed_uri.should =~ /https:\/\/base.api.url\/version\/api\/method/
   end
 
   it "get_request_uri should return simple request URI if api request does not require signature" do
@@ -175,6 +188,17 @@ describe "ApiOperator" do
     signed_uri.match(/oauth_signature=/).should == nil
     signed_uri.should =~ /oauth_consumer_key=oauth_consumer_key/
     signed_uri.should =~ /http:\/\/base.api.url\/version\/api\/method/
+  end
+
+  it "get_request_uri should return secure request URI if api request does not require signature" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.require_secure_connection
+    signed_uri =  @api_operator.get_request_uri(api_request)
+
+    signed_uri.match(/oauth_signature=/).should == nil
+    signed_uri.should =~ /oauth_consumer_key=oauth_consumer_key/
+    signed_uri.should =~ /https:\/\/base.api.url\/version\/api\/method/
   end
 
 
@@ -213,6 +237,7 @@ def stub_api_request
   api_request.stub!(:parameters).and_return({})
   api_request.stub!(:api_method).and_return("m")
   api_request.stub!(:requires_signature?).and_return(false)
+  api_request.stub!(:requires_secure_connection?).and_return(false)
   api_request.stub!(:ensure_country_is_set)
   return api_request
 end
