@@ -37,6 +37,7 @@ module Sevendigital
 
     def get_stream_track_url(track_id, token, options={})
         api_request = Sevendigital::ApiRequest.new("user/streamtrack", {:trackId => track_id}, options)
+        api_request.api_service = :media
         api_request.require_signature
         api_request.token = token
         @api_client.operator.get_request_uri(api_request)

@@ -47,6 +47,20 @@ describe "ApiOperator" do
 
   end
 
+  it "should create http request uri based on api method for non standard api service" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.api_service = :media
+    uri = @api_operator.create_request_uri(api_request)
+
+    uri.kind_of?(URI).should == true
+
+    uri.to_s.should =~ /http:\/\/media-base.api.url\/media-version\/api\/method/
+    uri.to_s.should =~ /[\?\&]param1=value/
+    uri.to_s.should =~ /[\?\&]paramTwo=2/
+
+  end
+
   it "should make sure country is set before making request" do
     @client.stub!(:country).and_return("sk")
 
@@ -201,11 +215,24 @@ describe "ApiOperator" do
     signed_uri.should =~ /https:\/\/base.api.url\/version\/api\/method/
   end
 
+  it "get_host_from_configuration should return host url for specific API service" do
+    host, version =  @api_operator.get_host_and_version_from_configuration(:media)
+    host.should ==  "media-base.api.url"
+    version.should ==  "media-version"
+  end
+
+  it "get_host_from_configuration should return host url for standard API service" do
+    host, version =  @api_operator.get_host_and_version_from_configuration(nil)
+    host.should ==  "base.api.url"
+    version.should ==  "version"
+  end
 
   def test_configuration
     configuration = OpenStruct.new
     configuration.api_url = "base.api.url"
+    configuration.media_api_url = "media-base.api.url"
     configuration.api_version = "version"
+    configuration.media_api_version = "media-version"
     configuration.oauth_consumer_key = "oauth_consumer_key"
     return configuration
   end
@@ -235,6 +262,7 @@ def stub_api_request
   api_request = stub(Sevendigital::ApiRequest)
 
   api_request.stub!(:parameters).and_return({})
+  api_request.stub!(:api_service).and_return(nil)
   api_request.stub!(:api_method).and_return("m")
   api_request.stub!(:requires_signature?).and_return(false)
   api_request.stub!(:requires_secure_connection?).and_return(false)

@@ -130,6 +130,7 @@ describe "UserManager" do
        api_request.api_method.should == "user/streamtrack"
        api_request.requires_secure_connection?.should == false
        api_request.requires_signature?.should == true
+       api_request.api_service.should == :media
        api_request.parameters[:trackId].should  == a_track_id
        api_request.token.should  == a_token
        a_stream_track_uri

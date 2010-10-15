@@ -3,7 +3,7 @@ module Sevendigital
 class ApiRequest
 
   attr_reader :api_method, :parameters, :signed
-  attr_accessor :token
+  attr_accessor :token, :api_service
   attr_accessor :signature_scheme
 
   def initialize(api_method, parameters, options = {})

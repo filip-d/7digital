@@ -6,7 +6,9 @@ module Sevendigital
 
   DEFAULT_CONFIGURATION = {
       :api_url =>  "api.7digital.com",
-      :api_version => "1.2"
+      :api_version => "1.2",
+      :media_api_url =>  "media3.7digital.com",
+      :media_api_version => "media"
     }
 
   class Client
