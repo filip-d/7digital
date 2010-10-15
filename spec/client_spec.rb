@@ -7,7 +7,7 @@ describe "Client" do
     client.configuration.api_url.should == 'api.7digital.com'
     client.configuration.api_version.should == '1.2'
     client.configuration.media_api_url.should == 'media3.7digital.com'
-    client.configuration.media_api_version.should == '1.2'
+    client.configuration.media_api_version.should == 'media'
   end
 
   it "should override default configuration with configuration hash" do

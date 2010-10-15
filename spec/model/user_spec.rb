@@ -58,16 +58,18 @@ describe "User" do
   it "should get stream track url from user manager" do
     @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
     a_track_id = 456
+    a_release_id = 123
     a_stream_track_url = "http://whatever"
     expected_options = {:page => 2}
 
-    @user_manager.should_receive(:get_stream_track_url) { |track_id, token, options|
+    @user_manager.should_receive(:get_stream_track_url) { |release_id, track_id, token, options|
       token.should == @user.oauth_access_token
       track_id.should == a_track_id
+      release_id.should == a_release_id
       (options.keys & expected_options.keys).should == expected_options.keys
       a_stream_track_url
     }
-    @user.stream_track_url(a_track_id, expected_options).should == a_stream_track_url
+    @user.stream_track_url(a_release_id, a_track_id, expected_options).should == a_stream_track_url
   end
 
   it "should raise Sevendigital::Error if user is not authenticated" do

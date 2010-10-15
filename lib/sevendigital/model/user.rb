@@ -20,9 +20,9 @@ module Sevendigital
       @api_client.user.purchase(release_id, track_id, price, @oauth_access_token, options)
     end
 
-    def stream_track_url(track_id, options={})
+    def stream_track_url(release_id, track_id, options={})
       raise Sevendigital::SevendigitalError if !authenticated?
-      @api_client.user.get_stream_track_url(track_id, @oauth_access_token, options)
+      @api_client.user.get_stream_track_url(release_id, track_id, @oauth_access_token, options)
     end
 
   end
