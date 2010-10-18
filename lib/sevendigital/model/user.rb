@@ -25,5 +25,10 @@ module Sevendigital
       @api_client.user.get_stream_track_url(release_id, track_id, @oauth_access_token, options)
     end
 
+    def add_card_url(return_url, options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user.get_add_card_url(return_url, @oauth_access_token, options)
+    end
+
   end
 end

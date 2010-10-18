@@ -43,6 +43,15 @@ module Sevendigital
         @api_client.operator.get_request_uri(api_request)
     end
 
+    def get_add_card_url(return_url, token, options={})
+        api_request = Sevendigital::ApiRequest.new("payment/addcard", {:returnUrl => return_url}, options)
+        api_request.api_service = :account
+        api_request.require_signature
+        api_request.require_secure_connection
+        api_request.token = token
+        @api_client.operator.get_request_uri(api_request)
+    end
+
 
   end
 

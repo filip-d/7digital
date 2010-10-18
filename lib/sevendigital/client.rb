@@ -8,7 +8,9 @@ module Sevendigital
       :api_url =>  "api.7digital.com",
       :api_version => "1.2",
       :media_api_url =>  "media3.7digital.com",
-      :media_api_version => "media"
+      :media_api_version => "media",
+      :account_api_url =>  "account.7digital.com",
+      :account_api_version => "mobile"
     }
 
   class Client
