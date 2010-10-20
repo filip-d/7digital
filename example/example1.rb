@@ -5,49 +5,24 @@ class VerySimpleCache < Hash
   def get(key) has_key?(key) ? fetch(key) : nil;  end
 end
 
-  sevendigital_client = Sevendigital::Client.new(
-          :oauth_consumer_key => "7digital_mobile",
-          :oauth_consumer_secret => "0a41737acfeba433",
+  api_client = Sevendigital::Client.new(
+          :oauth_consumer_key => "YOUR_KEY_HERE",
+          :oauth_consumer_secret => "YOUR_SECRET_HERE",
           :lazy_load? => true,
           :country => "GB",
-         # :cache => VerySimpleCache.new,
+          #:cache => VerySimpleCache.new,
           :verbose => "verbose"
   )
 
-#  artist = sevendigital_client.artist.search("radiohead").first
-#  artist = sevendigital_client.artist.get_details(1)
+  track = api_client.track.search("TEST CONTENT - TEST CONTENT", :page_size=>1).first
 
+  puts "purchasing track #{track.title} by #{track.artist.appears_as} from #{track.release.title}"
+  puts "the price is #{track.price.formatted_price}"
 
-  user = sevendigital_client.user.authenticate("filip%407digital.com", "cheche")
+  user = api_client.user.authenticate("USERS_EMAIL", "USERS_PASSWORD")
 
-  puts user.oauth_access_token
+  purchase_response = user.purchase!(track.release.id, track.id, track.price.value) if track.price.value
 
-  user.locker.locker_releases.each do |locker_release|
-    puts locker_release.release.title 
-    puts locker_release.locker_tracks[0].purchase_date
-  end
+  locker_track = purchase_response.locker_releases.first.locker_tracks.first
 
-#  puts artist.name
-
-  sevendigital_client.track.search("radiohead").each do |track|
-    puts "#{track.title} [#{track.version}]"
-    puts track.release.year.to_s + " - " + track.release.title
-#    puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
-  end
-
-
-  sevendigital_client.release.search("radiohead").each do |release|
-    puts release.year.to_s + " - " + release.title
-    puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
-  end
-
-  recommendations = sevendigital_client.release.get_top_by_tag("alternative-indie")
-
-  recommendations.each do |release|
-    puts "\n"
-    puts "#{release.artist.name} - #{release.title} (#{release.year})"
-    puts "Barcode: #{release.barcode}, explicit content: #{release.explicit_content}, formats: #{release.formats.collect {|format| format.file_format}}"
-    puts "Label: #{release.label.name}"
-    puts release.tracks.size.to_s + " tracks for " + release.price.formatted_price
-  end
-
+  puts "you can now download the track here: #{locker_track.download_urls.first.url}"
