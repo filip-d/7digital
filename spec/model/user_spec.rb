@@ -72,12 +72,27 @@ describe "User" do
     @user.stream_track_url(a_release_id, a_track_id, expected_options).should == a_stream_track_url
   end
 
-  it "should raise Sevendigital::Error if user is not authenticated" do
+  it "should not get a stream tack url but raise Sevendigital::Error if user is not authenticated" do
+    running {@user.get_locker}.should raise_error(Sevendigital::SevendigitalError)
+  end
+
+  it "should get an add card url from user manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    a_stream_track_url = "http://whatever"
+    a_return_url = "http://example.com"
     expected_options = {:page => 2}
 
+    @user_manager.should_receive(:get_add_card_url) { |return_url, token, options|
+      return_url.should == a_return_url
+      token.should == @user.oauth_access_token
+      (options.keys & expected_options.keys).should == expected_options.keys
+      a_stream_track_url
+    }
+    @user.add_card_url(a_return_url, expected_options).should == a_stream_track_url
+  end
+
+  it "should not get a stream tack url but raise Sevendigital::Error if user is not authenticated" do
     running {@user.get_locker}.should raise_error(Sevendigital::SevendigitalError)
-
-
   end
 
 end

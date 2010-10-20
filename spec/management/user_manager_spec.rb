@@ -142,5 +142,23 @@ describe "UserManager" do
 
   end
 
+  it "should get add card URI" do
+    an_add_track_uri = "http://account.com/addcard"
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    a_return_url = "http://example.com/"
+
+    @client.operator.should_receive(:get_request_uri) { |api_request|
+       api_request.api_method.should == "payment/addcard"
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
+       api_request.api_service.should == :account
+       api_request.token.should  == a_token
+       an_add_track_uri
+    }
+
+    @user_manager.get_add_card_url(a_return_url, a_token).should == an_add_track_uri
+
+  end
+
 
 end
