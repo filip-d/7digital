@@ -36,8 +36,13 @@ module Sevendigital
     end
 
     def from_http_response(http_response)
-      return from_xml(http_response.body.to_s) if http_response.is_a?(Net::HTTPSuccess)
-      from_invalid_http_response(http_response)
+      if http_response.is_a?(Net::HTTPSuccess) then
+        response = from_xml(http_response.body.to_s)
+      else
+        response = from_invalid_http_response(http_response)
+      end
+      response.headers = http_response.header
+      response
     end
 
     def from_invalid_http_response(http_response)

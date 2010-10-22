@@ -11,6 +11,7 @@ describe "ApiResponseDigestor" do
     stub_http_response = stub(Net::HTTPSuccess)
     stub_http_response.stub!(:is_a?).with(Net::HTTPSuccess).and_return(true)
     stub_http_response.stub!(:body).and_return('<response status="ok"></response>')
+    stub_http_response.stub!(:header).and_return(nil)
 
     response =  @api_response_digestor.from_http_response(stub_http_response)
     response.error_code.should == 0
@@ -24,6 +25,7 @@ describe "ApiResponseDigestor" do
     stub_http_response.stub!(:is_a?).with(Net::HTTPSuccess).and_return(false)
     stub_http_response.stub!(:code).and_return(expected_error_code.to_s)
     stub_http_response.stub!(:body).and_return(expected_message)
+    stub_http_response.stub!(:header).and_return(nil)
 
     response =  @api_response_digestor.from_http_response(stub_http_response)
     response.error_code.should == 401
@@ -31,6 +33,18 @@ describe "ApiResponseDigestor" do
 
   end
 
+
+  it "should store headers from http response" do
+
+    stub_http_response = stub(Net::HTTPSuccess)
+    stub_http_response.stub!(:is_a?).with(Net::HTTPSuccess).and_return(true)
+    stub_http_response.stub!(:body).and_return('<response status="ok"></response>')
+    stub_http_response.stub!(:header).and_return({"cache-control" => "test", "date" => "now"})
+
+    response =  @api_response_digestor.from_http_response(stub_http_response)
+    response.headers["cache-control"].should == "test"
+    response.headers["date"].should == "now"
+  end
 
 
   it "should create a response with body from xml ok response" do
