@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), %w[spec_helper])
 require 'ostruct'
+require 'time'
 
 describe "ApiOperatorCached" do
 
@@ -25,6 +26,21 @@ describe "ApiOperatorCached" do
     @cached_operator.stub(:create_request_uri).and_return("key")
     @cache.stub!(:get).with("key").and_return(:something)
     @cached_operator.should_not_receive(:make_http_request_and_digest)
+    @cached_operator.call_api(@stub_api_request)
+  end
+
+  it "should make an http request if cached response is out of date " do
+    now = Time.now.utc
+    yesterday = now - 60*60*24
+    max_age = 60*60*12
+    stub_time(now)
+
+    expired_response = stub(Sevendigital::ApiResponse)
+    expired_response.stub!(:headers).and_return({"cache-control" => "private, max-age=#{max_age}", "Date" => yesterday.httpdate})
+
+    @cached_operator.stub(:create_request_uri).and_return("key")
+    @cache.stub!(:get).with("key").and_return(expired_response)
+    @cached_operator.should_receive(:make_http_request_and_digest)
     @cached_operator.call_api(@stub_api_request)
   end
   
@@ -65,6 +81,10 @@ describe "ApiOperatorCached" do
 
   def fake_api_response
     return Net::HTTP.new("1.1", 200, "response_body")
+  end
+  
+  def stub_time(time)
+    Time.stub!(:now).and_return(time)
   end
 
   def stub_api_request
