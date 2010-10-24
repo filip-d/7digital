@@ -11,7 +11,7 @@ module Sevendigital
         price = Sevendigital::Price.new()
         price.currency_code = price_proxy.currency.code.to_s.upcase.to_sym
         price.currency_symbol= price_proxy.currency.value
-        price.value= price_proxy.value.value.to_f
+        price.value= price_proxy.value.value.to_f if !price_proxy.value.value.to_s.empty?
         price.formatted_price= price_proxy.formatted_price.value
         price.rrp= price_proxy.rrp.value.to_f if price_proxy.rrp
         price.formatted_rrp= price_proxy.formatted_rrp.value if price_proxy.formatted_rrp

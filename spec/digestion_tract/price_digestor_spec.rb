@@ -37,6 +37,25 @@ XML
 
   end
 
+    it "should parse from xml and populate N/A price" do
+
+    xml_response = <<XML
+<price>
+  <currency code="GBP">£</currency>
+  <value />
+  <formattedPrice>N/A</formattedPrice>
+  <onSale>false</onSale>
+</price>
+XML
+
+    price = @price_digestor.from_xml(xml_response)
+    price.currency_code.should == :GBP
+    price.currency_symbol.should == "£"
+    price.value.should == nil
+    price.formatted_price.should == "N/A"
+
+  end
+
   it "should parse from xml and populate all properties" do
 
     xml_response = load_sample_object_xml("price")
