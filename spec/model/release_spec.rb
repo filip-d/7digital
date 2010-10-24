@@ -4,7 +4,11 @@ require File.join(File.dirname(__FILE__), %w[../spec_helper])
 describe "Release" do
 
   before do
+    @configuration = stub(OpenStruct)
+    @configuration.stub!(:lazy_load?).and_return(true)
+
     @client = stub(Sevendigital::Client)
+    @client.stub!(:configuration).and_return(@configuration)
     @release_manager = mock(Sevendigital::ReleaseManager)
     @client.stub!(:release).and_return @release_manager
     
@@ -36,6 +40,13 @@ describe "Release" do
     @release.formats.should == fresh_release.formats
     @release.label.should == fresh_release.label
     @release.price.should == fresh_release.price
+
+  end
+
+  it "should lazy load price even if already populated but price value is not available" do
+    @release.price = Sevendigital::Price.new(@client)
+    @release.should_receive(:demand_price)
+    @release.price
 
   end
 
@@ -92,7 +103,9 @@ describe "Release" do
     release.explicit_content = true
     release.formats = []
     release.label = Sevendigital::Label.new
-    release.price = Sevendigital::Price.new
+    price = Sevendigital::Price.new
+    price.value = 5
+    release.price = price
     release
 end
 end
