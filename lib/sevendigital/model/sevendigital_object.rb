@@ -8,22 +8,27 @@ class Class
     end
   end
 
- def sevendigital_extended_property(accessor, get_method = nil)
+  def sevendigital_extended_property(accessor, get_method = nil)
 
     get_method ||= "get_#{accessor.to_s}".to_sym
     demand_method = "demand_#{accessor.to_s}".to_sym
 
-     define_method(demand_method) do |*options|
-       if instance_variable_get("@#{accessor}") == nil then
-         value = send(get_method, *options)
-         instance_variable_set("@#{accessor}", value) if get_method != :get_details
-       end
-     end
+    define_method(demand_method) do |*options|
+      if instance_variable_get("@#{accessor}").nil?  then
+        value = send(get_method, *options)
+        instance_variable_set("@#{accessor}", value) if get_method != :get_details
+      end
+    end
 
-     define_method("#{accessor}") do |*options|
-       send(demand_method, *options) if instance_variable_get("@#{accessor}").nil? && @api_client.configuration.lazy_load?
-       instance_variable_get("@#{accessor}")
-     end
+    define_method("#{accessor}") do |*options|
+      begin
+        send(demand_method, *options) if instance_variable_get("@#{accessor}").nil? && @api_client.configuration.lazy_load?
+      rescue Sevendigital::SevendigitalError => error
+        puts "Error whilst lazyloading #{accessor} - #{error.error_code} #{error.error_message}" if @api_client.verbose?
+        raise error if !@api_client.configuration.ignorant_lazy_load?
+      end
+      instance_variable_get("@#{accessor}")
+    end
 
      define_method("#{accessor}=") do |val|
        instance_variable_set("@#{accessor}",val)
