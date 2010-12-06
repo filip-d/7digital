@@ -20,7 +20,6 @@ module Sevendigital
     end
 
     def out_of_date?(current_time=nil)
-      puts @headers.inspect
       return true if @headers.nil? || @headers["Date"].nil? || @headers["cache-control"].nil?
       return true if  !(@headers["cache-control"] =~ /max-age=([0-9]+)/)
       current_time ||= Time.now.utc

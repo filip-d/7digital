@@ -16,11 +16,9 @@ describe "BasketManager" do
     mock_client_digestor(@client, :basket_digestor) \
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-      api_request.api_method.should == "basket"
-      api_request.parameters[:basketId].should  == a_basket_id
-      an_api_response
-    }
+    @client.should_receive(:make_api_request) \
+              .with("basket", {:basketId => a_basket_id}, {}) \
+              .and_return(an_api_response)
 
     basket = @basket_manager.get(a_basket_id)
     basket.should == a_basket
@@ -33,10 +31,9 @@ describe "BasketManager" do
     mock_client_digestor(@client, :basket_digestor) \
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-      api_request.api_method.should == "basket/create"
-      an_api_response
-    }
+    @client.should_receive(:make_api_request) \
+              .with("basket/create", {}, {}) \
+              .and_return(an_api_response)
 
     basket = @basket_manager.create
     basket.should == a_basket
@@ -52,13 +49,9 @@ describe "BasketManager" do
     mock_client_digestor(@client, :basket_digestor) \
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-      api_request.api_method.should == "basket/addItem"
-      api_request.parameters[:basketId].should  == a_basket_id
-      api_request.parameters[:releaseId].should  == a_release_id
-      api_request.parameters[:trackId].should  == a_track_id
-      an_api_response
-    }
+    @client.should_receive(:make_api_request) \
+      .with("basket/addItem", {:basketId => a_basket_id, :releaseId => a_release_id, :trackId => a_track_id}, {}) \
+      .and_return(an_api_response)
 
     basket = @basket_manager.add_item(a_basket_id, a_release_id, a_track_id)
     basket.should == a_basket
@@ -73,12 +66,9 @@ describe "BasketManager" do
     mock_client_digestor(@client, :basket_digestor) \
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-      api_request.api_method.should == "basket/removeItem"
-      api_request.parameters[:basketId].should  == a_basket_id
-      api_request.parameters[:itemId].should  == an_item_id
-      an_api_response
-    }
+    @client.should_receive(:make_api_request) \
+              .with("basket/removeItem", {:basketId => a_basket_id, :itemId => an_item_id}, {}) \
+              .and_return(an_api_response)
 
     basket = @basket_manager.remove_item(a_basket_id, an_item_id)
     basket.should == a_basket

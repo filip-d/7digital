@@ -112,4 +112,51 @@ describe "Client" do
 
   end
 
+  it "should make an API call using API request created by the client itself " do
+    a_method_name = "method"
+    a_method_params = { :param1 => 1 }
+
+    an_api_response = stub(Sevendigital::ApiResponse)
+    an_api_request = stub(Sevendigital::ApiRequest)
+
+    client = Sevendigital::Client.new
+    mock_operator = mock(Sevendigital::ApiOperator)
+    client.stub!(:operator).and_return(mock_operator)
+
+    client.should_receive(:create_api_request).with(a_method_name, a_method_params, {}).and_return(an_api_request)
+
+    mock_operator.should_receive(:call_api).with(an_api_request).and_return(an_api_response)
+
+    response = client.make_api_request(a_method_name, a_method_params, {})
+
+    response.should == an_api_response
+
+  end
+
+  it "should make a signed & secure API call" do
+    a_method_name = "method"
+    a_method_params = { :param1 => 1 }
+    a_token = "token"
+
+    an_api_response = "response"
+
+    client = Sevendigital::Client.new
+    mock_operator = mock(Sevendigital::ApiOperator)
+    client.stub!(:operator).and_return(mock_operator)
+
+    mock_operator.should_receive(:call_api) { |api_request|
+       api_request.api_method.should == a_method_name
+       api_request.requires_secure_connection?.should == true
+       api_request.requires_signature?.should == true
+       api_request.parameters.should  == a_method_params
+       api_request.token.should == a_token
+       an_api_response
+    }
+
+    response = client.make_signed_api_request(a_method_name, a_method_params, {}, a_token)
+
+    response.should == an_api_response
+
+  end
+
 end

@@ -76,7 +76,16 @@ module Sevendigital
 
     def make_api_request(api_method, parameters, options = {})
       api_request = create_api_request(api_method, parameters, options)
-      @api_client.operator.call_api(api_request)
+      operator.call_api(api_request)
+    end
+
+    def make_signed_api_request(api_method, parameters, options = {}, token = nil)
+      api_request = create_api_request(api_method, parameters, options)
+      api_request.require_signature
+      api_request.require_secure_connection
+      api_request.token = token
+
+      operator.call_api(api_request)
     end
 
     def add_default_parameters(parameters)

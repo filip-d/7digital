@@ -3,28 +3,18 @@ module Sevendigital
   class OAuthManager < Manager
 
     def get_request_token
-      api_request = Sevendigital::ApiRequest.new("oauth/requestToken", {})
-      api_request.require_signature
-      api_request.require_secure_connection
-      api_response = @api_client.operator.call_api(api_request)
+      api_response = @api_client.make_signed_api_request("oauth/requestToken", {})
       @api_client.oauth_request_token_digestor.from_xml(api_response.content.oauth_request_token, :oauth_request_token)
     end
 
     def get_access_token(request_token)
-      api_request = Sevendigital::ApiRequest.new("oauth/accessToken", {})
-      api_request.require_signature
-      api_request.require_secure_connection
-      api_request.token = request_token
-      api_response = @api_client.operator.call_api(api_request)
+      api_response = @api_client.make_signed_api_request("oauth/accessToken", {}, {}, request_token)
       @api_client.oauth_access_token_digestor.from_xml(api_response.content.oauth_access_token, :oauth_access_token)
     end
 
     def authorise_request_token(username, password, request_token)
-      api_request = Sevendigital::ApiRequest.new("oauth/requestToken/authorise", \
+      api_response = @api_client.make_signed_api_request("oauth/requestToken/authorise", \
         {:username => username, :password => password, :token => request_token.token})
-      api_request.require_signature
-      api_request.require_secure_connection
-      api_response = @api_client.operator.call_api(api_request)
       api_response.ok?
     end
 
