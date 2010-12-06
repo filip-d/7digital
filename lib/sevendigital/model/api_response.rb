@@ -20,8 +20,9 @@ module Sevendigital
     end
 
     def out_of_date?(current_time=nil)
-      return false if !@headers || !@headers["Date"] || !@headers["cache-control"]
-      return false if  !(@headers["cache-control"] =~ /max-age=([0-9]+)/)
+      puts @headers.inspect
+      return true if @headers.nil? || @headers["Date"].nil? || @headers["cache-control"].nil?
+      return true if  !(@headers["cache-control"] =~ /max-age=([0-9]+)/)
       current_time ||= Time.now.utc
       response_time = Time.parse(@headers["Date"])
       max_age = /max-age=([0-9]+)/.match(@headers["cache-control"])[1].to_i

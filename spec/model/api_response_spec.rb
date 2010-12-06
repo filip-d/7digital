@@ -104,14 +104,9 @@ describe "ApiResponse" do
   it "should be out of date if it is missing Date header" do
 
     response = Sevendigital::ApiResponse.new
-    response.out_of_date?(Time.now.utc).should == true
-
     response.headers = {"cache-control" => "private, max-age=#{2**30}"}
     response.out_of_date?(Time.now.utc).should == true
    
   end
-
-
-
 
 end

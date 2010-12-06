@@ -69,13 +69,47 @@ describe "Client" do
     client.very_verbose?.should == true
   end
 
-    it "should be verbose if told so" do
+  it "should be verbose if told so" do
     configuration = OpenStruct.new
     configuration.verbose = false
     client = Sevendigital::Client.new(configuration)
     client.verbose = true
     client.verbose?.should == true
     client.very_verbose?.should == false
+  end
+
+  it "should provide selected properties as default parameters for all api requests" do
+    configuration = OpenStruct.new
+    configuration.page_size = 12345
+    configuration.country = 'gb'
+    client = Sevendigital::Client.new(configuration)
+    client.country = 'sk'
+    client.default_parameters.should == {:page_size => 12345, :country => 'sk'}
+  end
+
+  it "create_api_request should merge method parameters and options with parameters taking preference" do
+    client = Sevendigital::Client.new
+    parameters = {:trackId => 1239, :releaseId => 456, :country => "CU"}
+    options = {:page => 1, :country => "US",  :trackId => "SS"}
+    request = client.create_api_request('method', parameters, options)
+    request.parameters[:trackId].should == 1239
+    request.parameters[:releaseId].should == 456
+    request.parameters[:country].should == "CU"
+    request.parameters[:page].should == 1
+    puts request.parameters.inspect
+    request.parameters.keys.size.should == 4 # page_size == null
+
+  end
+
+  it "create_api_request should add default parameters to request" do
+    client = Sevendigital::Client.new
+    client.page_size = 100
+    client.shop_id = 200
+    request = client.create_api_request('method', {}, {})
+
+    request.parameters[:pageSize].should == 100;
+    request.parameters[:shopId].should == 200;
+
   end
 
 end

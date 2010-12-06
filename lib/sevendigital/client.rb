@@ -11,52 +11,80 @@ module Sevendigital
       :media_api_version => "media",
       :account_api_url =>  "account.7digital.com",
       :account_api_version => "web"
-    }
+    }.freeze
 
   class Client
 
-  def load_configuration_from_yml(file_name, environment=nil)
-    plain_settings = YAML.load_file(file_name)
-    if (plain_settings["common"] || (environment && plain_settings[environment])) then
-      environment_settings = plain_settings["common"] || {}
-      environment_settings.update(plain_settings[environment]) if environment
-      environment_settings
-    else
-      plain_settings
-    end
-  end
+  DEFAULT_REQUEST_PARAMETERS = [:shop_id, :country, :page, :page_size, :image_size]
 
-  def load_configurations(configuration)
-    
-    default_settings = Sevendigital::DEFAULT_CONFIGURATION
-
-    if (configuration.kind_of? String) then
-      yml_configuration_file = configuration
-    else
-      yml_configuration_file ="#{RAILS_ROOT}/config/sevendigital.yml" if defined?(RAILS_ROOT)
-      explicit_settings = configuration if configuration.kind_of? Hash
-      explicit_settings = configuration.marshal_dump if configuration.kind_of? OpenStruct
+    def load_configuration_from_yml(file_name, environment=nil)
+      plain_settings = YAML.load_file(file_name)
+      if (plain_settings["common"] || (environment && plain_settings[environment])) then
+        environment_settings = plain_settings["common"] || {}
+        environment_settings.update(plain_settings[environment]) if environment
+        environment_settings
+      else
+        plain_settings
+      end
     end
 
-    environment = defined?(RAILS_ENV) ? RAILS_ENV  : nil
-    yml_settings = load_configuration_from_yml(yml_configuration_file, environment) if yml_configuration_file
-  
-    settings = default_settings
-    settings.update(yml_settings) if yml_settings
-    settings.update(explicit_settings) if explicit_settings
+    def load_configurations(configuration)
 
-    return OpenStruct.new(settings)
-  end
+      default_settings = Sevendigital::DEFAULT_CONFIGURATION.dup
 
-  #Code here
+      if (configuration.kind_of? String) then
+        yml_configuration_file = configuration
+      else
+        yml_configuration_file ="#{RAILS_ROOT}/config/sevendigital.yml" if defined?(RAILS_ROOT)
+        explicit_settings = configuration if configuration.kind_of? Hash
+        explicit_settings = configuration.marshal_dump if configuration.kind_of? OpenStruct
+      end
+
+      environment = defined?(RAILS_ENV) ? RAILS_ENV  : nil
+      yml_settings = load_configuration_from_yml(yml_configuration_file, environment) if yml_configuration_file
+
+      settings = default_settings
+      settings.update(yml_settings) if yml_settings
+      settings.update(explicit_settings) if explicit_settings
+
+      return OpenStruct.new(settings)
+    end
 
     def initialize(configuration=nil, api_operator=nil)
       @configuration = load_configurations(configuration)
       @api_operator = api_operator || hire_api_operator
     end
+
+    def default_parameters
+      params = {}
+      DEFAULT_REQUEST_PARAMETERS.each do |param|
+        value = self.send(param)
+        params[param] = value if value
+      end
+      params
+    end
   
     def hire_api_operator
        @configuration.cache ? ApiOperatorCached.new(self, @configuration.cache) : ApiOperator.new(self)
+    end
+
+    def create_api_request(api_method, parameters, options = {})
+      parameters = options.merge(parameters)
+      parameters = add_default_parameters(parameters)
+      ApiRequest.new(api_method, parameters)
+    end
+
+    def make_api_request(api_method, parameters, options = {})
+      api_request = create_api_request(api_method, parameters, options)
+      @api_client.operator.call_api(api_request)
+    end
+
+    def add_default_parameters(parameters)
+      params = parameters
+      default_parameters.each do |name, value|
+        params[name] ||= value
+      end
+      params
     end
 
     def artist
@@ -169,6 +197,38 @@ module Sevendigital
 
     def country=(country_code)
       @country = country_code
+    end
+
+    def image_size
+      @image_size || @configuration.image_size
+    end
+
+    def image_size=(size)
+      @image_size = size
+    end
+  
+    def page
+      @page || @configuration.page
+    end
+
+    def page=(number)
+      @page = number
+    end
+
+    def page_size
+      @page_size || @configuration.page_size
+    end
+
+    def page_size=(size)
+      @page_size = size
+    end
+
+    def shop_id
+      @shop_id || @configuration.shop_id
+    end
+
+    def shop_id=(id)
+      @shop_id = id
     end
 
     def verbose?

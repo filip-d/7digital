@@ -88,7 +88,6 @@ module Sevendigital
   end
 
   def create_request_uri(api_request)
-    api_request.ensure_country_is_set(@client.country)
     host, version = get_host_and_version_from_configuration(api_request.api_service)
     path = "/#{version}/#{api_request.api_method}"
     query = api_request.parameters.map{ |k,v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}" }.join("&")

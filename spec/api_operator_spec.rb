@@ -61,15 +61,6 @@ describe "ApiOperator" do
 
   end
 
-  it "should make sure country is set before making request" do
-    @client.stub!(:country).and_return("sk")
-
-    @stub_api_request.should_receive(:ensure_country_is_set).with("sk")
-    
-    @api_operator.create_request_uri(@stub_api_request)
-
-  end
-
   it "should make HTTP request and get http response" do
 
     http_response = fake_api_response
@@ -252,7 +243,7 @@ describe "ApiOperator" do
   @client.stub!(:configuration).and_return(configuration)
   @client.stub!(:oauth_consumer).and_return(OAuth::Consumer.new( configuration.oauth_consumer_key, configuration.oauth_consumer_secret))
   @client.stub!(:api_response_digestor).and_return(response_digestor)
-  @client.stub!(:country).and_return("sk")
+  @client.stub!(:default_parameters).and_return({:country => 'sk'})
   @client.stub!(:verbose?).and_return(false)
   @client.stub!(:very_verbose?).and_return(false)
 
