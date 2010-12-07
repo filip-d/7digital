@@ -20,11 +20,9 @@ describe "TrackManager" do
     mock_client_digestor(@client, :track_digestor) \
       .should_receive(:from_xml).with(an_api_response.content.track).and_return(a_track)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-       api_request.api_method.should == "track/details"
-       api_request.parameters[:trackId].should  == a_track_id
-       an_api_response
-    }
+    @client.should_receive(:make_api_request) \
+                 .with("track/details", {:trackId => a_track_id}, {}) \
+                 .and_return(an_api_response)
 
     @track_manager.get_details(a_track_id).should == a_track
 
@@ -50,16 +48,16 @@ describe "TrackManager" do
 
   it "get_chart should call track/chart api method and digest the release list from response" do
 
-    api_response = fake_api_response("track/chart")
+    an_api_response = fake_api_response("track/chart")
     a_chart = []
 
     mock_client_digestor(@client, :chart_item_digestor) \
-        .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
+        .should_receive(:list_from_xml).with(an_api_response.content.chart).and_return(a_chart)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-       api_request.api_method.should == "track/chart"
-       api_response
-    }
+    @client.should_receive(:make_api_request) \
+                   .with("track/chart", {}, {}) \
+                   .and_return(an_api_response)
+
 
     chart = @track_manager.get_chart
     chart.should == a_chart
@@ -68,12 +66,15 @@ describe "TrackManager" do
   it "build_preview_url should return URL for track/preview api request" do
     track_id = 123456
     fake_preview_url = "http://7digital.com/track/preview"
+    fake_api_request = stub(Sevendigital::ApiRequest)
 
-    @client.operator.should_receive(:create_request_uri) { |api_request|
-       api_request.api_method.should == "track/preview"
-       api_request.parameters[:trackId].should  == track_id
-       fake_preview_url
-    }
+    @client.should_receive(:create_api_request) \
+                   .with("track/preview", {:trackId => track_id}, {}) \
+                   .and_return(fake_api_request)
+
+    @client.operator.should_receive(:create_request_uri) \
+      .with(fake_api_request) \
+      .and_return(fake_preview_url)
 
     preview_url = @track_manager.build_preview_url(track_id)
 
@@ -83,20 +84,18 @@ describe "TrackManager" do
   it "search should call track/search api method and digest the nested track list from response" do
 
     query = "radiohead"
-    api_response = fake_api_response("track/search")
+    an_api_response = fake_api_response("track/search")
     a_track_list = [Sevendigital::Track.new(@client)]
 
     mock_client_digestor(@client, :track_digestor) \
       .should_receive(:nested_list_from_xml) \
-      .with(api_response.content.search_results, :search_result, :search_results) \
+      .with(an_api_response.content.search_results, :search_result, :search_results) \
       .and_return(a_track_list)
 
-    @client.operator.should_receive(:call_api) { |api_request|
-       api_request.api_method.should == "track/search"
-       api_request.parameters[:q].should == query
-       api_response
-    }
-
+    @client.should_receive(:make_api_request) \
+                   .with("track/search", {:q => query}, {}) \
+                   .and_return(an_api_response)
+    
     tracks = @track_manager.search(query)
     tracks.should == a_track_list
 
