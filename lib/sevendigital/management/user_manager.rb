@@ -18,25 +18,18 @@ module Sevendigital
     end
 
     def get_locker(token, options={})
-        api_request = Sevendigital::ApiRequest.new("user/locker", {}, options)
-        api_request.require_signature
-        api_request.require_secure_connection
-        api_request.token = token
-        api_response = @api_client.operator.call_api(api_request)
-        @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
+      api_response = @api_client.make_signed_api_request("user/locker", {}, {}, token)
+      @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
     end
 
     def purchase(release_id, track_id, price, token, options={})
-        api_request = Sevendigital::ApiRequest.new("user/purchase/item", {:releaseId => release_id, :trackId => track_id, :price => price}, options)
-        api_request.require_signature
-        api_request.require_secure_connection
-        api_request.token = token
-        api_response = @api_client.operator.call_api(api_request)
-        @api_client.locker_digestor.from_xml(api_response.content.purchase)
+      api_response = @api_client.make_signed_api_request("user/purchase/item", \
+        {:releaseId => release_id, :trackId => track_id, :price => price}, options, token)
+      @api_client.locker_digestor.from_xml(api_response.content.purchase)
     end
 
     def get_stream_track_url(release_id, track_id, token, options={})
-        api_request = Sevendigital::ApiRequest.new("user/streamtrack", {:releaseId => release_id, :trackId => track_id}, options)
+        api_request = @api_client.create_api_request("user/streamtrack", {:releaseId => release_id, :trackId => track_id}, options)
         api_request.api_service = :media
         api_request.require_signature
         api_request.token = token
@@ -44,7 +37,7 @@ module Sevendigital
     end
 
     def get_add_card_url(return_url, token, options={})
-        api_request = Sevendigital::ApiRequest.new("payment/addcard", {:returnUrl => return_url}, options)
+        api_request = @api_client.create_api_request("payment/addcard", {:returnUrl => return_url}, options)
         api_request.api_service = :account
         api_request.require_signature
         api_request.require_secure_connection

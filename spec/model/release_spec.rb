@@ -44,7 +44,7 @@ describe "Release" do
   end
 
   it "should lazy load price even if already populated but price value is not available" do
-    @release.price = Sevendigital::Price.new(@client)
+    @release.price = Sevendigital::Price.new
     @release.should_receive(:demand_price)
     @release.price
 
