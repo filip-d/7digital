@@ -11,6 +11,8 @@ DESCRIPTION
 
   s.files = Dir.glob("{lib,spec}/**/*") + %w(README.rdoc)
   s.extra_rdoc_files = ["README.rdoc"]
+  s.add_dependency('peachy', '>= 0.3.5')
+  s.add_dependency('will_paginate', '>= 2.3.15')
 
   s.homepage = "http://github.com/filip7d/7digital"
   s.rdoc_options = ["--main", "README.rdoc"]
