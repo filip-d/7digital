@@ -49,6 +49,8 @@ describe "ApiOperator" do
 
   it "should create http request uri based on api method for non standard api service" do
 
+    @client.should_receive(:api_host_and_version).with(:media).and_return(["media-base.api.url","media-version"])
+
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
     api_request.api_service = :media
     uri = @api_operator.create_request_uri(api_request)
@@ -206,24 +208,8 @@ describe "ApiOperator" do
     signed_uri.should =~ /https:\/\/base.api.url\/version\/api\/method/
   end
 
-  it "get_host_from_configuration should return host url for specific API service" do
-    host, version =  @api_operator.get_host_and_version_from_configuration(:media)
-    host.should ==  "media-base.api.url"
-    version.should ==  "media-version"
-  end
-
-  it "get_host_from_configuration should return host url for standard API service" do
-    host, version =  @api_operator.get_host_and_version_from_configuration(nil)
-    host.should ==  "base.api.url"
-    version.should ==  "version"
-  end
-
   def test_configuration
     configuration = OpenStruct.new
-    configuration.api_url = "base.api.url"
-    configuration.media_api_url = "media-base.api.url"
-    configuration.api_version = "version"
-    configuration.media_api_version = "media-version"
     configuration.oauth_consumer_key = "oauth_consumer_key"
     return configuration
   end
@@ -246,6 +232,7 @@ describe "ApiOperator" do
   @client.stub!(:default_parameters).and_return({:country => 'sk'})
   @client.stub!(:verbose?).and_return(false)
   @client.stub!(:very_verbose?).and_return(false)
+  @client.stub!(:api_host_and_version).and_return(["base.api.url","version"])
 
 end
 

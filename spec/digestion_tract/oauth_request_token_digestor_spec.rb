@@ -3,7 +3,10 @@ require File.join(File.dirname(__FILE__), %w[../spec_helper])
 describe "OAuthRequestTokenDigestor" do
 
   before do
-     @token_digestor = Sevendigital::OAuthRequestTokenDigestor.new(nil)
+    @stub_oauth_consumer = stub(OAuth::Consumer)
+    api_client = stub(Sevendigital::Client)
+    api_client.stub!(:oauth_consumer).and_return(@stub_oauth_consumer)
+    @token_digestor = Sevendigital::OAuthRequestTokenDigestor.new(api_client)
   end
 
 
@@ -26,6 +29,7 @@ XML
     token.kind_of?(OAuth::RequestToken).should == true
     token.token.should == "yu87230J29DT7tyuGslO98wrR43e39Of"
     token.secret.should == "d2I8uj7yaoa39KKdu3upasybu98f89fln"
+    token.consumer.should == @stub_oauth_consumer
   end
 
 end

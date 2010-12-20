@@ -88,7 +88,7 @@ module Sevendigital
   end
 
   def create_request_uri(api_request)
-    host, version = get_host_and_version_from_configuration(api_request.api_service)
+    host, version = @client.api_host_and_version(api_request.api_service)
     path = "/#{version}/#{api_request.api_method}"
     query = api_request.parameters.map{ |k,v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}" }.join("&")
     if api_request.requires_secure_connection? then
@@ -96,11 +96,6 @@ module Sevendigital
     else
       URI::HTTP.build(:host => host, :path => path, :query =>query)
     end
-  end
-
-  def get_host_and_version_from_configuration(api_service)
-     service = api_service && !api_service.to_s.empty? ? "#{api_service}_" : ""
-     return @client.configuration.send("#{service}api_url".to_sym), @client.configuration.send("#{service}api_version".to_sym) 
   end
 
   def log_request(request)

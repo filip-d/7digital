@@ -96,6 +96,11 @@ module Sevendigital
       params
     end
 
+    def api_host_and_version(api_service=nil)
+       service = api_service && !api_service.to_s.empty? ? "#{api_service}_" : ""
+       return configuration.send("#{service}api_url".to_sym), configuration.send("#{service}api_version".to_sym)
+    end
+
     def artist
       @artist_manager ||= ArtistManager.new(self) 
     end
@@ -173,7 +178,18 @@ module Sevendigital
     end
 
     def oauth_consumer
-      @oauth_consumer ||= OAuth::Consumer.new( @configuration.oauth_consumer_key, @configuration.oauth_consumer_secret)
+      host, version = api_host_and_version(:account)
+
+      consumer_options = {
+        :authorize_path     => "https://#{host}/#{version}/oauth/authorise",
+        :http_method   => :get
+      }
+
+      @oauth_consumer ||= OAuth::Consumer.new( \
+              @configuration.oauth_consumer_key, \
+              @configuration.oauth_consumer_secret, \
+              consumer_options \
+      )
     end
 
     def oauth_request_token_digestor

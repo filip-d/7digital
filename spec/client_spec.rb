@@ -159,4 +159,42 @@ describe "Client" do
 
   end
 
+  it "should get API host url for specific API service from configuration" do
+
+    configuration = OpenStruct.new
+    configuration.media_api_url = "media-base.api.url"
+    configuration.media_api_version = "media-version"
+    client = Sevendigital::Client.new(configuration)
+
+    client.api_host_and_version(:media).should == ["media-base.api.url", "media-version"]
+
+  end
+
+  it "should get API host url for standard API service from configuration" do
+
+    configuration = OpenStruct.new
+    configuration.api_url = "base.api.url"
+    configuration.api_version = "version"
+    client = Sevendigital::Client.new(configuration)
+
+    client.api_host_and_version.should == ["base.api.url", "version"]
+
+  end
+
+  it "should provide initialized oauth consumer" do
+
+    configuration = OpenStruct.new
+    configuration.oauth_consumer_key = "api_key"
+    configuration.oauth_consumer_secret = "secret"
+    configuration.account_api_url = "account.7d.com"
+    configuration.account_api_version = "mobile"
+    client = Sevendigital::Client.new(configuration)
+
+    consumer = client.oauth_consumer
+    consumer.authorize_path.should == "https://account.7d.com/mobile/oauth/authorise"
+    consumer.key.should == "api_key"
+    consumer.secret.should == "secret"
+
+  end
+
 end
