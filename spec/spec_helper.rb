@@ -1,6 +1,14 @@
 #$: << 'sevendigital'
 #$: << 'spec'
 
+require 'simplecov'
+
+SimpleCov.start do
+  add_group 'Management', 'lib/sevendigital/management'
+  add_group 'Digestion', 'lib/sevendigital/digestion_tract'
+  add_group 'Model', 'lib/sevendigital/model'
+end
+
 require 'spec'
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib sevendigital]))
@@ -10,7 +18,7 @@ require "peachy_spec_helper_patch"
 Peachy.whine
 
 Spec::Runner.configure do |config|
-  # == Mock Framework
+  # == Mock Framework 
   #
   # RSpec uses it's own mocking framework by default. If you prefer to
   # use mocha, flexmock or RR, uncomment the appropriate line:
