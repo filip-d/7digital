@@ -1,24 +1,21 @@
 # -*- encoding: utf-8 -*-
+
+require File.expand_path('../lib/sevendigital/version', __FILE__)
+
 Gem::Specification.new do |s|
   s.name = "7digital"
-  s.version = '0.0.2'
-
+  s.version = Sevendigital::VERSION
   s.authors = ["filip7d"]
   s.email = ["filip@7digital.com"]
-  s.description = <<DESCRIPTION
-A ruby wrapper for 7digital API
-DESCRIPTION
-
-  s.files = Dir.glob("{lib,spec}/**/*") + %w(README.rdoc)
+  s.description = "A ruby wrapper for 7digital API"
+  s.summary = s.description
+  s.files = Dir.glob("{lib}/**/*") + %w(README.rdoc)
+  s.test_files = Dir.glob("{spec}/**/*") + %w(README.rdoc)
   s.extra_rdoc_files = ["README.rdoc"]
   s.add_dependency('peachy', '>= 0.3.5')
   s.add_dependency('will_paginate', '>= 2.3.15')
-
   s.homepage = "http://github.com/filip7d/7digital"
   s.rdoc_options = ["--main", "README.rdoc"]
   s.rubygems_version = "1.3.6"
-  s.summary = <<SUMMARY
-A ruby wrapper for 7digital API
-SUMMARY
 end
 
