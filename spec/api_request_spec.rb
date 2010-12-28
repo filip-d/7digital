@@ -2,21 +2,22 @@ require "spec_helper"
 
 describe "ApiRequest" do
 
-  it "should provide paging parameters in 7digital API format" do
+  it "should always provide selected parameters in 7digital API format" do
 
-    request = Sevendigital::ApiRequest.new('method', {:page => 5, :per_page => 3 })
+    request = Sevendigital::ApiRequest.new('method', {
+            :page => 5,
+            :per_page => 3,
+            :shop_id => 99,
+            :image_size => 999
+    })
     request.comb_parameters
     request.parameters[:page].should == 5
     request.parameters[:pageSize].should == 3
-
-  end
-
-  it "should provide shop ID parameter in 7digital API format" do
-
-    request = Sevendigital::ApiRequest.new('method', {:shop_id => 123 })
-    request.comb_parameters
-    request.parameters[:shopId].should == 123
+    request.parameters[:per_page].should == nil
+    request.parameters[:shopId].should == 99
     request.parameters[:shop_id].should == nil
+    request.parameters[:imageSize].should == 999
+    request.parameters[:image_size].should == nil
 
   end
 

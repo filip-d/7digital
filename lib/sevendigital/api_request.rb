@@ -30,21 +30,24 @@ class ApiRequest
   end
 
   def comb_parameters
-    parameters = @parameters
-    page_size = parameters[:page_size] || parameters[:per_page]
-    parameters.delete(:page_size)
-    parameters[:pageSize] ||= page_size if page_size
-
-    shop_id = parameters[:shop_id]
-    parameters.delete(:shop_id)
-    parameters[:shopId] ||= shop_id if shop_id
-
-    parameters = remove_nils(parameters)
-    @parameters = parameters
+    comb_parameter(:pageSize, [:page_size, :per_page])
+    comb_parameter(:shopId, :shop_id)
+    comb_parameter(:imageSize, :image_size)
+    remove_empty_parameters()
   end
 
-  def remove_nils(parameters)
-    parameters.delete_if { |key, value| value.nil? }
+  def comb_parameter(correct_name, alternative_names)
+    param_value = nil
+    alternative_names = [alternative_names] unless alternative_names.is_a?(Array)
+    alternative_names.each do |alternative_name|
+      param_value ||= @parameters[alternative_name]
+      @parameters.delete(alternative_name)
+    end
+    @parameters[correct_name] ||= param_value if param_value
+  end
+
+  def remove_empty_parameters
+    @parameters.delete_if { |key, value| value.nil? }
   end
 
 
