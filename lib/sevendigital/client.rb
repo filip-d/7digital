@@ -1,63 +1,17 @@
-require 'ostruct'
-require 'yaml'
-
-
 module Sevendigital
-
-  DEFAULT_CONFIGURATION = {
-      :api_url =>  "api.7digital.com",
-      :api_version => "1.2",
-      :media_api_url =>  "media-eu.7digital.com",
-      :media_api_version => "media",
-      :account_api_url =>  "account.7digital.com",
-      :account_api_version => "web"
-    }.freeze
 
   class Client
 
-  DEFAULT_REQUEST_PARAMETERS = [:shop_id, :country, :page, :page_size, :image_size]
+  COMMON_REQUEST_PARAMETERS = [:shop_id, :country, :page, :page_size, :image_size]
 
-    def load_configuration_from_yml(file_name, environment=nil)
-      plain_settings = YAML.load_file(file_name)
-      if (plain_settings["common"] || (environment && plain_settings[environment])) then
-        environment_settings = plain_settings["common"] || {}
-        environment_settings.update(plain_settings[environment]) if environment
-        environment_settings
-      else
-        plain_settings
-      end
-    end
-
-    def load_configurations(configuration)
-
-      default_settings = Sevendigital::DEFAULT_CONFIGURATION.dup
-
-      if (configuration.kind_of? String) then
-        yml_configuration_file = configuration
-      else
-        yml_configuration_file ="#{RAILS_ROOT}/config/sevendigital.yml" if defined?(RAILS_ROOT)
-        explicit_settings = configuration if configuration.kind_of? Hash
-        explicit_settings = configuration.marshal_dump if configuration.kind_of? OpenStruct
-      end
-
-      environment = defined?(RAILS_ENV) ? RAILS_ENV  : nil
-      yml_settings = load_configuration_from_yml(yml_configuration_file, environment) if yml_configuration_file
-
-      settings = default_settings
-      settings.update(yml_settings) if yml_settings
-      settings.update(explicit_settings) if explicit_settings
-
-      return OpenStruct.new(settings)
-    end
-
-    def initialize(configuration=nil, api_operator=nil)
-      @configuration = load_configurations(configuration)
-      @api_operator = api_operator || hire_api_operator
+    def initialize(*args)
+      @configuration = Sevendigital::ClientConfiguration.new(*args)
+      @api_operator = hire_api_operator
     end
 
     def default_parameters
       params = {}
-      DEFAULT_REQUEST_PARAMETERS.each do |param|
+      COMMON_REQUEST_PARAMETERS.each do |param|
         value = self.send(param)
         params[param] = value if value
       end
@@ -66,6 +20,10 @@ module Sevendigital
   
     def hire_api_operator
        @configuration.cache ? ApiOperatorCached.new(self, @configuration.cache) : ApiOperator.new(self)
+    end
+
+    def user_agent_info
+      
     end
 
     def create_api_request(api_method, parameters, options = {})
