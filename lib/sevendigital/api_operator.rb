@@ -60,7 +60,8 @@ module Sevendigital
   def create_signed_http_request(api_request)
     request_uri = create_request_uri(api_request)
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
-    http_request = Net::HTTP::Get.new(request_uri.request_uri)
+
+    http_request = Net::HTTP::Get.new(request_uri.request_uri, {"user-agent" => @client.user_agent_info})
     ensure_secure_connection(http_client) if api_request.requires_secure_connection?
     puts "Prepared request #{request_uri.to_s}" if @client.verbose?
     puts http_request.signature_base_string(http_client, @client.oauth_consumer, api_request.token) if @client.very_verbose?
@@ -75,9 +76,10 @@ module Sevendigital
 
   def create_standard_http_request(api_request)
     request_uri = create_request_uri(api_request)
-    request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
-    http_request = Net::HTTP::Get.new(request_uri.request_uri)
+
+    request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key
+    http_request = Net::HTTP::Get.new(request_uri.request_uri, {"user-agent" => @client.user_agent_info})
     ensure_secure_connection(http_client) if api_request.requires_secure_connection?
     return http_client, http_request
   end

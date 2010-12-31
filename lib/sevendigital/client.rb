@@ -23,7 +23,9 @@ module Sevendigital
     end
 
     def user_agent_info
-      
+      app_info = @configuration.app_name ? "/#{@configuration.app_name}" : nil
+      app_info += " #{@configuration.app_version}" if app_info && @configuration.app_version
+      "#{Sevendigital::NAME} Gem #{Sevendigital::VERSION}#{app_info}"
     end
 
     def create_api_request(api_method, parameters, options = {})

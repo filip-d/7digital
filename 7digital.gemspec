@@ -3,10 +3,10 @@
 require File.expand_path('../lib/sevendigital/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = "7digital"
+  s.name = Sevendigital::NAME
   s.version = Sevendigital::VERSION
   s.authors = ["filip7d"]
-  s.email = ["filip@7digital.com"]
+  s.email = ["filip+ruby@7digital.com"]
   s.description = "A ruby wrapper for 7digital API"
   s.summary = s.description
   s.files = Dir.glob("{lib}/**/*") + %w(README.rdoc)

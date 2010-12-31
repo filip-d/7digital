@@ -3,42 +3,32 @@ require "spec_helper"
 describe "Client" do
 
   it "should not be verbose if not told to so" do
-    configuration = OpenStruct.new
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new
     client.verbose?.should == false
     client.very_verbose?.should == false
   end
 
   it "should be verbose if told to be verbose in configuration" do
-    configuration = OpenStruct.new
-    configuration.verbose = true
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new(:verbose => true)
     client.verbose?.should == true
     client.very_verbose?.should == false
   end
 
   it "should be very verbose if told to be very verbose in configruation" do
-    configuration = OpenStruct.new
-    configuration.verbose = :very_verbose
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new(:verbose => :very_verbose)
     client.verbose?.should == true
     client.very_verbose?.should == true
   end
 
   it "should be verbose if told so" do
-    configuration = OpenStruct.new
-    configuration.verbose = false
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new(:verbose => false)
     client.verbose = true
     client.verbose?.should == true
     client.very_verbose?.should == false
   end
 
   it "should provide selected properties as default parameters for all api requests" do
-    configuration = OpenStruct.new
-    configuration.page_size = 12345
-    configuration.country = 'gb'
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new(:page_size => 12345, :country => 'gb')
     client.country = 'sk'
     client.default_parameters.should == {:page_size => 12345, :country => 'sk'}
   end
@@ -117,7 +107,7 @@ describe "Client" do
 
   it "should get API host url for specific API service from configuration" do
 
-    configuration = OpenStruct.new
+    configuration = Sevendigital::ClientConfiguration.new
     configuration.media_api_url = "media-base.api.url"
     configuration.media_api_version = "media-version"
     client = Sevendigital::Client.new(configuration)
@@ -128,7 +118,7 @@ describe "Client" do
 
   it "should get API host url for standard API service from configuration" do
 
-    configuration = OpenStruct.new
+    configuration = Sevendigital::ClientConfiguration.new
     configuration.api_url = "base.api.url"
     configuration.api_version = "version"
     client = Sevendigital::Client.new(configuration)
@@ -139,7 +129,7 @@ describe "Client" do
 
   it "should provide initialized oauth consumer" do
 
-    configuration = OpenStruct.new
+    configuration =  Sevendigital::ClientConfiguration.new
     configuration.oauth_consumer_key = "api_key"
     configuration.oauth_consumer_secret = "secret"
     configuration.account_api_url = "account.7d.com"
@@ -152,5 +142,13 @@ describe "Client" do
     consumer.secret.should == "secret"
 
   end
+
+  it "user_agent_info should contain app_name & version if specified" do
+    client = Sevendigital::Client.new(:app_name => "RSpec", :app_version => "0.0.7")
+
+    client.user_agent_info.should == "7digital Gem #{Sevendigital::VERSION}/RSpec 0.0.7"
+
+  end
+
 
 end

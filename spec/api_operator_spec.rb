@@ -132,6 +132,7 @@ describe "ApiOperator" do
     http_request.path.should =~ /param1=value/
     http_request["Authorization"].should =~ /OAuth oauth_consumer_key="oauth_consumer_key"/
     http_request["Authorization"].should =~ / oauth_signature=/
+#   http_request["Authorization"].should !=~ / oauth_token="token"/
   end
 
   it "should create a 3-legged signed HTTP request" do
@@ -171,6 +172,15 @@ describe "ApiOperator" do
     http_request.path.should =~ /api\/method/
     http_request.path.should =~ /param1=value/
     http_request.path.should =~ /oauth_consumer_key=oauth_consumer_key/
+  end
+
+  it "should add custom user agent info to created HTTP request" do
+
+    @client.stub!(:user_agent_info).and_return("7digital Gem")
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    http_client, http_request = @api_operator.create_http_request(api_request)
+    http_request["User-agent"].should =~ /7digital Gem/
   end
 
   it "get_request_uri should return oauth sign URI if api request requires signature" do
@@ -230,6 +240,7 @@ describe "ApiOperator" do
   @client.stub!(:oauth_consumer).and_return(OAuth::Consumer.new( configuration.oauth_consumer_key, configuration.oauth_consumer_secret))
   @client.stub!(:api_response_digestor).and_return(response_digestor)
   @client.stub!(:default_parameters).and_return({:country => 'sk'})
+  @client.stub!(:user_agent_info).and_return("7digital")
   @client.stub!(:verbose?).and_return(false)
   @client.stub!(:very_verbose?).and_return(false)
   @client.stub!(:api_host_and_version).and_return(["base.api.url","version"])
