@@ -6,6 +6,7 @@ module Sevendigital
 
     def initialize(*args)
       @configuration = Sevendigital::ClientConfiguration.new(*args)
+      yield @configuration if block_given?
       @api_operator = hire_api_operator
     end
 

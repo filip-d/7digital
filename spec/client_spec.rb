@@ -107,10 +107,10 @@ describe "Client" do
 
   it "should get API host url for specific API service from configuration" do
 
-    configuration = Sevendigital::ClientConfiguration.new
-    configuration.media_api_url = "media-base.api.url"
-    configuration.media_api_version = "media-version"
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new { |configuration|
+      configuration.media_api_url = "media-base.api.url"
+      configuration.media_api_version = "media-version"
+    }
 
     client.api_host_and_version(:media).should == ["media-base.api.url", "media-version"]
 
@@ -118,10 +118,10 @@ describe "Client" do
 
   it "should get API host url for standard API service from configuration" do
 
-    configuration = Sevendigital::ClientConfiguration.new
-    configuration.api_url = "base.api.url"
-    configuration.api_version = "version"
-    client = Sevendigital::Client.new(configuration)
+    client = Sevendigital::Client.new { |configuration|
+      configuration.api_url = "base.api.url"
+      configuration.api_version = "version"
+    }
 
     client.api_host_and_version.should == ["base.api.url", "version"]
 

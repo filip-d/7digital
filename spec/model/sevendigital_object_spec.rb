@@ -5,8 +5,8 @@ describe "SevendigitalObject" do
 
   before do
 
-    @configuration = stub(OpenStruct)
-    @configuration.stub!(:lazy_load?).and_return(true)
+    @configuration = stub(Sevendigital::ClientConfiguration)
+    @configuration.stub!(:lazy_load).and_return(true)
 
     @client = stub(Sevendigital::Client)
     @client.stub!(:configuration).and_return(@configuration)
@@ -29,7 +29,7 @@ describe "SevendigitalObject" do
     class TestClass < Sevendigital::SevendigitalObject
       sevendigital_extended_property :test_property
     end
-    @configuration.stub!(:ignorant_lazy_load?).and_return(false)
+    @configuration.stub!(:ignorant_lazy_load).and_return(false)
     test_object = TestClass.new(@client)
     test_object.should_receive(:demand_test_property).and_raise(Sevendigital::SevendigitalError)
     running {test_object.test_property}.should raise_error(Sevendigital::SevendigitalError)
@@ -39,7 +39,7 @@ describe "SevendigitalObject" do
     class TestClass < Sevendigital::SevendigitalObject
       sevendigital_extended_property :test_property
     end
-    @configuration.stub!(:ignorant_lazy_load?).and_return(true)
+    @configuration.stub!(:ignorant_lazy_load).and_return(true)
     test_object = TestClass.new(@client)
     test_object.should_receive(:demand_test_property).and_raise(Sevendigital::SevendigitalError)
     test_object.test_property

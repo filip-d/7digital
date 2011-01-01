@@ -22,10 +22,10 @@ class Class
 
     define_method("#{accessor}") do |*options|
       begin
-        send(demand_method, *options) if instance_variable_get("@#{accessor}").nil? && @api_client.configuration.lazy_load?
+        send(demand_method, *options) if instance_variable_get("@#{accessor}").nil? && @api_client.configuration.lazy_load
       rescue Sevendigital::SevendigitalError => error
         puts "Error whilst lazyloading #{accessor} - #{error.error_code} #{error.error_message}" if @api_client.verbose?
-        raise error if !@api_client.configuration.ignorant_lazy_load?
+        raise error if !@api_client.configuration.ignorant_lazy_load
       end
       instance_variable_get("@#{accessor}")
     end
