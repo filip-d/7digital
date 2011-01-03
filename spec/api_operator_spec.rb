@@ -32,6 +32,49 @@ describe "ApiOperator" do
 
   end
 
+  it "should create http GET request by default" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.class.should == Net::HTTP::Get
+
+  end
+
+  it "should create http POST request" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.http_method = :POST
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.class.should == Net::HTTP::Post
+
+  end
+
+  it "should create http DELETE request" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.http_method = :DELETE
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.class.should == Net::HTTP::Delete
+
+  end
+
+  it "should create http PUT request" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.http_method = :PUT
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.class.should == Net::HTTP::Put
+
+  end
+
   it "should create HTTPS request uri based on api method that requires secure connection and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})

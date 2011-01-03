@@ -61,7 +61,7 @@ module Sevendigital
     request_uri = create_request_uri(api_request)
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
 
-    http_request = Net::HTTP::Get.new(request_uri.request_uri, {"user-agent" => @client.user_agent_info})
+    http_request = new_http_request(request_uri.request_uri, api_request.http_method)
     ensure_secure_connection(http_client) if api_request.requires_secure_connection?
     puts "Prepared request #{request_uri.to_s}" if @client.verbose?
     puts http_request.signature_base_string(http_client, @client.oauth_consumer, api_request.token) if @client.very_verbose?
@@ -79,7 +79,7 @@ module Sevendigital
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
 
     request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key
-    http_request = Net::HTTP::Get.new(request_uri.request_uri, {"user-agent" => @client.user_agent_info})
+    http_request = new_http_request(request_uri.request_uri, api_request.http_method)
     ensure_secure_connection(http_client) if api_request.requires_secure_connection?
     return http_client, http_request
   end
@@ -98,6 +98,11 @@ module Sevendigital
     else
       URI::HTTP.build(:host => host, :path => path, :query =>query)
     end
+  end
+
+  def new_http_request(request_uri, http_method)
+    request_type = Kernel.const_get("Net").const_get("HTTP").const_get(http_method.to_s.capitalize)
+    request_type.new(request_uri, {"user-agent" => @client.user_agent_info})
   end
 
   def log_request(request)
