@@ -75,6 +75,29 @@ describe "ApiOperator" do
 
   end
 
+  it "should have empty body if no form parameters provided" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.instance_variable_get("@body").empty?.should == true
+
+  end
+
+  it "should set up any form parameters in body" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request.form_parameters[:shop_id] = "1234"
+    api_request.form_parameters[:email] = "test@example.com"
+    api_request.form_parameters[:ignore] = nil
+
+    client, request = @api_operator.create_http_request(api_request)
+
+    request.instance_variable_get("@body").should == "shopId=1234&email=test%40example.com"
+
+  end
+
   it "should create HTTPS request uri based on api method that requires secure connection and client configuration" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})

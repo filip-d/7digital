@@ -10,7 +10,6 @@ describe "ApiRequest" do
             :shop_id => 99,
             :image_size => 999
     })
-    request.comb_parameters
     request.parameters[:page].should == 5
     request.parameters[:pageSize].should == 3
     request.parameters[:per_page].should == nil
@@ -24,7 +23,6 @@ describe "ApiRequest" do
   it "should not contain nil parameters" do
 
     request = Sevendigital::ApiRequest.new('method', {:key1 => "value", :key2 => nil})
-    request.comb_parameters
     request.parameters[:key1].should == "value"
     request.parameters.has_key?(:key2).should == false
 
