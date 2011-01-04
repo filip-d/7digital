@@ -1,7 +1,136 @@
-Ruby wrapper for 7digital API 
+=Ruby wrapper for 7digital API
 
-Example usage:
-	sevendigital_client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :country => "GB")
-	artist = sevendigital_client.artist.get_details(1)
-	puts artist.name
+This is a ruby wrapper for the 7digital API.
+
+==About 7digital
+
+7digital.com is an online music store operating in over 16 countries and offering more than 11 million high quality DRM free MP3s (320kbps) from all major labels and wide range of idependent labels and distributors. 7digital API will give you access to the full catalogue including high quality album art, 30s preview clips for all tracks, commissions on sales, integrated purchasing and full length streaming. More details at http://developer.7digital.net
+
+==Installation
+
+	gem install 7digital
+
+==Quick start example
+
+
+	require "sevendigital"
+	api_client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :country => "GB")
+	an_artist = api_client.artist.search("radiohead").first
+	a_release = an_artist.releases(:page_size=>100).sort_by{|release| release.year}.last
+	puts "the latest #{an_artist.name} release is #{a_release.title} from #{a_release.year}"
+	puts "go and buy it at #{a_release.url} !"
+
+==Usage details
+
+===Initializing & configuring an API Client
+
+To use the wrapper and access the 7digital API you need a configured instance of Sevendigital::Client. Create one using the standard new method:
+
+	client = Sevendigital::Client.new
+
+This will get you an API client configured with default settings. At very least before making any API calls you will need to update the configuration with your own API key. You can adjust the client's configuration in several ways:
+
+1. In Rails app you can put _sevendigital.yml_ inside your app's config dir and this will be automatically picked up (for a template please see the examples directory)
+
+2. You can provide a custom location of configuration file when instantiating a client
+
+	client = Sevendigital::Client.new("dir/subdir/my_7d_configuration.yml")
+3. You can supply a hash of configuration settings when instantiating a client
+
+	client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :country => "GB")
+4. You can update the configuration in block whilst instantiating a client
+
+	client = Sevendigital::Client.new { |config|
+		config.oauth_consumer_key => "YOUR_KEY_HERE"
+		config.verbose => true
+	}
+
+You  can also combine all of the above (if the same setting is specified multiple times the last one will be applied)
+An extreme example:
+
+	client = Sevendigital::Client.new("7digital_default_settings.yml", :oauth_consumer_key => "MY_OTHER_KEY") { |conf|
+		conf.country = "SE"
+		conf.oauth_consumer_key = "ACTUALLY_USE_THIS_KEY"
+	}
+
+===Using the client
+
+List of all available API methods and their return types
+
+----
+
+Provided by Sevendigital::ArtistManager :
+
+client.artist.*get_details*(artist_id, options={}) => Sevendigital::Artist
+
+client.artist.*get_releases*(artist_id, options={}) => [ Sevendigital::Release ]
+
+client.artist.*get_similar*(artist_id, options={}) => [ Sevendigital::Artist ]
+
+client.artist.*get_top_by_tag*(tags, options={}) => [ Sevendigital::Artist ]
+
+client.artist.*get_top_tracks*(artist_id, options={}) => [ Sevendigital::Track ]
+
+client.artist.*search*(query, options={}) => [ Sevendigital::Artist ]
+
+----
+
+Provided by Sevendigital::ReleaseManager :
+
+client.release.*get_details*(release_id, options = {})  => Sevendigital::Release
+
+client.release.*get_tracks*(release_id, options = {})  => [ Sevendigital::Track ]
+
+client.release.*get_chart*(options={}) => [ Sevendigital::ChartItem ]
+
+client.release.*get_by_date*(from_date = nil, to_date = nil, options = {}) => [ Sevendigital::Release ]
+
+client.release.*get_recommendations*(release_id, options = {}) => [ Sevendigital::Release ]
+
+client.release.*get_top_by_tag*(tags, options = {}) => [ Sevendigital::Release ]
+
+client.release.*search*(query, options={}) => [ Sevendigital::Release ]
+
+----
+
+client.track.*get_details*(id, options={}) => Sevendigital::Track
+
+client.track.*get_details_from_release*(track_id, release_id, options={}) => Sevendigital::Track
+
+client.track.*get_chart*(options={}) => [ Sevendigital::ChartItem ]
+
+client.track.*build_preview_url*(id, options={}) => String
+
+client.track.*search*(query, options={}) => [ Sevendigital::Track ]
+
+---
+
+client.basket.*get*(basket_id, options={}) => Sevendigital::Basket
+
+client.basket.*create*(options={}) => Sevendigital::Basket
+
+client.basket.*add_item*(basket_id, release_id, track_id=nil, options={}) => Sevendigital::Basket
+
+client.basket.*remove_item*(basket_id, item_id, options={}) => Sevendigital::Basket
+
+---
+
+client.oauth.*get_request_token* => OAuth::RequestToken
+
+client.oauth.*get_access_token*(request_token)  => OAuth::AccessToken
+
+---
+
+client.user.*login*(access_token) => Sevendigital::User
+
+client.user.*authenticate*(email, password) => Sevendigital::User
+
+client.user.*get_locker*(token, options={}) => Sevendgital::Locker
+
+client.user.*purchase*(release_id, track_id, price, token, options={}) => Sevendgital::Locker
+
+client.user.*get_stream_track_url*(release_id, track_id, token, options={}) => String
+
+client.user.*get_add_card_url*(return_url, token, options={}) => String
+
 
