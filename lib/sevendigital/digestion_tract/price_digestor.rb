@@ -1,7 +1,7 @@
 require 'rational'
 module Sevendigital
 
-  class PriceDigestor < Digestor
+  class PriceDigestor < Digestor # :nodoc:
 
     def default_element_name; :price end
     def default_list_element_name; nil end

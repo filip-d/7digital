@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class ArtistDigestor < Digestor
+  class ArtistDigestor < Digestor # :nodoc:
 
     def default_element_name; :artist end
     def default_list_element_name; :artists end

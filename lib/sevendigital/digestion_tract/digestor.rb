@@ -1,6 +1,7 @@
 module Sevendigital
 
-  class Digestor
+  #internal generic class used for digesting XML responses from the API
+  class Digestor # :nodoc:
 
       #TODO TEST THIS CRAP
 

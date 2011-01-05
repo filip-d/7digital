@@ -2,7 +2,7 @@ module Sevendigital
 
   require 'date'
 
-  class ReleaseDigestor < Digestor
+  class ReleaseDigestor < Digestor # :nodoc:
     
     def default_element_name; :release end
     def default_list_element_name; :releases end

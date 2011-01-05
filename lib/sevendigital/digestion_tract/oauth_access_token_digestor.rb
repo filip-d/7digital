@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class OAuthAccessTokenDigestor < Digestor
+  class OAuthAccessTokenDigestor < Digestor # :nodoc:
 
     def default_element_name; :oauth_access_token end
 

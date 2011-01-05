@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class DownloadUrlDigestor < Digestor
+  class DownloadUrlDigestor < Digestor # :nodoc:
 
     def default_element_name; :download_url end
     def default_list_element_name; :download_urls end

@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class LabelDigestor < Digestor
+  class LabelDigestor < Digestor # :nodoc:
 
     def default_element_name; :label end
     def default_list_element_name; :labels end

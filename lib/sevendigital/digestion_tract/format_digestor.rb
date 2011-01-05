@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class FormatDigestor < Digestor
+  class FormatDigestor < Digestor # :nodoc:
 
     def default_element_name; :format end
     def default_list_element_name; :formats end

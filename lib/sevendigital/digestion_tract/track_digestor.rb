@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class TrackDigestor < Digestor
+  class TrackDigestor < Digestor # :nodoc:
 
     def default_element_name; :track end
     def default_list_element_name; :tracks end

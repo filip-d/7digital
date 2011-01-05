@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class ApiResponseDigestor < Digestor
+  class ApiResponseDigestor < Digestor # :nodoc:
 
     def from_xml(xml_or_proxy, element_name = :response)
       return from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
