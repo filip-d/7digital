@@ -22,14 +22,14 @@ describe "Client" do
 
   it "should be verbose if told so" do
     client = Sevendigital::Client.new(:verbose => false)
-    client.verbose = true
+    client.configuration.verbose = true
     client.verbose?.should == true
     client.very_verbose?.should == false
   end
 
   it "should provide selected properties as default parameters for all api requests" do
     client = Sevendigital::Client.new(:page_size => 12345, :country => 'gb')
-    client.country = 'sk'
+    client.configuration.country = 'sk'
     client.default_parameters.should == {:page_size => 12345, :country => 'sk'}
   end
 
@@ -49,8 +49,8 @@ describe "Client" do
 
   it "create_api_request should add default parameters to request" do
     client = Sevendigital::Client.new
-    client.page_size = 100
-    client.shop_id = 200
+    client.configuration.page_size = 100
+    client.configuration.shop_id = 200
     request = client.create_api_request('method', {}, {})
 
     request.parameters[:pageSize].should == 100;
