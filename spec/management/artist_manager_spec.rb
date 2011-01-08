@@ -94,22 +94,22 @@ describe "ArtistManager" do
 
   end
 
-  it "search should call artist/search api method and digest the nested artist list from response" do
+  it "browse should call artist/browse api method and digest the artist list from response" do
 
-    query = "radiohead"
-    an_api_response = fake_api_response("artist/search")
+    letter = "ra"
+    an_api_response = fake_api_response("artist/browse")
     an_artist_list = []
 
     mock_client_digestor(@client, :artist_digestor) \
-      .should_receive(:nested_list_from_xml) \
-      .with(an_api_response.content.search_results, :search_result, :search_results) \
+      .should_receive(:list_from_xml) \
+      .with(an_api_response.content.artists) \
       .and_return(an_artist_list)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/search", {:q => query}, {}) \
+            .with("artist/browse", {:letter => letter}, {}) \
             .and_return(an_api_response)
 
-    artists = @artist_manager.search(query)
+    artists = @artist_manager.browse(letter)
     artists.should == an_artist_list
 
   end

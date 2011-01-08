@@ -5,7 +5,7 @@ module Sevendigital
   # provides access to Artist related API methods (artist/*)
   class ArtistManager < Manager
 
-    # calls <tt>*artist/details*</tt> API method and returns Artist with populated details
+    # calls *artist/details* API method and returns Artist with populated details
     #
     # <tt>artist_id</tt>:: artist ID
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
@@ -14,7 +14,7 @@ module Sevendigital
       @api_client.artist_digestor.from_xml(api_response.content.artist)
     end
 
-    # calls *_artist/releases_* API method and returns Release array
+    # calls *artist/releases* API method and returns Release array
     #
     # <tt>artist_id</tt>:: artist ID
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
@@ -23,7 +23,7 @@ module Sevendigital
       @api_client.release_digestor.list_from_xml(api_response.content.releases)
     end
       
-    # calls *<tt>artist/toptracks</tt>* API method and returns Track array
+    # calls *artist/toptracks* API method and returns Track array
     #
     # <tt>artist_id</tt>:: artist ID
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
@@ -32,7 +32,7 @@ module Sevendigital
       @api_client.track_digestor.list_from_xml(api_response.content.tracks)
     end
 
-    # calls *<tt>artist/similar</tt>* API method and returns Artist array
+    # calls *artist/similar* API method and returns Artist array
     #
     # <tt>artist_id</tt>:: artist ID
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
@@ -41,7 +41,7 @@ module Sevendigital
       @api_client.artist_digestor.list_from_xml(api_response.content.artists)
     end
 
-    # calls *<tt>artist/byTag/top</tt>* API method and returns Artist array
+    # calls *artist/byTag/top* API method and returns Artist array
     #
     # <tt>tags</tt>:: string containing comma separated list of tags
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
@@ -50,13 +50,22 @@ module Sevendigital
       @api_client.artist_digestor.nested_list_from_xml(api_response.content.tagged_results, :tagged_item, :tagged_results)
     end
 
-    # calls *<tt>artist/search</tt>* API method and returns Artist arry
+    # calls *artist/search* API method and returns Artist array
     #
     # <tt>query</tt>:: string containing the search query
     # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
     def search(query, options={})
      api_response = @api_client.make_api_request("artist/search", {:q => query}, options)
      @api_client.artist_digestor.nested_list_from_xml(api_response.content.search_results, :search_result, :search_results)
+    end
+
+    # calls *artist/browse* API method and returns Artist array
+    #
+    # <tt>letter</tt>:: string containing the search query
+    # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
+    def browse(letter, options={})
+     api_response = @api_client.make_api_request("artist/browse", {:letter => letter}, options)
+     @api_client.artist_digestor.list_from_xml(api_response.content.artists)
     end
 
   end

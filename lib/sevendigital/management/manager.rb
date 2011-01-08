@@ -1,6 +1,6 @@
 module Sevendigital
 
-  class Manager
+  class Manager # :nodoc:
 
     def initialize(api_client)
       @api_client =  api_client
