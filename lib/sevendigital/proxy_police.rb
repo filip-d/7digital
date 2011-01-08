@@ -1,5 +1,8 @@
 module Sevendigital
-  class ProxyPolice
+
+  #internal class used to ensure the XML being processed is a Peachy::Proxy object
+  #if not it checks the expected element name matches the supplied XML string and converts it to Peachy::Proxy
+  class ProxyPolice # :nodoc:
 
     def ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name)
       if xml_or_proxy.kind_of? Peachy::Proxy then

@@ -1,6 +1,7 @@
 module Sevendigital
 
-class ApiRequest
+#Abstraction of a HTTP API request, ApiOperator uses this ApiRequest to build a real HTTP requests
+class ApiRequest # :nodoc:
 
   attr_reader :api_method, :parameters, :signed
   attr_accessor :token, :api_service, :http_method

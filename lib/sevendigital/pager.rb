@@ -5,7 +5,9 @@ end
 
 module Sevendigital
 
-  class Pager
+  #internal class used to page array results if will_paginate is available
+  class Pager # :nodoc:
+
     attr_accessor :page, :page_size, :total_items
 
     def paginate_list(list)
