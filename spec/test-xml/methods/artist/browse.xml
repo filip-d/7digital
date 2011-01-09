@@ -2,23 +2,21 @@
 <response status="ok" version="1.2"
 					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
-	<response status="ok" version="1.2">
-		<artists>
-			<page>1</page>
-			<pageSize>10</pageSize>
-			<totalItems>3256</totalItems>
-			<artist id="144641">
-				<name>P J Harvey</name>
-				<url>http://www.7digital.com/artists/p-j-harvey/?partner=123</url>
-				<sortName>P J Harvey</sortName>
-				<image>http://cdn.7static.com/static/img/artistimages/00/001/446/0000144641_50.jpg</image>
-			</artist>
-			<artist id="17168">
-				<name>P J Proby</name>
-				<url>http://www.7digital.com/artists/p-j-proby/?partner=123</url>
-				<sortName>P J Proby</sortName>
-				<image>http://cdn.7static.com/static/img/artistimages/00/001/716/000017168_50.jpg</image>
-			</artist>
-		</artists>
-	</response>
+	<artists>
+		<page>1</page>
+		<pageSize>10</pageSize>
+		<totalItems>3256</totalItems>
+		<artist id="144641">
+			<name>P J Harvey</name>
+			<url>http://www.7digital.com/artists/p-j-harvey/?partner=123</url>
+			<sortName>P J Harvey</sortName>
+			<image>http://cdn.7static.com/static/img/artistimages/00/001/446/0000144641_50.jpg</image>
+		</artist>
+		<artist id="17168">
+			<name>P J Proby</name>
+			<url>http://www.7digital.com/artists/p-j-proby/?partner=123</url>
+			<sortName>P J Proby</sortName>
+			<image>http://cdn.7static.com/static/img/artistimages/00/001/716/000017168_50.jpg</image>
+		</artist>
+	</artists>
 </response>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<response status="ok" version="1.2"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<chart>
+		<type>artist</type>
+		<fromDate>2009-03-24T00:00:00Z</fromDate>
+		<toDate>2009-03-30T00:00:00+01:00</toDate>
+		<page>1</page>
+		<pageSize>10</pageSize>
+		<totalItems>20</totalItems>
+		<chartItem>
+			<position>1</position>
+			<change>Up</change>
+			<artist id="162872">
+				<name>The Last Shadow Puppets</name>
+				<url>http://www.7digital.com/artists/the-last-shadow-puppets/?partner=123</url>
+			</artist>
+		</chartItem>
+		<chartItem>
+			<position>2</position>
+			<change>Down</change>
+			<artist id="304">
+				<name>Radiohead</name>
+				<sortName>Radiohead</sortName>
+				<url>http://eu.7digital.com/artists/radiohead/?partner=827</url>
+				<image>http://cdn.7static.com/static/img/artistimages/00/000/003/0000000304_150.jpg</image>
+			</artist>
+		</chartItem>
+	</chart>
+</response>
