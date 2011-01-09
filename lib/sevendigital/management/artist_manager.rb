@@ -68,6 +68,15 @@ module Sevendigital
      @api_client.artist_digestor.list_from_xml(api_response.content.artists)
     end
 
+    # calls *artist/chart* API method and returns Artist array
+    #
+    # <tt>options</tt>:: optional hash of additional API parameters, e.g. {page_size => 50}, etc
+    def get_chart(options={})
+     api_response = @api_client.make_api_request("artist/chart", {}, options)
+     @api_client.chart_item_digestor.list_from_xml(api_response.content.chart)
+    end
+
+
   end
 
 end

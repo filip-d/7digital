@@ -114,4 +114,21 @@ describe "ArtistManager" do
 
   end
 
+
+  it "get_chart should call artist/chart api method and digest the artist list from response" do
+
+    api_response = fake_api_response("artist/chart")
+    a_chart = [Sevendigital::ChartItem.new(@client)]
+
+    mock_client_digestor(@client, :chart_item_digestor) \
+        .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
+
+    @client.should_receive(:make_api_request) \
+      .with("artist/chart", {}, {}) \
+      .and_return(api_response)
+
+    chart = @artist_manager.get_chart
+    chart.should == a_chart
+  end
+
 end
