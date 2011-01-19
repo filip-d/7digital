@@ -3,7 +3,7 @@
 require File.expand_path('../lib/sevendigital/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name = Sevendigital::NAME
+  s.name = "7digital"
   s.version = Sevendigital::VERSION
   s.authors = ["filip7d"]
   s.email = ["filip+ruby@7digital.com"]
