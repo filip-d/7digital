@@ -1,9 +1,11 @@
 module Sevendigital
 
+  #Holds the complete API response
   class ApiResponse
 
     attr_accessor :error_code, :error_message, :content, :headers
 
+    #True if no API error has been returned
     def ok?
       return (@error_code == 0 && !@content.nil?)
     end
@@ -19,6 +21,7 @@ module Sevendigital
       response
     end
 
+    #Returns true if the response has been retrieved from cache but has since expired
     def out_of_date?(current_time=nil)
       return true if @headers.nil? || @headers["Date"].nil? || @headers["cache-control"].nil?
       return true if  !(@headers["cache-control"] =~ /max-age=([0-9]+)/)
