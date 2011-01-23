@@ -10,6 +10,8 @@ module Sevendigital
   #deals with OAuth signing requests that require signature, making sure parameters are in correct format etc
   class ApiOperator # :nodoc:
 
+  RESERVED_CHARACTERS = /[^a-zA-Z0-9\-\.\_\~]/
+
   def initialize(client)
     @client = client
   end
@@ -76,7 +78,7 @@ module Sevendigital
     request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key unless api_request.requires_signature?
 
     http_request = new_http_request(request_uri.request_uri, api_request.http_method)
-    
+
     ensure_secure_connection(http_client) if api_request.requires_secure_connection?
     add_form_parameters(http_request, api_request)
 
@@ -91,12 +93,18 @@ module Sevendigital
   def create_request_uri(api_request)
     host, version = @client.api_host_and_version(api_request.api_service)
     path = "/#{version}/#{api_request.api_method}"
-    query = api_request.parameters.map{ |k,v| "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}" }.join("&")
+    query = api_request.parameters.map{ |k,v| "#{escape(k)}=#{escape(v)}" }.join("&")
     if api_request.requires_secure_connection? then
       URI::HTTPS.build(:host => host, :path => path, :query =>query)
     else
       URI::HTTP.build(:host => host, :path => path, :query =>query)
     end
+  end
+
+  def escape(value)
+    URI::escape(value.to_s, RESERVED_CHARACTERS)
+    rescue ArgumentError
+      URI::escape(value.to_s.force_encoding(Encoding::UTF_8), RESERVED_CHARACTERS)
   end
 
   def new_http_request(request_uri, http_method)

@@ -32,6 +32,17 @@ describe "ApiOperator" do
 
   end
 
+  it "should URL encode parameters accourding to OAuth spec" do
+
+    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "a+b@c.d", :paramTwo => "<a b>"})
+
+    uri = @api_operator.create_request_uri(api_request)
+
+    uri.to_s.should =~ /[\?\&]param1=a%2Bb%40c.d/
+    uri.to_s.should =~ /[\?\&]paramTwo=%3Ca%20b%3E/
+
+  end
+
   it "should create http GET request by default" do
 
     api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
