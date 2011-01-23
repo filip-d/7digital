@@ -1,0 +1,40 @@
+#Your API access key and secret
+oauth_consumer_key: "YOUR_KEY_HERE"
+oauth_consumer_secret: "YOUR_SECRET_HERE"
+
+#Your website/application name & version
+#this information will be appended to user-agent HTTP headers for all API requests
+app_name: 7digital API Example
+app_version: 0.0.1
+
+#automatically populate properties
+lazy_load: true
+
+#raise SevendigitalError if lazy loading a property fails?
+#true - the error is ignored and the property remains unpopulated
+#false - the original error is raised
+ignorant_lazy_load: true
+
+#what information to log
+#false or nil - (default) don't log anything
+#true or verbose - log basic info
+#very_verbose - include full request & api responses in the log
+verbose: true
+
+## default settings for common API parameters ##
+
+#if any of the bellow parameters is specified here it will be appended to all API requests
+#they can always be overridden for each individual API query
+#e.g.:
+# @client = Sevendigital::Client.new(:country => 'GB', :page_size => 20)
+# @client.release.search("radiohead", :country => 'ES', :page_size => 5) -> will return 5 results from spanish catalogue
+#
+#end user's location
+#country: GB
+#
+##size of images returned by API responses (for valid size please see the 7digital API documentation)
+#image_size: 50
+#
+#number of items returned in API responses
+#page_size: 20
+#
