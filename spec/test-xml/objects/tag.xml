@@ -1,8 +1,5 @@
-<price>
-	<currency code="GBP">&#163;</currency>
-	<value>1.79</value>
-	<formattedPrice>&#163;1.79</formattedPrice>
-	<rrp>1.99</rrp>
-	<formattedRrp>&#163;1.99</formattedRrp>
-	<onSale>true</onSale>
-</price>
+<tag id="pop">
+	<text>pop</text>
+	<url>http://www.7digital.com/tags/pop?partner=123</url>
+	<count>90847</count>
+</tag>

@@ -1,9 +1,7 @@
-require "peachy"
-
 module Sevendigital
 
-  class Label
-    attr_accessor :id, :name
-	end
+  class Tag
+    attr_accessor :id, :text, :url, :count
+  end
 
 end

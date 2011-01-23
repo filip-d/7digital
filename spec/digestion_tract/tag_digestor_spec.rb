@@ -1,34 +1,46 @@
+# coding: utf-8
 require File.expand_path('../../spec_helper', __FILE__)
 
-describe "LabelDigestor" do
+describe "TagDigestor" do
 
   before do
-     @label_digestor = Sevendigital::LabelDigestor.new(nil)
+     @tag_digestor = Sevendigital::TagDigestor.new(nil)
   end
 
+   it "should not digest from invalid xml but throw up (exception)" do
 
-    it "should not digest from invalid xml but throw up (exception)" do
-
-    xml_response = <<XML
-    <release id="123">
-      <name>expected artist name</name>
-    </release>
+     xml_response = <<XML
+     <xxx>
+       <text>pop</text>
+     </xxx>
 XML
 
-    running {@label_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
-    end
-  
-  it "should digest label xml and populate all properties" do
+    running {@tag_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+  end
+
+  it "should parse from xml and populate minimum available properties" do
 
     xml_response = <<XML
-    <label id="123">
-      <name>expected label name</name>
-    </label>
+<tag id="rock">
+  <text>ROCK</text>
+</tag>
 XML
 
-    label = @label_digestor.from_xml(xml_response)
-    label.id.should == 123
-    label.name.should == "expected label name"
+    tag = @tag_digestor.from_xml(xml_response)
+    tag.id.should == 'rock'
+    tag.text.should == "ROCK"
+    
+  end
+
+  it "should parse from xml and populate all properties" do
+
+    xml_response = load_sample_object_xml("tag")
+
+    tag = @tag_digestor.from_xml(xml_response)
+    tag.id.should == "pop"
+    tag.text.should == "pop"
+    tag.url.should == "http://www.7digital.com/tags/pop?partner=123"
+    tag.count.should == 90847
   end
 
 end

@@ -2,6 +2,10 @@ module Sevendigital
 
   class Client
 
+    def api_response_digestor
+      @api_response_digestor ||= ApiResponseDigestor.new(self)
+    end
+
     def artist_digestor
       @artist_digestor ||= ArtistDigestor.new(self)
     end
@@ -12,6 +16,10 @@ module Sevendigital
 
     def basket_item_digestor
       @basket_item_digestor ||= BasketItemDigestor.new(self)
+    end
+
+    def chart_item_digestor
+      @chart_item_digestor ||= ChartItemDigestor.new(self)
     end
 
     def download_url_digestor
@@ -38,12 +46,20 @@ module Sevendigital
       @locker_track_digestor ||= LockerTrackDigestor.new(self)
     end
 
-    def price_digestor
-      @price_digestor ||= PriceDigestor.new(self)
+    def oauth_request_token_digestor
+      @oauth_request_token_digestor ||= OAuthRequestTokenDigestor.new(self)
+    end
+
+    def oauth_access_token_digestor
+      @oauth_access_token_digestor ||= OAuthAccessTokenDigestor.new(self)
     end
 
     def pager_digestor
       @pager_digestor ||= PagerDigestor.new(self)
+    end
+
+    def price_digestor
+      @price_digestor ||= PriceDigestor.new(self)
     end
 
     def release_digestor
@@ -54,22 +70,10 @@ module Sevendigital
       @track_digestor ||= TrackDigestor.new(self)
     end
 
-    def oauth_request_token_digestor
-      @oauth_request_token_digestor ||= OAuthRequestTokenDigestor.new(self)
+    def tag_digestor
+      @tag_digestor ||= TagDigestor.new(self)
     end
 
-    def oauth_access_token_digestor
-      @oauth_access_token_digestor ||= OAuthAccessTokenDigestor.new(self)
-    end
-
-    def api_response_digestor
-      @api_response_digestor ||= ApiResponseDigestor.new(self)
-    end
-    
-    def chart_item_digestor
-      @chart_item_digestor ||= ChartItemDigestor.new(self)
-    end
-    
   end
 
 end

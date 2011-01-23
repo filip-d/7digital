@@ -13,6 +13,10 @@ module Sevendigital
       @release_manager ||= ReleaseManager.new(self)
     end
 
+    def tag
+      @tag_manager ||= TagManager.new(self)
+    end
+    
     def track
       @track_manager ||= TrackManager.new(self)
     end

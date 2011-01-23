@@ -1,0 +1,17 @@
+<response status="ok" version="1.2" xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<tags>
+		<page>1</page>
+		<pageSize>10</pageSize>
+		<totalItems>2</totalItems>
+		<tag id="pop">
+			<text>pop</text>
+			<url>http://www.7digital.com/tags/pop?partner=123</url>
+			<count>90847</count>
+		</tag>
+		<tag id="rock">
+			<text>rock</text>
+			<url>http://www.7digital.com/tags/rock?partner=123</url>
+			<count>52454</count>
+		</tag>
+	</tags>
+</response>
