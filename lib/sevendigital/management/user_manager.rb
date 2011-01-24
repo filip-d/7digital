@@ -18,7 +18,7 @@ module Sevendigital
     end
 
     def get_locker(token, options={})
-      api_response = @api_client.make_signed_api_request("user/locker", {}, {}, token)
+      api_response = @api_client.make_signed_api_request("user/locker", {}, options, token)
       @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
     end
 
