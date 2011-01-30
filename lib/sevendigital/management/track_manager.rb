@@ -8,7 +8,7 @@ module Sevendigital
     end
 
     def get_details_from_release(track_id, release_id, options={})
-      @api_client.release.get_tracks(release_id, options).find {|track| track.id = track_id}
+      @api_client.release.get_tracks(release_id, options).find {|track| track.id == track_id}
     end
 
     def get_chart(options={})
