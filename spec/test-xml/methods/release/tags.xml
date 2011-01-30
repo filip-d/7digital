@@ -1,0 +1,27 @@
+<response status="ok" version="1.2" xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd">
+	<tags>
+		<page>1</page>
+		<pageSize>10</pageSize>
+		<totalItems>5</totalItems>
+		<tag id="rock">
+			<text>rock</text>
+			<url>http://www.7digital.com/tags/rock</url>
+		</tag>
+		<tag id="pop">
+			<text>pop</text>
+			<url>http://www.7digital.com/tags/pop</url>
+		</tag>
+		<tag id="electronic">
+			<text>electronic</text>
+			<url>http://www.7digital.com/tags/electronic</url>
+		</tag>
+		<tag id="indie-rock">
+			<text>indie rock</text>
+			<url>http://www.7digital.com/tags/indie-rock</url>
+		</tag>
+		<tag id="2000s">
+			<text>2000s</text>
+			<url>http://www.7digital.com/tags/2000s</url>
+		</tag>
+	</tags>
+</response>

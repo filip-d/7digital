@@ -73,6 +73,18 @@ describe "Release" do
     }
     @release.get_recommendations(expected_options)
 
+   end
+
+    it "get_tags should get tags from manager" do
+    expected_options = {:page => 2}
+
+    @release_manager.should_receive(:get_tags) { |release_id, options|
+      release_id.should == @release.id
+      (options.keys & expected_options.keys).should == expected_options.keys
+      []
+    }
+    @release.get_tags(expected_options)
+
   end
 
   def fake_releases_list

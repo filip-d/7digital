@@ -131,4 +131,22 @@ describe "ArtistManager" do
     chart.should == a_chart
   end
 
+
+  it "get_tags should call artist/tags api method and return list of digested tags" do
+    an_artist_id = 123
+    a_list_of_tags = [Sevendigital::Tag.new(@client), Sevendigital::Tag.new(@client)]
+    an_api_response = fake_api_response("artist/tags")
+    options = {:page => 1}
+
+    mock_client_digestor(@client, :tag_digestor) \
+         .should_receive(:list_from_xml).with(an_api_response.content.tags).and_return(a_list_of_tags)
+
+    @client.should_receive(:make_api_request) \
+            .with("artist/tags", {:artistId => an_artist_id}, options) \
+            .and_return(an_api_response)
+
+    releases = @artist_manager.get_tags(an_artist_id, options)
+    releases.should == a_list_of_tags
+  end
+
 end

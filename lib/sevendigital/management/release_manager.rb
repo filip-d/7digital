@@ -46,6 +46,12 @@ module Sevendigital
       @api_client.release_digestor.nested_list_from_xml(api_response.content.search_results, :search_result, :search_results)
     end
 
+
+    def get_tags(release_id, options = {})
+      api_response = @api_client.make_api_request("release/tags", {:releaseId => release_id}, options)
+      @api_client.tag_digestor.list_from_xml(api_response.content.tags)
+    end
+
   end
 
 end

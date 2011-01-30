@@ -1,0 +1,12 @@
+<response status="ok" version="1.2">
+	<tags>
+		<tag id="rock">
+			<text>rock</text>
+			<url>http://www.7digital.com/tags/rock?partner=123</url>
+		</tag>
+		<tag id="united-kingdom">
+			<text>united kingdom</text>
+			<url>http://www.7digital.com/tags/united-kingdom?partner=123</url>
+		</tag>
+	</tags>
+</response>

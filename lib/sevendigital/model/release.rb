@@ -9,6 +9,7 @@ module Sevendigital
                          
     sevendigital_extended_property :tracks
     sevendigital_extended_property :recommendations
+    sevendigital_extended_property :tags
 
     def get_details(options={})
       release_with_details = @api_client.release.get_details(@id, options)
@@ -22,8 +23,12 @@ module Sevendigital
     end
 
     def get_recommendations(options={})
-      @recommendations = @api_client.release.get_recommendations(@id, options)
+      @api_client.release.get_recommendations(@id, options)
     end
+
+    def get_tags(options={})
+      @api_client.release.get_tags(@id, options)
+     end
 
     def demand_price(options={})
       get_details(options) if @price.nil? || @price.value.nil?

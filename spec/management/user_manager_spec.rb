@@ -79,15 +79,16 @@ describe "UserManager" do
     an_api_response = fake_api_response("user/locker")
     a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
     fake_locker = [Sevendigital::LockerRelease.new(@client)]
+    options = {:sort => "random"}
 
     mock_client_digestor(@client, :locker_digestor) \
       .should_receive(:from_xml).with(an_api_response.content.locker).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
-        .with("user/locker", {}, {}, a_token) \
+        .with("user/locker", {}, options, a_token) \
         .and_return(an_api_response)
     
-    @user_manager.get_locker(a_token).should == fake_locker
+    @user_manager.get_locker(a_token, options).should == fake_locker
 
   end
 

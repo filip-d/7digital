@@ -65,6 +65,19 @@ describe "Artist" do
 
    end
 
+  it "get_tags should get tags from manager" do
+    expected_options = {:page => 2}
+
+    @artist_manager.should_receive(:get_tags) { |artist_id, options|
+      artist_id.should == @artist.id
+      (options.keys & expected_options.keys).should == expected_options.keys
+      []
+    }
+    @artist.get_tags(expected_options)
+
+  end
+
+
   it "should be a various artist if name contains various" do
 
     @artist.name = "various"

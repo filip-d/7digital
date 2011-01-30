@@ -34,6 +34,7 @@ module Sevendigital
     sevendigital_extended_property :releases
     sevendigital_extended_property :top_tracks
     sevendigital_extended_property :similar
+    sevendigital_extended_property :tags
 
     #Retrieves releases by this artist by calling *artist/releases* API method
     def get_releases(options={})
@@ -48,6 +49,11 @@ module Sevendigital
     #Retrieves artists similar to this artist by calling *artist/similar* API method
     def get_similar(options={})
       @similar = @api_client.artist.get_similar(@id, options)
+    end
+
+    #Retrieves tags of this artist by calling *artist/tags* API method
+    def get_tags(options={})
+    @api_client.artist.get_tags(@id, options)
     end
 
     #True if this artist represents various artists

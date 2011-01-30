@@ -177,5 +177,24 @@ describe "ReleaseManager" do
 
     end
 
+  it "get_tags should call release/tags api method and digest the tag list from response" do
+    expected_options = {:page_size => 20}
+    a_release_id = 123
+    api_response = fake_api_response("release/tags")
+    a_tag_list = []
+
+    mock_client_digestor(@client, :tag_digestor) \
+      .should_receive(:list_from_xml).with(api_response.content.tags).and_return(a_tag_list)
+
+    @client.should_receive(:make_api_request) \
+      .with("release/tags", {:releaseId=>a_release_id}, expected_options) \
+      .and_return(api_response)
+
+    tracks = @release_manager.get_tags(a_release_id, expected_options)
+    tracks.should == a_tag_list
+
+  end
+
+
 
 end
