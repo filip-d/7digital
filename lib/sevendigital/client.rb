@@ -86,7 +86,7 @@ module Sevendigital
     end
 
     def verbose?
-      !(@verbose || @configuration.verbose).nil?
+     !!(@verbose || @configuration.verbose)
     end
 
     def very_verbose?

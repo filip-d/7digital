@@ -2,8 +2,14 @@ require "spec_helper"
 
 describe "Client" do
 
-  it "should not be verbose if not told to so" do
+  it "should not be verbose if not told anything" do
     client = Sevendigital::Client.new
+    client.verbose?.should == false
+    client.very_verbose?.should == false
+  end
+
+  it "should not be verbose if told to so" do
+    client = Sevendigital::Client.new(:verbose => false)
     client.verbose?.should == false
     client.very_verbose?.should == false
   end
