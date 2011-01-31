@@ -25,13 +25,13 @@ module Sevendigital
       args.each do |configuration_argument|
         self.override_with(configuration_argument)
       end
-      puts "Now: #{self.inspect}"
+      #puts "Now: #{self.inspect}"
   
     end
 
     def override_with(configuration)
-      puts "Now: #{self.inspect}"
-      puts "Overriding with #{configuration.class}: #{configuration.inspect}"
+      #puts "Now: #{self.inspect}"
+      #puts "Overriding with #{configuration.class}: #{configuration.inspect}"
       return self unless configuration
       if configuration.kind_of? Hash then
         table.merge!(configuration)

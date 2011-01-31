@@ -17,7 +17,6 @@ module Sevendigital
       parent_proxy = Peachy::Proxy.new(xml)
       if element_name
 #        parent_proxy.send(element_name)
-        puts element_name.to_s
         eval "parent_proxy.#{element_name.to_s}"
       else
         parent_proxy

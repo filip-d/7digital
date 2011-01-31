@@ -117,7 +117,7 @@ module Sevendigital
   end
 
   def log_request(request)
-    puts "ApiOperator: Calling #{request.inspect}"
+    puts "ApiOperator calling #{request.inspect}" if @client.verbose?
   end
 
 end

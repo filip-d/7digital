@@ -22,7 +22,6 @@ XML
    it "should digest locker release xml and populate all available properties" do
 
     xml_response = load_sample_object_xml("locker_release")
-    puts @locker_release_digestor
     
     locker_release = @locker_release_digestor.from_xml(xml_response)
 
