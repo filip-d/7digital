@@ -13,13 +13,13 @@ lazy_load: true
 #raise SevendigitalError if lazy loading a property fails?
 #true - the error is ignored and the property remains unpopulated
 #false - the original error is raised
-ignorant_lazy_load: true
+ignorant_lazy_load: false
 
 #what information to log
 #false or nil - (default) don't log anything
 #true or verbose - log basic info
 #very_verbose - include full request & api responses in the log
-verbose: true
+#verbose: true
 
 ## default settings for common API parameters ##
 
@@ -28,13 +28,12 @@ verbose: true
 #e.g.:
 # @client = Sevendigital::Client.new(:country => 'GB', :page_size => 20)
 # @client.release.search("radiohead", :country => 'ES', :page_size => 5) -> will return 5 results from spanish catalogue
-#
+
 #end user's location
 #country: GB
-#
+
 ##size of images returned by API responses (for valid size please see the 7digital API documentation)
 #image_size: 50
-#
+
 #number of items returned in API responses
 #page_size: 20
-#
