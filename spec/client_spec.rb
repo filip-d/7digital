@@ -36,7 +36,7 @@ describe "Client" do
   it "should provide selected properties as default parameters for all api requests" do
     client = Sevendigital::Client.new(:page_size => 12345, :country => 'gb')
     client.configuration.country = 'sk'
-    client.default_parameters.should == {:page_size => 12345, :country => 'sk'}
+    client.send(:default_parameters).should == {:page_size => 12345, :country => 'sk'}
   end
 
   it "create_api_request should merge method parameters and options with parameters taking preference" do
@@ -129,7 +129,7 @@ describe "Client" do
       configuration.api_version = "version"
     }
 
-    client.api_host_and_version.should == ["base.api.url", "version"]
+    client.send(:api_host_and_version).should == ["base.api.url", "version"]
 
   end
 
