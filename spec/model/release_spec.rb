@@ -5,7 +5,7 @@ describe "Release" do
 
   before do
     @configuration = stub(OpenStruct)
-    @configuration.stub!(:lazy_load?).and_return(true)
+    @configuration.stub!(:lazy_load).and_return(true)
 
     @client = stub(Sevendigital::Client)
     @client.stub!(:configuration).and_return(@configuration)
