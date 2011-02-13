@@ -1,5 +1,6 @@
 module Sevendigital
 
+#@private
 #Abstraction of a HTTP API request, ApiOperator uses this ApiRequest to build a real HTTP requests
 class ApiRequest # :nodoc:
 

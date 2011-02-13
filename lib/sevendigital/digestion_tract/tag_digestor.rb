@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class TagDigestor < Digestor # :nodoc:
 
     def default_element_name; :tag end

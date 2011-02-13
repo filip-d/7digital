@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class ArtistDigestor < Digestor # :nodoc:
 
     def default_element_name; :artist end

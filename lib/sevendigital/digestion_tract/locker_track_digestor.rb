@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class LockerTrackDigestor < Digestor # :nodoc:
     
     def default_element_name; :locker_track end

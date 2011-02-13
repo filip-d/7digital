@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class PagerDigestor < Digestor # :nodoc:
 
     def default_element_name; :results end

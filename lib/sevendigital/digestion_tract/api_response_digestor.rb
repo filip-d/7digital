@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class ApiResponseDigestor < Digestor # :nodoc:
 
     def from_xml(xml_or_proxy, element_name = :response)

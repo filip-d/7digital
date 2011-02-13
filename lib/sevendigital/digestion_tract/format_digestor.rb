@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class FormatDigestor < Digestor # :nodoc:
 
     def default_element_name; :format end

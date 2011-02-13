@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class BasketItemDigestor < Digestor # :nodoc:
     
     def default_element_name; :basket_item end

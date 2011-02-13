@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class LockerReleaseDigestor < Digestor # :nodoc:
     
     def default_element_name; :locker_release end

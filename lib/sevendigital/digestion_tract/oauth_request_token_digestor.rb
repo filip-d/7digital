@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class OAuthRequestTokenDigestor < Digestor # :nodoc:
 
     def default_element_name; :oauth_request_token end

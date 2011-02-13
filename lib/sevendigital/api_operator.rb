@@ -6,6 +6,7 @@ module Sevendigital
   require 'uri'
   require 'cgi'
 
+  #@private
   #internal class used for translating ApiRequests into http calls
   #deals with OAuth signing requests that require signature, making sure parameters are in correct format etc
   class ApiOperator # :nodoc:

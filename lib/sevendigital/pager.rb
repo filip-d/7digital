@@ -5,6 +5,7 @@ end
 
 module Sevendigital
 
+  #@private
   #internal class used to page array results if will_paginate is available
   class Pager # :nodoc:
 

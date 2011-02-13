@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class ChartItemDigestor < Digestor # :nodoc:
 
     def default_element_name; :chart_item end

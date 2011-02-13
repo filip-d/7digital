@@ -1,6 +1,7 @@
 require 'rational'
 module Sevendigital
 
+  #@private
   class PriceDigestor < Digestor # :nodoc:
 
     def default_element_name; :price end

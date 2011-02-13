@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class DownloadUrlDigestor < Digestor # :nodoc:
 
     def default_element_name; :download_url end

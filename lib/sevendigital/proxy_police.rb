@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   #internal class used to ensure the XML being processed is a Peachy::Proxy object
   #if not it checks the expected element name matches the supplied XML string and converts it to Peachy::Proxy
   class ProxyPolice # :nodoc:

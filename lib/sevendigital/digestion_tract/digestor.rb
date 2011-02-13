@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   #internal generic class used for digesting XML responses from the API
   class Digestor # :nodoc:
 

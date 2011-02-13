@@ -1,5 +1,6 @@
 module Sevendigital
 
+#@private
 #Cached version of ApiOperator
 #If response for an API request is already in cache and
 #and it hasn't expired returns the cached response is returned instead of making an API call
