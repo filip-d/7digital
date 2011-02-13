@@ -1,5 +1,6 @@
 module Sevendigital
 
+  #@private
   class Manager # :nodoc:
 
     def initialize(api_client)

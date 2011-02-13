@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.add_dependency('peachy', '>= 0.3.5')
   s.add_dependency('will_paginate', '>= 2.3.15')
+  s.add_development_dependency('yard', '>= 0.6.0')
   s.homepage = "http://github.com/filip7d/7digital"
   s.rdoc_options = ["--main", "README.rdoc"]
   s.rubygems_version = "1.3.6"
