@@ -1,7 +1,8 @@
-class Class
+#@private
+class Class # :nodoc:
 
   def sevendigital_basic_property(*properties)
-    @basic_properties = []
+    @basic_properties ||= []
     properties.each do |property|
       @basic_properties << "@#{property}".to_sym
       sevendigital_extended_property property, :get_details
@@ -46,7 +47,7 @@ module Sevendigital
 
     def copy_basic_properties_from(other_object)
       self.class.instance_variable_get(:@basic_properties).each do |property|
-         instance_variable_set(property, other_object.instance_variable_get(property))
+        instance_variable_set(property, other_object.instance_variable_get(property))
       end
     end
 
