@@ -7,6 +7,7 @@ describe "Track" do
     @client = stub(Sevendigital::Client)
     @track_manager = mock(Sevendigital::TrackManager)
     @client.stub!(:track).and_return @track_manager
+    @client.stub!(:configuration).and_return OpenStruct.new
     
     @track = Sevendigital::Track.new(@client)
     @track.id = 1234
