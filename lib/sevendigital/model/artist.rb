@@ -1,62 +1,86 @@
 module Sevendigital
 
-  #==Basic properties
-  #<tt>*id*</tt>:: \Artist ID
-  #<tt>*name*</tt>:: \Artist\'s name
-  #<tt>*appears_as*</tt>:: \Artist\'s name as it appears on the release or track (only available when artist is linked from release or track)
-  #
-  #==Optional properties
-  #with lazy loading enabled these will be automatically populated by calling get_details
-  #<tt>*sort_name*</tt>:: \Artist name used for sorting, e.g. Beatles, The
-  #<tt>*image*</tt>:: \Artist image URL
-  #<tt>*url*</tt>:: \Artist buy link URL
-  #
+#with lazy loading enabled these will be automatically populated by calling get_details
   #==Extended properties
   #with lazy loading enabled these will be automatically populated by calling the method in brackets
-  #<tt>*releases*</tt>:: array of artist\'s releases (retrieved using get_releases)
-  #<tt>*top_tracks*</tt>:: array of artist\'s top tracks (get_top_tracks)
-  #<tt>*similar*</tt>:: array of artists similar to this artist (get_similar)
   #additional options can be passed in when accessing lazy loaded properties, e.g.
   #   artist.releases({:page_size => 5, :image_size =>250})
 
-  class Artist < SevendigitalObject
+class Artist < SevendigitalObject
 
-    attr_accessor :id, :name, :appears_as #:nodoc:
+  #7digital artist ID
+  #@return [Integer]
+  attr_accessor :id
 
-    sevendigital_basic_property :sort_name, :image, :url
+  #artist's name
+  #@return [String]
+  attr_accessor :name
 
-    #Retrieves artist\'s details by calling *artist/details* API method
+  #Artist's name as it appears on the release or track (only available when artist is linked from release or track)
+  #@return [String]
+  attr_accessor :appears_as
+
+  #Artist name used for sorting, e.g. Beatles, The (optional lazy-loaded property)
+  #@return [String]
+  sevendigital_basic_property :sort_name
+
+  #Artist image URL (optional lazy-loaded property)
+  #@return [String]
+  sevendigital_basic_property :image
+
+  #Artist buy link URL (optional lazy-loaded property)
+  #@return [String]
+  sevendigital_basic_property :url
+
+  #artist's releases (lazy loaded using get_releases)
+  #@return [Array<Release>] 
+  sevendigital_extended_property :releases
+
+  #artist's top tracks (lazy loaded using get_top_tracks)
+  #@return [Array<Track>] 
+  sevendigital_extended_property :top_tracks
+
+  #list of artists similar to this artist (lazy loaded using {get_similar})
+  #@return [Array<Artist>] similar
+  sevendigital_extended_property :similar
+
+  #list of tags associated with the artist (lazy loaded using {get_tags})
+  #@return [Array<Artist>] similar
+  sevendigital_extended_property :tags
+
+    #populates all available details on artist by calling *artist/details* API method
+    #@return [Artist] 
     def get_details(options={})
       artist_with_details = @api_client.artist.get_details(@id, options)
       copy_basic_properties_from(artist_with_details)
     end
 
-    sevendigital_extended_property :releases
-    sevendigital_extended_property :top_tracks
-    sevendigital_extended_property :similar
-    sevendigital_extended_property :tags
-
-    #Retrieves releases by this artist by calling *artist/releases* API method
+    #releases by this artist retrieved by calling *artist/releases* API method
+    #@return [Array<Release>]
     def get_releases(options={})
-    @api_client.artist.get_releases(@id, options)
+      @api_client.artist.get_releases(@id, options)
     end
 
-    #Retrieves top tracks by this artist by calling *artist/topTracks* API method
+    #top tracks by this artist retrieved by calling *artist/topTracks* API method
+    #@return [Array<Track>] 
     def get_top_tracks(options={})
-    @api_client.artist.get_top_tracks(@id, options)
+      @api_client.artist.get_top_tracks(@id, options)
     end
 
-    #Retrieves artists similar to this artist by calling *artist/similar* API method
+    #artists similar to this artist retrieved by calling *artist/similar* API method
+    #@return [Array<Track>]
     def get_similar(options={})
       @similar = @api_client.artist.get_similar(@id, options)
     end
 
-    #Retrieves tags of this artist by calling *artist/tags* API method
+    #tags associated with this artist retrieved by calling *artist/tags* API method
+    #@return [Array<Tag>]
     def get_tags(options={})
-    @api_client.artist.get_tags(@id, options)
+      @api_client.artist.get_tags(@id, options)
     end
 
-    #True if this artist represents various artists
+    #does this artist represents various artists?
+    #@return [Boolean]
     def various?
       joined_names = "#{name} #{appears_as}".downcase
 
