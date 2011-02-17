@@ -17,7 +17,7 @@ describe "BasketManager" do
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
-              .with("basket", {:basketId => a_basket_id}, {}) \
+              .with(:GET, "basket", {:basketId => a_basket_id}, {}) \
               .and_return(an_api_response)
 
     basket = @basket_manager.get(a_basket_id)
@@ -32,7 +32,7 @@ describe "BasketManager" do
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
-              .with("basket/create", {}, {}) \
+              .with(:GET, "basket/create", {}, {}) \
               .and_return(an_api_response)
 
     basket = @basket_manager.create
@@ -50,7 +50,7 @@ describe "BasketManager" do
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
-      .with("basket/addItem", {:basketId => a_basket_id, :releaseId => a_release_id, :trackId => a_track_id}, {}) \
+      .with(:GET, "basket/addItem", {:basketId => a_basket_id, :releaseId => a_release_id, :trackId => a_track_id}, {}) \
       .and_return(an_api_response)
 
     basket = @basket_manager.add_item(a_basket_id, a_release_id, a_track_id)
@@ -67,7 +67,7 @@ describe "BasketManager" do
           .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
-              .with("basket/removeItem", {:basketId => a_basket_id, :itemId => an_item_id}, {}) \
+              .with(:GET, "basket/removeItem", {:basketId => a_basket_id, :itemId => an_item_id}, {}) \
               .and_return(an_api_response)
 
     basket = @basket_manager.remove_item(a_basket_id, an_item_id)

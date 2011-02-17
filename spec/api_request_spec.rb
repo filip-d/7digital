@@ -4,7 +4,7 @@ describe "ApiRequest" do
 
   it "should always provide selected parameters in 7digital API format" do
 
-    request = Sevendigital::ApiRequest.new('method', {
+    request = Sevendigital::ApiRequest.new(:METHOD, 'method', {
             :page => 5,
             :per_page => 3,
             :shop_id => 99,
@@ -22,7 +22,7 @@ describe "ApiRequest" do
 
   it "should not contain nil parameters" do
 
-    request = Sevendigital::ApiRequest.new('method', {:key1 => "value", :key2 => nil})
+    request = Sevendigital::ApiRequest.new(:METHOD, 'method', {:key1 => "value", :key2 => nil})
     request.parameters[:key1].should == "value"
     request.parameters.has_key?(:key2).should == false
 

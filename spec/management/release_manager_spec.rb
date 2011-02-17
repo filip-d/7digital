@@ -21,7 +21,7 @@ describe "ReleaseManager" do
       .should_receive(:from_xml).with(api_response.content.release).and_return(a_release)
 
     @client.should_receive(:make_api_request) \
-      .with("release/details", {:releaseId => expected_release_id}, {}) \
+      .with(:GET, "release/details", {:releaseId => expected_release_id}, {}) \
       .and_return(api_response)
 
     @release_manager.get_details(expected_release_id).should == a_release
@@ -38,7 +38,7 @@ describe "ReleaseManager" do
       .should_receive(:list_from_xml).with(api_response.content.tracks).and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \
-      .with("release/tracks", {:releaseId=>a_release_id}, expected_options) \
+      .with(:GET, "release/tracks", {:releaseId=>a_release_id}, expected_options) \
       .and_return(api_response)
 
     tracks = @release_manager.get_tracks(a_release_id, expected_options)
@@ -56,7 +56,7 @@ describe "ReleaseManager" do
       .should_receive(:list_from_xml).with(api_response.content.tracks).and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \
-      .with("release/tracks", {:releaseId => a_release_id}, {:page_size => 100}) \
+      .with(:GET, "release/tracks", {:releaseId => a_release_id}, {:page_size => 100}) \
       .and_return(api_response)
 
     tracks = @release_manager.get_tracks(a_release_id)
@@ -74,7 +74,7 @@ describe "ReleaseManager" do
         .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
-      .with("release/chart", {}, {}) \
+      .with(:GET, "release/chart", {}, {}) \
       .and_return(api_response)
 
     chart = @release_manager.get_chart
@@ -92,7 +92,7 @@ describe "ReleaseManager" do
       .should_receive(:list_from_xml).with(api_response.content.releases).and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
-         .with("release/byDate", {:fromDate => from_date.strftime("%Y%m%d"), :toDate => to_date.strftime("%Y%m%d")}, {}) \
+         .with(:GET, "release/byDate", {:fromDate => from_date.strftime("%Y%m%d"), :toDate => to_date.strftime("%Y%m%d")}, {}) \
          .and_return(api_response)
 
     tracks = @release_manager.get_by_date(from_date, to_date)
@@ -109,7 +109,7 @@ describe "ReleaseManager" do
       .should_receive(:list_from_xml).with(api_response.content.releases).and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
-         .with("release/byDate", {}, {}) \
+         .with(:GET, "release/byDate", {}, {}) \
          .and_return(api_response)
 
     releases = @release_manager.get_by_date
@@ -129,7 +129,7 @@ describe "ReleaseManager" do
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
-         .with("release/recommend", {:releaseId => a_release_id}, {}) \
+         .with(:GET, "release/recommend", {:releaseId => a_release_id}, {}) \
          .and_return(api_response)
    
     releases = @release_manager.get_recommendations(a_release_id)
@@ -149,7 +149,7 @@ describe "ReleaseManager" do
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
-         .with("release/byTag/top", {:tags => tags}, {}) \
+         .with(:GET, "release/byTag/top", {:tags => tags}, {}) \
          .and_return(api_response)
     
     releases = @release_manager.get_top_by_tag(tags)
@@ -169,7 +169,7 @@ describe "ReleaseManager" do
         .and_return(a_release_list)
 
       @client.should_receive(:make_api_request) \
-           .with("release/search", {:q => query}, {}) \
+           .with(:GET, "release/search", {:q => query}, {}) \
            .and_return(api_response)
 
       releases = @release_manager.search(query)
@@ -187,7 +187,7 @@ describe "ReleaseManager" do
       .should_receive(:list_from_xml).with(api_response.content.tags).and_return(a_tag_list)
 
     @client.should_receive(:make_api_request) \
-      .with("release/tags", {:releaseId=>a_release_id}, expected_options) \
+      .with(:GET, "release/tags", {:releaseId=>a_release_id}, expected_options) \
       .and_return(api_response)
 
     tracks = @release_manager.get_tags(a_release_id, expected_options)

@@ -17,7 +17,7 @@ describe "ArtistManager" do
           .should_receive(:from_xml).with(an_api_response.content.artist).and_return(an_artist)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/details", {:artistId => an_artist_id}, {}) \
+            .with(:GET, "artist/details", {:artistId => an_artist_id}, {}) \
             .and_return(an_api_response)
 
     artist = @artist_manager.get_details(an_artist_id)
@@ -33,7 +33,7 @@ describe "ArtistManager" do
          .should_receive(:list_from_xml).with(an_api_response.content.releases).and_return(a_list_of_releases)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/releases", {:artistId => an_artist_id}, {}) \
+            .with(:GET, "artist/releases", {:artistId => an_artist_id}, {}) \
             .and_return(an_api_response)
     
     releases = @artist_manager.get_releases(an_artist_id)
@@ -49,7 +49,7 @@ describe "ArtistManager" do
         .should_receive(:list_from_xml).with(an_api_response.content.tracks).and_return(a_top_tracks_list)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/topTracks", {:artistId => an_artist_id}, {}) \
+            .with(:GET, "artist/topTracks", {:artistId => an_artist_id}, {}) \
             .and_return(an_api_response)
 
     tracks = @artist_manager.get_top_tracks(an_artist_id)
@@ -66,7 +66,7 @@ describe "ArtistManager" do
         .should_receive(:list_from_xml).with(an_api_response.content.artists).and_return(a_similar_artists_list)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/similar", {:artistId => an_artist_id}, {}) \
+            .with(:GET, "artist/similar", {:artistId => an_artist_id}, {}) \
             .and_return(an_api_response)
 
     artists = @artist_manager.get_similar(an_artist_id)
@@ -86,7 +86,7 @@ describe "ArtistManager" do
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/byTag/top", {:tags => tags}, {}) \
+            .with(:GET, "artist/byTag/top", {:tags => tags}, {}) \
             .and_return(an_api_response)
 
     releases = @artist_manager.get_top_by_tag(tags)
@@ -106,7 +106,7 @@ describe "ArtistManager" do
       .and_return(an_artist_list)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/browse", {:letter => letter}, {}) \
+            .with(:GET, "artist/browse", {:letter => letter}, {}) \
             .and_return(an_api_response)
 
     artists = @artist_manager.browse(letter)
@@ -124,7 +124,7 @@ describe "ArtistManager" do
         .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
-      .with("artist/chart", {}, {}) \
+      .with(:GET, "artist/chart", {}, {}) \
       .and_return(api_response)
 
     chart = @artist_manager.get_chart
@@ -142,7 +142,7 @@ describe "ArtistManager" do
          .should_receive(:list_from_xml).with(an_api_response.content.tags).and_return(a_list_of_tags)
 
     @client.should_receive(:make_api_request) \
-            .with("artist/tags", {:artistId => an_artist_id}, options) \
+            .with(:GET, "artist/tags", {:artistId => an_artist_id}, options) \
             .and_return(an_api_response)
 
     releases = @artist_manager.get_tags(an_artist_id, options)

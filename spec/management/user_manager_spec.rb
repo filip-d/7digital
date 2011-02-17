@@ -51,13 +51,15 @@ describe "UserManager" do
   end
 
   it "authenticate should attempt to authorise request token" do
-    @client.oauth.should_receive(:authorise_request_token).with(@an_email, @a_password, @a_request_token) \
+    @client.oauth.should_receive(:authorise_request_token) \
+      .with(@an_email, @a_password, @a_request_token) \
       .and_return(true)
     @user_manager.authenticate(@an_email, @a_password)
   end
 
   it "authenticate should retrieve access_token for authenticated user" do
-    @client.oauth.should_receive(:get_access_token).with(@a_request_token) \
+    @client.oauth.should_receive(:get_access_token)
+      .with(@a_request_token) \
       .and_return(@an_access_token)
     user = @user_manager.authenticate(@an_email, @a_password)
     user.oauth_access_token.should == @an_access_token
@@ -85,7 +87,7 @@ describe "UserManager" do
       .should_receive(:from_xml).with(an_api_response.content.locker).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
-        .with("user/locker", {}, options, a_token) \
+        .with(:GET, "user/locker", {}, options, a_token) \
         .and_return(an_api_response)
     
     @user_manager.get_locker(a_token, options).should == fake_locker
@@ -104,7 +106,7 @@ describe "UserManager" do
       .should_receive(:from_xml).with(an_api_response.content.purchase).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
-           .with("user/purchase/item", \
+           .with(:GET, "user/purchase/item", \
                 {:trackId => a_track_id, :releaseId => a_release_id, :price => a_price}, \
                 {}, a_token) \
            .and_return(an_api_response)
@@ -121,7 +123,7 @@ describe "UserManager" do
     an_api_request = stub(Sevendigital::ApiRequest)
 
     @client.should_receive(:create_api_request) \
-      .with("user/streamtrack", {:trackId => a_track_id, :releaseId => a_release_id}, {}) \
+      .with(:GET, "user/streamtrack", {:trackId => a_track_id, :releaseId => a_release_id}, {}) \
       .and_return(an_api_request)
 
     an_api_request.should_receive(:api_service=).with(:media)
@@ -144,7 +146,7 @@ describe "UserManager" do
      an_api_request = stub(Sevendigital::ApiRequest)
 
     @client.should_receive(:create_api_request) \
-      .with("payment/addcard", {:returnUrl => a_return_url}, {}) \
+      .with(:GET, "payment/addcard", {:returnUrl => a_return_url}, {}) \
       .and_return(an_api_request)
 
     an_api_request.should_receive(:api_service=).with(:account)

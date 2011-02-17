@@ -11,19 +11,19 @@ module Sevendigital
       @api_operator = hire_api_operator
     end
 
-    def create_api_request(api_method, parameters, options = {})
+    def create_api_request(http_method, api_method, parameters, options = {})
       parameters = options.merge(parameters)
       parameters = add_default_parameters(parameters)
-      ApiRequest.new(api_method, parameters)
+      ApiRequest.new(http_method, api_method, parameters)
     end
 
-    def make_api_request(api_method, parameters, options = {})
-      api_request = create_api_request(api_method, parameters, options)
+    def make_api_request(http_method, api_method, parameters, options = {})
+      api_request = create_api_request(http_method, api_method, parameters, options)
       operator.call_api(api_request)
     end
 
-    def make_signed_api_request(api_method, parameters, options = {}, token = nil)
-      api_request = create_api_request(api_method, parameters, options)
+    def make_signed_api_request(http_method, api_method, parameters, options = {}, token = nil)
+      api_request = create_api_request(http_method, api_method, parameters, options)
       api_request.require_signature
       api_request.require_secure_connection
       api_request.token = token

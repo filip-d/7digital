@@ -9,11 +9,11 @@ class ApiRequest # :nodoc:
   attr_accessor :signature_scheme
   attr_writer :form_parameters
 
-  def initialize(api_method, parameters, options={})
+  def initialize(http_method, api_method, parameters, options={})
     @api_method = api_method
     @parameters = parameters
     @signature_scheme = :header
-    @http_method = :GET
+    @http_method = http_method
     comb_parameters(parameters)
     @form_parameters = Hash.new
   end

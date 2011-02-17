@@ -40,11 +40,11 @@ class Artist < SevendigitalObject
   #@return [Array<Track>] 
   sevendigital_extended_property :top_tracks
 
-  #list of artists similar to this artist (lazy loaded using {get_similar})
+  #list of artists similar to this artist (lazy loaded using {#get_similar})
   #@return [Array<Artist>] similar
   sevendigital_extended_property :similar
 
-  #list of tags associated with the artist (lazy loaded using {get_tags})
+  #list of tags associated with the artist (lazy loaded using #get_tags)
   #@return [Array<Artist>] similar
   sevendigital_extended_property :tags
 

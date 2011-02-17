@@ -43,7 +43,7 @@ describe "Client" do
     client = Sevendigital::Client.new
     parameters = {:trackId => 1239, :releaseId => 456, :country => "CU"}
     options = {:page => 1, :country => "US",  :trackId => "SS"}
-    request = client.create_api_request('method', parameters, options)
+    request = client.create_api_request(:GET, 'method', parameters, options)
     request.parameters[:trackId].should == 1239
     request.parameters[:releaseId].should == 456
     request.parameters[:country].should == "CU"
@@ -67,6 +67,7 @@ describe "Client" do
   it "should make an API call using API request created by the client itself " do
     a_method_name = "method"
     a_method_params = { :param1 => 1 }
+    an_http_method = :METHOD
 
     an_api_response = stub(Sevendigital::ApiResponse)
     an_api_request = stub(Sevendigital::ApiRequest)
@@ -75,11 +76,11 @@ describe "Client" do
     mock_operator = mock(Sevendigital::ApiOperator)
     client.stub!(:operator).and_return(mock_operator)
 
-    client.should_receive(:create_api_request).with(a_method_name, a_method_params, {}).and_return(an_api_request)
+    client.should_receive(:create_api_request).with(an_http_method, a_method_name, a_method_params, {}).and_return(an_api_request)
 
     mock_operator.should_receive(:call_api).with(an_api_request).and_return(an_api_response)
 
-    response = client.make_api_request(a_method_name, a_method_params, {})
+    response = client.make_api_request(an_http_method, a_method_name, a_method_params, {})
 
     response.should == an_api_response
 
@@ -88,6 +89,7 @@ describe "Client" do
   it "should make a signed & secure API call" do
     a_method_name = "method"
     a_method_params = { :param1 => 1 }
+    an_http_method = :METHOD
     a_token = "token"
 
     an_api_response = "response"
@@ -98,6 +100,7 @@ describe "Client" do
 
     mock_operator.should_receive(:call_api) { |api_request|
        api_request.api_method.should == a_method_name
+       api_request.http_method.should == an_http_method
        api_request.requires_secure_connection?.should == true
        api_request.requires_signature?.should == true
        api_request.parameters.should  == a_method_params
@@ -105,7 +108,7 @@ describe "Client" do
        an_api_response
     }
 
-    response = client.make_signed_api_request(a_method_name, a_method_params, {}, a_token)
+    response = client.make_signed_api_request(an_http_method, a_method_name, a_method_params, {}, a_token)
 
     response.should == an_api_response
 

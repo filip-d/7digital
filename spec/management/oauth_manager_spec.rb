@@ -22,7 +22,7 @@ describe "OAuthManager" do
       .and_return(fake_token)
 
     @client.should_receive(:make_signed_api_request) \
-       .with("oauth/requestToken", {}) \
+       .with(:GET, "oauth/requestToken", {}) \
        .and_return(an_api_response)
 
     token = @oauth_manager.get_request_token
@@ -44,7 +44,7 @@ describe "OAuthManager" do
       .and_return(fake_token)
 
     @client.should_receive(:make_signed_api_request) \
-       .with("oauth/accessToken", {}, {}, a_request_token) \
+       .with(:GET, "oauth/accessToken", {}, {}, a_request_token) \
        .and_return(an_api_response)
 
     token = @oauth_manager.get_access_token(a_request_token)
@@ -60,7 +60,7 @@ describe "OAuthManager" do
     an_api_response = fake_api_response("oauth/requesttoken")
 
     @client.should_receive(:make_signed_api_request) \
-       .with("oauth/requestToken/authorise", \
+       .with(:GET, "oauth/requestToken/authorise", \
               {:username => an_email_address, :password => a_password, :token => a_request_token.token}) \
        .and_return(an_api_response)
     

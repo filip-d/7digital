@@ -18,18 +18,18 @@ module Sevendigital
     end
 
     def get_locker(token, options={})
-      api_response = @api_client.make_signed_api_request("user/locker", {}, options, token)
+      api_response = @api_client.make_signed_api_request(:GET, "user/locker", {}, options, token)
       @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
     end
 
     def purchase(release_id, track_id, price, token, options={})
-      api_response = @api_client.make_signed_api_request("user/purchase/item", \
+      api_response = @api_client.make_signed_api_request(:GET, "user/purchase/item", \
         {:releaseId => release_id, :trackId => track_id, :price => price}, options, token)
       @api_client.locker_digestor.from_xml(api_response.content.purchase)
     end
 
     def get_stream_track_url(release_id, track_id, token, options={})
-        api_request = @api_client.create_api_request("user/streamtrack", {:releaseId => release_id, :trackId => track_id}, options)
+        api_request = @api_client.create_api_request(:GET, "user/streamtrack", {:releaseId => release_id, :trackId => track_id}, options)
         api_request.api_service = :media
         api_request.require_signature
         api_request.token = token
@@ -37,7 +37,7 @@ module Sevendigital
     end
 
     def get_add_card_url(return_url, token, options={})
-        api_request = @api_client.create_api_request("payment/addcard", {:returnUrl => return_url}, options)
+        api_request = @api_client.create_api_request(:GET, "payment/addcard", {:returnUrl => return_url}, options)
         api_request.api_service = :account
         api_request.require_signature
         api_request.require_secure_connection

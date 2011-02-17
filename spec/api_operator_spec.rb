@@ -20,7 +20,7 @@ describe "ApiOperator" do
 
   it "should create http request uri based on api method and client configuration" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
 
     uri = @api_operator.create_request_uri(api_request)
 
@@ -34,7 +34,7 @@ describe "ApiOperator" do
 
   it "should URL encode parameters accourding to OAuth spec" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "a+b@c.d", :paramTwo => "<a b>"})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "a+b@c.d", :paramTwo => "<a b>"})
 
     uri = @api_operator.create_request_uri(api_request)
 
@@ -43,9 +43,9 @@ describe "ApiOperator" do
 
   end
 
-  it "should create http GET request by default" do
+  it "should create http GET request" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
 
     client, request = @api_operator.create_http_request(api_request)
 
@@ -55,8 +55,7 @@ describe "ApiOperator" do
 
   it "should create http POST request" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
-    api_request.http_method = :POST
+    api_request = Sevendigital::ApiRequest.new(:POST, "api/method", {:param1 => "value", :paramTwo => 2})
 
     client, request = @api_operator.create_http_request(api_request)
 
@@ -66,8 +65,7 @@ describe "ApiOperator" do
 
   it "should create http DELETE request" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
-    api_request.http_method = :DELETE
+    api_request = Sevendigital::ApiRequest.new(:DELETE, "api/method", {:param1 => "value", :paramTwo => 2})
 
     client, request = @api_operator.create_http_request(api_request)
 
@@ -77,8 +75,7 @@ describe "ApiOperator" do
 
   it "should create http PUT request" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
-    api_request.http_method = :PUT
+    api_request = Sevendigital::ApiRequest.new(:PUT, "api/method", {:param1 => "value", :paramTwo => 2})
 
     client, request = @api_operator.create_http_request(api_request)
 
@@ -88,7 +85,7 @@ describe "ApiOperator" do
 
   it "should have empty body if no form parameters provided" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
 
     client, request = @api_operator.create_http_request(api_request)
 
@@ -98,7 +95,7 @@ describe "ApiOperator" do
 
   it "should set up any form parameters in body" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.form_parameters[:shop_id] = "1234"
     api_request.form_parameters[:email] = "test@example.com"
     api_request.form_parameters[:ignore] = nil
@@ -111,7 +108,7 @@ describe "ApiOperator" do
 
   it "should create HTTPS request uri based on api method that requires secure connection and client configuration" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_secure_connection
 
     uri = @api_operator.create_request_uri(api_request)
@@ -128,7 +125,7 @@ describe "ApiOperator" do
 
     @client.should_receive(:api_host_and_version).with(:media).and_return(["media-base.api.url","media-version"])
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.api_service = :media
     uri = @api_operator.create_request_uri(api_request)
 
@@ -201,7 +198,7 @@ describe "ApiOperator" do
   end
 
   it "should create a 2-legged signed HTTP request" do
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_signature
     http_client, http_request = @api_operator.create_http_request(api_request)
     http_client.use_ssl?.should == false
@@ -213,7 +210,7 @@ describe "ApiOperator" do
   end
 
   it "should create a 3-legged signed HTTP request" do
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_signature
     api_request.token = OAuth::AccessToken.new(@client.oauth_consumer, "token", "secret")
     http_client, http_request = @api_operator.create_http_request(api_request)
@@ -226,7 +223,7 @@ describe "ApiOperator" do
   end
 
   it "should create a 3-legged signed HTTPS request" do
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_signature
     api_request.require_secure_connection
     api_request.token = OAuth::AccessToken.new(@client.oauth_consumer, "token", "secret")
@@ -242,7 +239,7 @@ describe "ApiOperator" do
   end
 
   it "should create a standard HTTP request" do
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     http_client, http_request = @api_operator.create_http_request(api_request)
     http_client.inspect.should =~ /base\.api\.url:80/
     http_client.use_ssl?.should == false
@@ -255,14 +252,14 @@ describe "ApiOperator" do
 
     @client.stub!(:user_agent_info).and_return("7digital Gem")
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     http_client, http_request = @api_operator.create_http_request(api_request)
     http_request["User-agent"].should =~ /7digital Gem/
   end
 
   it "get_request_uri should return oauth sign URI if api request requires signature" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.token = OAuth::AccessToken.new(nil, "token", "token_secret")
     api_request.require_signature
     api_request.require_secure_connection
@@ -276,7 +273,7 @@ describe "ApiOperator" do
 
   it "get_request_uri should return simple request URI if api request does not require signature" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     signed_uri =  @api_operator.get_request_uri(api_request)
 
     signed_uri.match(/oauth_signature=/).should == nil
@@ -286,7 +283,7 @@ describe "ApiOperator" do
 
   it "get_request_uri should return secure request URI if api request does not require signature" do
 
-    api_request = Sevendigital::ApiRequest.new("api/method", {:param1 => "value", :paramTwo => 2})
+    api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.require_secure_connection
     signed_uri =  @api_operator.get_request_uri(api_request)
 

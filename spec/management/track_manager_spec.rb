@@ -21,7 +21,7 @@ describe "TrackManager" do
       .should_receive(:from_xml).with(an_api_response.content.track).and_return(a_track)
 
     @client.should_receive(:make_api_request) \
-                 .with("track/details", {:trackId => a_track_id}, {}) \
+                 .with(:GET, "track/details", {:trackId => a_track_id}, {}) \
                  .and_return(an_api_response)
 
     @track_manager.get_details(a_track_id).should == a_track
@@ -57,7 +57,7 @@ describe "TrackManager" do
         .should_receive(:list_from_xml).with(an_api_response.content.chart).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
-                   .with("track/chart", {}, {}) \
+                   .with(:GET, "track/chart", {}, {}) \
                    .and_return(an_api_response)
 
 
@@ -71,7 +71,7 @@ describe "TrackManager" do
     fake_api_request = stub(Sevendigital::ApiRequest)
 
     @client.should_receive(:create_api_request) \
-                   .with("track/preview", {:trackId => track_id}, {}) \
+                   .with(:GET, "track/preview", {:trackId => track_id}, {}) \
                    .and_return(fake_api_request)
 
     @client.operator.should_receive(:create_request_uri) \
@@ -95,7 +95,7 @@ describe "TrackManager" do
       .and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \
-                   .with("track/search", {:q => query}, {}) \
+                   .with(:GET, "track/search", {:q => query}, {}) \
                    .and_return(an_api_response)
     
     tracks = @track_manager.search(query)

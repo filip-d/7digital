@@ -22,7 +22,7 @@ describe "TagManager" do
         .should_receive(:list_from_xml).with(an_api_response.content.tags).and_return(a_tag_list)
 
     @client.should_receive(:make_api_request) \
-                   .with("tag", {}, {}) \
+                   .with(:GET, "tag", {}, {}) \
                    .and_return(an_api_response)
 
 
