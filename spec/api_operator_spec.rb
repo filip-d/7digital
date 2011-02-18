@@ -97,13 +97,14 @@ describe "ApiOperator" do
 
     api_request = Sevendigital::ApiRequest.new(:GET, "api/method", {:param1 => "value", :paramTwo => 2})
     api_request.form_parameters[:shop_id] = "1234"
-    api_request.form_parameters[:email] = "test@example.com"
+    api_request.form_parameters[:email] = "test+email@example.com"
     api_request.form_parameters[:ignore] = nil
 
     client, request = @api_operator.create_http_request(api_request)
 
-    request.instance_variable_get("@body").should == "email=test%40example.com&shopId=1234"
-
+    #request.instance_variable_get("@body").should == "email=test%40example.com&shopId=1234"
+    request.instance_variable_get("@body").should =~ /email=test%2Bemail%40example.com/
+    request.instance_variable_get("@body").should =~ /shopId=1234/
   end
 
   it "should create HTTPS request uri based on api method that requires secure connection and client configuration" do

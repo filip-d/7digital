@@ -38,6 +38,7 @@ XML
     xml_response = load_sample_object_xml("user_payment_card")
 
     card = @card_digestor.from_xml(xml_response)
+    card.id.should == 9876
     card.type.should == "VISA"
     card.last_4_digits.should == "2345"
     card.expiry_date.should == "201109"

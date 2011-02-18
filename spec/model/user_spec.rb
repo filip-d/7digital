@@ -8,7 +8,7 @@ describe "User" do
     @user_manager = mock(Sevendigital::UserManager)
     @user_card_manager = mock(Sevendigital::UserCardManager)
     @client.stub!(:user).and_return @user_manager
-    @client.stub!(:user_cards).and_return @user_card_manager
+    @client.stub!(:user_payment_card).and_return @user_card_manager
 
     @user = Sevendigital::User.new(@client)
   end
