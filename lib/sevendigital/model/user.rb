@@ -6,6 +6,8 @@ module Sevendigital
 
     sevendigital_extended_property :locker
 
+    sevendigital_extended_property :cards
+
     def authenticated?
       return !@oauth_access_token.nil?
     end
@@ -13,6 +15,11 @@ module Sevendigital
     def get_locker(options={})
       raise Sevendigital::SevendigitalError if !authenticated?
       @api_client.user.get_locker(@oauth_access_token, options)
+    end
+
+    def get_cards(options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user_cards.get_card_list(@oauth_access_token, options)
     end
 
     def purchase!(release_id, track_id, price, options={})

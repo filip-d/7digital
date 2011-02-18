@@ -6,8 +6,10 @@ describe "User" do
   before do
     @client = stub(Sevendigital::Client)
     @user_manager = mock(Sevendigital::UserManager)
+    @user_card_manager = mock(Sevendigital::UserCardManager)
     @client.stub!(:user).and_return @user_manager
-    
+    @client.stub!(:user_cards).and_return @user_card_manager
+
     @user = Sevendigital::User.new(@client)
   end
 
@@ -33,6 +35,20 @@ describe "User" do
     }
     locker = @user.get_locker(expected_options)
     locker.should == fake_locker
+  end
+
+  it "should get user's payment cards from user card manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    fake_card_list = [Sevendigital::Card.new(@client)]
+    expected_options = {:page => 2}
+
+    @user_card_manager.should_receive(:get_card_list) { |token, options|
+      token.should == @user.oauth_access_token
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fake_card_list
+    }
+    cards = @user.get_cards(expected_options)
+    cards.should == fake_card_list
   end
 
   it "should get user manager to make a purchase" do

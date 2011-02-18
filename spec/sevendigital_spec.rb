@@ -39,7 +39,7 @@ describe "Sevendigital Gem" do
 
      it "should get user's cards" do
        user = @api_client.user.authenticate("user@example.com", "test")
-       puts @api_client.user_payment_card.get_card_list(user.oauth_access_token).inspect
+       puts user.cards.inspect
 
      end
 
