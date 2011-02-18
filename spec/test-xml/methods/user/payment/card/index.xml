@@ -1,0 +1,8 @@
+<response status="ok" version="1.2">
+	<card id="12345678">
+		<type>VISA</type>
+		<last4digits>2345</last4digits>
+		<cardHolderName>Mr. John Smith</cardHolderName>
+		<expiryDate>201109</expiryDate>
+	</card>
+</response>
