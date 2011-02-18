@@ -32,7 +32,7 @@ end
 
   def load_sample_method_xml(method_name)
     method_name = "test-xml/methods/" + method_name + ".xml"
-    IO.read( File.join(File.dirname(__FILE__), method_name.split('/')))
+      IO.read( File.join(File.dirname(__FILE__), method_name.split('/')))
   end
 
   def load_sample_object_xml(method_name)

@@ -33,6 +33,23 @@ describe "UserManager" do
     @user.nil?.should == true
   end
 
+  it "sign_up should call user/signUp api method and return signed up and authenticated user" do
+    an_api_response = fake_api_response("user/signup")
+    fake_user = Sevendigital::User.new(@client)
+    options = {:country => "XX"}
+
+    mock_client_digestor(@client, :user_digestor) \
+      .should_receive(:from_xml).with(an_api_response.content.user).and_return(fake_user)
+
+    @client.should_receive(:make_signed_api_request) \
+        .with(:POST, "user/signUp", {:emailAddress => @an_email, :password => @a_password}, options) \
+        .and_return(an_api_response)
+    
+    user = @user_manager.sign_up(@an_email, @a_password, options)
+    user.should == fake_user
+    user.authenticated?.should == true
+  end
+
   it "authenticate should return an authenticated user if supplied with valid login details" do
     user = @user_manager.authenticate("email", "password")
     user.kind_of?(Sevendigital::User).should == true
@@ -58,7 +75,7 @@ describe "UserManager" do
   end
 
   it "authenticate should retrieve access_token for authenticated user" do
-    @client.oauth.should_receive(:get_access_token)
+    @client.oauth.should_receive(:get_access_token) \
       .with(@a_request_token) \
       .and_return(@an_access_token)
     user = @user_manager.authenticate(@an_email, @a_password)

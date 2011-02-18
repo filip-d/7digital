@@ -92,6 +92,11 @@ module Sevendigital
       @tag_digestor ||= TagDigestor.new(self)
     end
 
+    #@private
+    def user_digestor
+      @user_digestor ||= UserDigestor.new(self)
+    end
+
   end
 
 end

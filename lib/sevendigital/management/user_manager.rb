@@ -17,6 +17,14 @@ module Sevendigital
       user
     end
 
+    def sign_up(email, password, options={})
+      api_response = @api_client.make_signed_api_request(:POST, "user/signUp", \
+        {:emailAddress => email, :password=> password}, options)
+      user = @api_client.user_digestor.from_xml(api_response.content.user)
+      user.oauth_access_token = authenticate(email, password).oauth_access_token
+      user
+    end
+
     def get_locker(token, options={})
       api_response = @api_client.make_signed_api_request(:GET, "user/locker", {}, options, token)
       @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)

@@ -14,7 +14,13 @@ module Sevendigital
     def create_api_request(http_method, api_method, parameters, options = {})
       parameters = options.merge(parameters)
       parameters = add_default_parameters(parameters)
-      ApiRequest.new(http_method, api_method, parameters)
+      if http_method != :POST then
+        request = ApiRequest.new(http_method, api_method, parameters)
+      else
+        request = ApiRequest.new(http_method, api_method, {})
+        request.form_parameters = parameters
+      end
+      request
     end
 
     def make_api_request(http_method, api_method, parameters, options = {})

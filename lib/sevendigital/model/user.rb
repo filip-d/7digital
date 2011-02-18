@@ -2,7 +2,7 @@ module Sevendigital
 
   class User < SevendigitalObject
 
-    attr_accessor :oauth_access_token
+    attr_accessor :oauth_access_token, :id, :type, :email_address
 
     sevendigital_extended_property :locker
 

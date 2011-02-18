@@ -1,0 +1,5 @@
+#Your API access key and secret
+oauth_consumer_key: "YOUR_KEY_HERE"
+oauth_consumer_secret: "YOUR_SECRET_HERE"
+
+lazy_load: true
