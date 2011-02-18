@@ -30,10 +30,16 @@ describe "Sevendigital Gem" do
      end
 
      it "should fail to sign up an existing user" do
-       running {user = @api_client.user.sign_up("filip@7digital.com", "!Â£$%^&*({}:@~<>")}.should raise_error(Sevendigital::SevendigitalError) { |error|
+       running {user = @api_client.user.sign_up("filip@7digital.com", "!£$%^&*({}:@~<>")}.should raise_error(Sevendigital::SevendigitalError) { |error|
          error.error_message.should == "User with given email already exists"
-         error.error_code.should == 2001
+         error.error_code.should == 2003
        }
+
+     end
+
+     it "should get user's cards" do
+       user = @api_client.user.authenticate("user@example.com", "test")
+       puts @api_client.user_payment_card.get_card_list(user.oauth_access_token).inspect
 
      end
 

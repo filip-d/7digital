@@ -93,6 +93,11 @@ module Sevendigital
     end
 
     #@private
+    def user_card_digestor
+      @user_digestor ||= UserCardDigestor.new(self)
+    end
+
+    #@private
     def user_digestor
       @user_digestor ||= UserDigestor.new(self)
     end

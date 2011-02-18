@@ -102,7 +102,7 @@ describe "ApiOperator" do
 
     client, request = @api_operator.create_http_request(api_request)
 
-    request.instance_variable_get("@body").should == "shopId=1234&email=test%40example.com"
+    request.instance_variable_get("@body").should == "email=test%40example.com&shopId=1234"
 
   end
 

@@ -134,7 +134,7 @@ describe "ArtistManager" do
 
   it "get_tags should call artist/tags api method and return list of digested tags" do
     an_artist_id = 123
-    a_list_of_tags = [Sevendigital::Tag.new(@client), Sevendigital::Tag.new(@client)]
+    a_list_of_tags = [Sevendigital::Tag.new, Sevendigital::Tag.new]
     an_api_response = fake_api_response("artist/tags")
     options = {:page => 1}
 

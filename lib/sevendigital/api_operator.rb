@@ -95,6 +95,7 @@ module Sevendigital
     host, version = @client.api_host_and_version(api_request.api_service)
     path = "/#{version}/#{api_request.api_method}"
     query = api_request.parameters.map{ |k,v| "#{escape(k)}=#{escape(v)}" }.join("&")
+    query = nil if query == ""
     if api_request.requires_secure_connection? then
       URI::HTTPS.build(:host => host, :path => path, :query =>query)
     else

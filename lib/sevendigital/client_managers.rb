@@ -32,6 +32,11 @@ module Sevendigital
       @user_manager ||= UserManager.new(self)
     end
 
+    #@return [UserManager]
+    def user_payment_card
+      @user_card_manager ||= UserCardManager.new(self)
+    end
+
     #@return [OAuthManager]
     def oauth
       @oauth_manager ||= OAuthManager.new(self)

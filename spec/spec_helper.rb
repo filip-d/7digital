@@ -1,6 +1,8 @@
 #$: << 'sevendigital'
 #$: << 'spec'
 
+=begin
+
 require 'simplecov'
 
 SimpleCov.start do
@@ -8,6 +10,8 @@ SimpleCov.start do
   add_group 'Digestion', 'lib/sevendigital/digestion_tract'
   add_group 'Model', 'lib/sevendigital/model'
 end
+
+=end
 
 require 'spec'
 require File.expand_path(
