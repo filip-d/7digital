@@ -10,7 +10,7 @@ module Sevendigital
       make_sure_not_eating_nil(card_proxy)
 
       card = Sevendigital::Card.new(@api_client)
-      card.id = card_proxy.id.to_s
+      card.id = card_proxy.id.to_i
       card.type = card_proxy.type.value.to_s
       card.last_4_digits = card_proxy.last4digits.value.to_s
       card.card_holder_name = card_proxy.card_holder_name.value.to_s if value_present?(card_proxy.card_holder_name)

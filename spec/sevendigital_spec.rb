@@ -8,6 +8,7 @@ describe "Sevendigital Gem" do
           File.join(File.dirname(__FILE__),"sevendigital_spec.yml"),
           :verbose => "verbose"
     )
+
   end
 
      it "should find an artist" do
@@ -30,16 +31,18 @@ describe "Sevendigital Gem" do
      end
 
      it "should fail to sign up an existing user" do
-       running {user = @api_client.user.sign_up("filip@7digital.com", "!£$%^&*({}:@~<>")}.should raise_error(Sevendigital::SevendigitalError) { |error|
+       running {user = @api_client.user.sign_up("filip@7digital.com", "Â£$%^&*()_+")}.should raise_error(Sevendigital::SevendigitalError) { |error|
          error.error_message.should == "User with given email already exists"
          error.error_code.should == 2003
        }
 
      end
 
-     it "should get user's cards" do
-       user = @api_client.user.authenticate("user@example.com", "test")
-       puts user.cards.inspect
+     it "should manage user's cards" do
+       user = @api_client.user.authenticate("test@7digital.com", "password")
+       user.add_card("4444333322221111", "VISA", "Mr Test", nil, "201109", nil, 123, "90210", "US")
+       user.cards.first.id.should > 0
+       user.cards.first.last_4_digits.should == "1111"
 
      end
 

@@ -1,0 +1,8 @@
+<response status="ok" version="1.2">
+	<card>
+		<type>VISA</type>
+		<last4digits>2345</last4digits>
+		<cardHolderName>2345</cardHolderName>
+		<expiryDate>2345</expiryDate>
+	</card>
+</response>

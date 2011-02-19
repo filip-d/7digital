@@ -51,6 +51,27 @@ describe "User" do
     cards.should == fake_card_list
   end
 
+  it "should add payment card for user using user card manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    card_number = "4444333322221111"
+    card_type = "VISA"
+    card_holder_name = "Mr John Simth"
+    card_start_date = "200909"
+    card_expiry_date = "201109"
+    card_issue_number = "1"
+    card_verification_code ="123"
+    card_post_code = "EC2A 4HJ"
+    card_country = "GB"
+    fake_card = Sevendigital::Card.new(@client)
+
+    @user_card_manager.should_receive(:add_card).with(
+            card_number, card_type, card_holder_name, card_start_date, card_expiry_date, card_issue_number,
+            card_verification_code, card_post_code, card_country, @user.oauth_access_token, {}).and_return(fake_card)
+    card = @user.add_card(card_number, card_type, card_holder_name, card_start_date, card_expiry_date,
+                          card_issue_number, card_verification_code, card_post_code, card_country)
+    card.should == fake_card
+  end
+
   it "should get user manager to make a purchase" do
     @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
     a_release_id = 123

@@ -19,7 +19,14 @@ module Sevendigital
 
     def get_cards(options={})
       raise Sevendigital::SevendigitalError if !authenticated?
-      @api_client.user_cards.get_card_list(@oauth_access_token, options)
+      @api_client.user_payment_card.get_card_list(@oauth_access_token, options)
+    end
+
+    def add_card(card_number, card_type, card_holder_name, card_start_date, card_expiry_date, card_issue_number,
+            card_verification_code, card_post_code, card_country, options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user_payment_card.add_card(card_number, card_type, card_holder_name, card_start_date, card_expiry_date, card_issue_number,
+            card_verification_code, card_post_code, card_country, @oauth_access_token, options)
     end
 
     def purchase!(release_id, track_id, price, options={})
