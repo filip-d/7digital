@@ -46,4 +46,15 @@ describe "Sevendigital Gem" do
 
      end
 
+     it "should select a card as default" do
+       user = @api_client.user.authenticate("test@7digital.com", "password")
+       user.add_card("4444333322221111", "VISA", "Mr Test", nil, "201109", nil, 123, "90210", "US")
+       new_card_id = user.cards.first.id
+       old_card_id = user.cards.last.id
+       new_card_id.should_not == old_card_id
+       user.select_card(old_card_id)
+       user.get_cards.first.id.should == old_card_id
+
+     end
+
 end
