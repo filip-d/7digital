@@ -44,5 +44,27 @@ XML
 
   end
 
+    it "should just return the input if passed in Peachy proxy " do
+
+    xml = <<XML
+    <rootElement id="123">
+      <subElement>expected value</subElement>
+    </rootElement>
+XML
+    proxy = Peachy::Proxy.new(xml)
+    checked_proxy = Sevendigital::ProxyPolice.ensure_is_proxy(proxy, nil)
+    checked_proxy.should == proxy
+
+    end
+
+  it "should just return the input if passed in Peachy SimpleContent " do
+
+    xml = "<element/>"
+    proxy = Peachy::SimpleContent.new(xml)
+    checked_proxy = Sevendigital::ProxyPolice.ensure_is_proxy(proxy, nil)
+    checked_proxy.should == proxy
+
+  end
+
 
 end

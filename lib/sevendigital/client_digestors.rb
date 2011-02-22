@@ -94,7 +94,7 @@ module Sevendigital
 
     #@private
     def user_card_digestor
-      @user_digestor ||= UserCardDigestor.new(self)
+      @user_card_digestor ||= UserCardDigestor.new(self)
     end
 
     #@private

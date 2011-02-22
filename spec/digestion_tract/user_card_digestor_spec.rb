@@ -46,4 +46,13 @@ XML
 
   end
 
+  it "should digest xml containing empty list of cards and return an empty array" do
+
+    xml_response = load_sample_object_xml("user_payment_card_list_empty")
+
+    cards = @card_digestor.list_from_xml(xml_response, :cards)
+    cards.size.should == 0
+
+  end
+
 end
