@@ -103,19 +103,20 @@ module Sevendigital
     end
   end
 
-  def escape(value)
-    URI::escape(value.to_s, RESERVED_CHARACTERS)
-    rescue ArgumentError
-      URI::escape(value.to_s.force_encoding(Encoding::UTF_8), RESERVED_CHARACTERS)
-  end
-
   def new_http_request(request_uri, http_method)
     request_type = Kernel.const_get("Net").const_get("HTTP").const_get(http_method.to_s.capitalize)
     request_type.new(request_uri, {"user-agent" => @client.user_agent_info})
   end
 
   def add_form_parameters(http_request, api_request)
-    http_request.set_form_data(api_request.form_parameters)
+    http_request.body = api_request.form_parameters.map {|k, v| "#{escape(k)}=#{escape(v)}" }.flatten.join('&')
+    http_request.content_type = 'application/x-www-form-urlencoded'
+  end
+
+  def escape(value)
+    URI::escape(value.to_s, RESERVED_CHARACTERS)
+  rescue ArgumentError
+    URI::escape(value.to_s.force_encoding(Encoding::UTF_8), RESERVED_CHARACTERS)
   end
 
   def log_request(request)
