@@ -1,18 +1,6 @@
 require '../lib/sevendigital'
 
-class VerySimpleCache < Hash
-  def set(key, value) store(key, value);  end
-  def get(key) has_key?(key) ? fetch(key) : nil;  end
-end
-
-  api_client = Sevendigital::Client.new(
-          :oauth_consumer_key => "YOUR_KEY_HERE",
-          :oauth_consumer_secret => "YOUR_SECRET_HERE",
-          :lazy_load? => true,
-          :country => "GB",
-          #:cache => VerySimpleCache.new,
-          :verbose => "verbose"
-  )
+  api_client = Sevendigital::Client.new("sevendigital.yml", :cache=>VerySimpleCache.new)
 
   track = api_client.track.search("TEST CONTENT - TEST CONTENT", :page_size=>1).first
 

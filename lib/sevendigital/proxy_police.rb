@@ -6,10 +6,10 @@ module Sevendigital
   class ProxyPolice # :nodoc:
 
     def ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name)
-      if xml_or_proxy.kind_of? Peachy::Proxy then
-          return xml_or_proxy
+      if xml_or_proxy.kind_of?(Peachy::Proxy) || xml_or_proxy.kind_of?(Peachy::SimpleContent) then
+        return xml_or_proxy
       else
-          return ProxyPolice.create_release_proxy(xml_or_proxy, element_name)
+        return ProxyPolice.create_release_proxy(xml_or_proxy, element_name)
       end
     end
 

@@ -29,6 +29,11 @@ module Sevendigital
             card_verification_code, card_post_code, card_country, @oauth_access_token, options)
     end
 
+    def select_card(card_id, options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user_payment_card.select_card(card_id, @oauth_access_token, options)
+    end
+
     def purchase!(release_id, track_id, price, options={})
       raise Sevendigital::SevendigitalError if !authenticated?
       @api_client.user.purchase(release_id, track_id, price, @oauth_access_token, options)

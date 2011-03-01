@@ -17,5 +17,11 @@ module Sevendigital
       @api_client.user_card_digestor.from_xml(api_response.content.card)
     end
 
+    def select_card(card_id, token, options={})
+      api_response = @api_client.make_signed_api_request(
+              :POST, "user/payment/card/select", {:cardId => card_id}, options, token)
+      api_response.ok?
+    end
+
   end
 end

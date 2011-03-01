@@ -63,4 +63,17 @@ describe "UserCardManager" do
     card.should == a_card
   end
 
+  it "select_card should call user/payment/card/select api method and return true if successful " do
+    card_id = 123
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    an_api_response = fake_api_response("user/payment/card/select")
+    options = {:pagesize => 20 }
+
+    @client.should_receive(:make_signed_api_request) \
+              .with(:POST, "user/payment/card/select", {:cardId => card_id}, options, a_token) \
+              .and_return(an_api_response)
+
+    @card_manager.select_card(card_id, a_token, options).should == true
+  end
+
 end

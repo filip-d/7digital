@@ -72,6 +72,16 @@ describe "User" do
     card.should == fake_card
   end
 
+  it "should select a default payment card for user using user card manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    card_id = 123456
+
+    @user_card_manager.should_receive(:select_card).with(
+            card_id, @user.oauth_access_token, {}).and_return(true)
+    @user.select_card(card_id).should == true
+  end
+
+
   it "should get user manager to make a purchase" do
     @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
     a_release_id = 123
