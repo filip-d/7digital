@@ -18,7 +18,7 @@ module Sevendigital
 
     def build_preview_url(id, options={})
       api_request = @api_client.create_api_request(:GET, "track/preview", {:trackId => id}, options)
-      @api_client.operator.create_request_uri(api_request)
+      @api_client.operator.get_request_uri(api_request)
     end
 
     def search(query, options={})

@@ -74,7 +74,7 @@ describe "TrackManager" do
                    .with(:GET, "track/preview", {:trackId => track_id}, {}) \
                    .and_return(fake_api_request)
 
-    @client.operator.should_receive(:create_request_uri) \
+    @client.operator.should_receive(:get_request_uri) \
       .with(fake_api_request) \
       .and_return(fake_preview_url)
 
