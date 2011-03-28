@@ -21,21 +21,6 @@ module Sevendigital
       response
     end
 
-    #Returns true if the response has been retrieved from cache but has since expired
-    def out_of_date?(current_time=nil)
-      return true if @headers.nil? || @headers["Date"].nil? || @headers["cache-control"].nil?
-      return true if  !(@headers["cache-control"] =~ /max-age=([0-9]+)/)
-      current_time ||= Time.now.utc
-      response_time = Time.parse(@headers["Date"])
-      max_age = /max-age=([0-9]+)/.match(@headers["cache-control"])[1].to_i
-      response_time + max_age < current_time
-    end
-
-
-  def response_cacheable?
-    return true
-  end
-
   end
 
 end
