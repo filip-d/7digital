@@ -82,7 +82,7 @@ describe "User" do
   end
 
 
-  it "should get user manager to make a purchase" do
+  it "should purchase a track using user manger" do
     @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
     a_release_id = 123
     a_track_id = 456
@@ -90,7 +90,7 @@ describe "User" do
     fake_locker = [Sevendigital::LockerRelease.new(@client)]
     expected_options = {:page => 2}
 
-    @user_manager.should_receive(:purchase) { |release_id, track_id, price, token, options|
+    @user_manager.should_receive(:purchase_item) { |release_id, track_id, price, token, options|
       token.should == @user.oauth_access_token
       release_id.should == a_release_id
       track_id.should == a_track_id
@@ -98,7 +98,23 @@ describe "User" do
       (options.keys & expected_options.keys).should == expected_options.keys
       fake_locker
     }
-    purchase_locker = @user.purchase!(a_release_id, a_track_id, a_price, expected_options)
+    purchase_locker = @user.purchase_item!(a_release_id, a_track_id, a_price, expected_options)
+    purchase_locker.should == fake_locker
+  end
+
+  it "should purchase a basket using user manger" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    a_basket_id = 123
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+    expected_options = {:page => 2}
+
+    @user_manager.should_receive(:purchase_basket) { |basket_id, token, options|
+      token.should == @user.oauth_access_token
+      basket_id.should == a_basket_id
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fake_locker
+    }
+    purchase_locker = @user.purchase_basket!(a_basket_id, expected_options)
     purchase_locker.should == fake_locker
   end
 

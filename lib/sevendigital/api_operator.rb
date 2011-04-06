@@ -76,7 +76,10 @@ module Sevendigital
     request_uri = create_request_uri(api_request)
     http_client = Net::HTTP.new(request_uri.host, request_uri.port)
 
-    request_uri.query += '&oauth_consumer_key=' + @client.configuration.oauth_consumer_key unless api_request.requires_signature?
+    if !api_request.requires_signature? then
+      request_uri.query ||= ""
+      request_uri.query += "&oauth_consumer_key=#{@client.configuration.oauth_consumer_key}"
+    end
 
     http_request = new_http_request(request_uri.request_uri, api_request.http_method)
 

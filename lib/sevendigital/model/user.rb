@@ -34,9 +34,20 @@ module Sevendigital
       @api_client.user_payment_card.select_card(card_id, @oauth_access_token, options)
     end
 
-    def purchase!(release_id, track_id, price, options={})
+    # <b>DEPRECATED:</b> Please use <tt>purchase_item!</tt> instead.
+    def purchase!(release_id, track_id, price, token, options={})
+      warn "[DEPRECATION] `purchase!` is deprecated.  Please use 'purchase_item!' instead."
+      purchase_item!(release_id, track_id, price, options={})
+    end
+
+    def purchase_item!(release_id, track_id, price, options={})
       raise Sevendigital::SevendigitalError if !authenticated?
-      @api_client.user.purchase(release_id, track_id, price, @oauth_access_token, options)
+      @api_client.user.purchase_item(release_id, track_id, price, @oauth_access_token, options)
+    end
+
+    def purchase_basket!(basket_id, options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      @api_client.user.purchase_basket(basket_id, @oauth_access_token, options)
     end
 
     def stream_track_url(release_id, track_id, options={})

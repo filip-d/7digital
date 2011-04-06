@@ -132,6 +132,26 @@ describe "UserManager" do
 
   end
 
+  it "purchase_basket should call user/purchase/basket api method and return digested locker items" do
+    an_api_response = fake_api_response("user/purchase/basket")
+    a_basket_id = 123456
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    fake_locker = [Sevendigital::LockerRelease.new(@client)]
+
+    mock_client_digestor(@client, :locker_digestor) \
+      .should_receive(:from_xml).with(an_api_response.content.purchase).and_return(fake_locker)
+
+    @client.should_receive(:make_signed_api_request) \
+           .with(:GET, "user/purchase/basket", \
+                {:basketId => a_basket_id}, \
+                {}, a_token) \
+           .and_return(an_api_response)
+
+    @user_manager.purchase_basket(a_basket_id, a_token).should == fake_locker
+
+  end
+
+
   it "should get stream track URI" do
     a_stream_track_uri = "http://media.com/streamtrack"
     a_track_id = 123456
