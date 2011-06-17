@@ -11,35 +11,59 @@ module Sevendigital
     end
 
     def call_api(api_request)
-      request_cache_key = create_request_uri(api_request)
-      if !api_request.requires_signature?
-        http_response = @cache.respond_to?(:read) ? @cache.read(request_cache_key.to_s) : @cache.get(request_cache_key.to_s)
-      end
-      puts "ApiOperatorCached: Got from cache #{request_cache_key}" if @client.verbose? && http_response
-      puts "but the response is out of date" if @client.verbose? && http_response && response_out_of_date?(http_response)
-      if (!http_response || response_out_of_date?(http_response)) then
-        http_response = make_http_request(api_request)
-        if !api_request.requires_signature?
-          @cache.respond_to?(:write) ? @cache.write(request_cache_key.to_s, http_response) : @cache.set(request_cache_key.to_s, http_response)
-        end
-      end
-      api_response = digest_http_response(http_response)
-      p api_response if @client.very_verbose?
-      api_response
-    end
+      http_response = retrieve_from_cache(api_request)
+      http_response = cache_response(api_request) if response_out_of_date?(http_response)
 
-    def response_out_of_date?(http_response, current_time=nil)
-      header_invalid?(http_response.header) || cache_expired?(http_response.header, current_time)
+      digest_http_response(http_response).tap do |api_response|
+        @client.log(:verbose) { "ApiOperatorCached: API Response: #{api_response}" }
+      end
     end
 
   private
 
     def header_invalid?(header)
-      header.nil? || header["Date"].nil? || header["cache-control"].nil? || !(header["cache-control"] =~ /max-age=([0-9]+)/)
+      header["Date"].nil? || header["cache-control"].nil? || !(header["cache-control"] =~ /max-age=([0-9]+)/)
     end
 
     def cache_expired?(header, current_time=nil)
       (Time.parse(header["Date"]) + (/max-age=([0-9]+)/.match(header["cache-control"])[1].to_i)) < (current_time || Time.now.utc)
+    end
+
+    def cache_response(api_request)
+      make_http_request(api_request).tap do |response|
+        # Enforce configuration option to cache for a time period.
+        unless @client.configuration.default_cache_period.blank?
+          if header_invalid?(response.header)
+            response.header['cache-control'] = "private, max-age=#{@client.configuration.default_cache_period.to_i}"
+            @client.log(:verbose) { "ApiOperatorCached: Updating cache-control header with: #{@client.configuration.default_cache_period.to_i} seconds" }
+          end
+        end
+
+        unless api_request.requires_signature?
+          key = request_cache_key(api_request)
+          @cache.respond_to?(:write) ? @cache.write(key, response) : @cache.set(key, response)
+          @client.log(:verbose) { "ApiOperatorCached: Storing response in cache..." }
+        end
+      end
+    end
+
+    def request_cache_key(api_request)
+      create_request_uri(api_request).to_s
+    end
+
+    def response_out_of_date?(http_response, current_time=nil)
+      (http_response.blank? || header_invalid?(http_response.header) || cache_expired?(http_response.header, current_time)).tap do |expired|
+        @client.log(:verbose) { "ApiOperatorCached: Cache response out of date" if expired }
+      end
+    end
+
+    def retrieve_from_cache(api_request)
+      unless api_request.requires_signature?
+        key = request_cache_key(api_request)
+        (@cache.respond_to?(:read) ? @cache.read(key) : @cache.get(key)).tap do |response|
+          @client.log(:verbose) { "ApiOperatorCached: Got from cache #{key}" if response }
+        end
+      end
     end
   end
 end

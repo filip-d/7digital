@@ -77,10 +77,7 @@ module Sevendigital
     def transform_keys_to_symbols(hash)
       return hash if not hash.is_a?(Hash)
       new_hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = transform_keys_to_symbols(v); memo}
-      return new_hash
+      new_hash
     end
-
-
   end
-
 end
