@@ -57,19 +57,24 @@ describe "ClientConfiguration" do
   it "should use environment specific configuration file with environment specific settings" do
     conf_file = File.join(File.dirname(__FILE__),"data", "configuration_env_override.yml")
     puts conf_file
-    Object.const_set(:RAILS_ENV, "development") 
+
+    rails = OpenStruct.new
+    rails.env = "development"
+    Object.const_set(:Rails, rails)
+
     configuration = Sevendigital::ClientConfiguration.new(conf_file)
     configuration.api_url.should == 'test-yml-development.7digital.com'
-    Object.instance_eval{ remove_const :RAILS_ENV }
+    Object.instance_eval{ remove_const :Rails }
   end
 
   it "should use rails/config/sevendigital configuration as default rails settings" do
-    rails_root = File.join(File.dirname(__FILE__),"data")
-    puts rails_root
-    Object.const_set(:RAILS_ROOT, rails_root)
+    rails = OpenStruct.new
+    rails.root = Pathname(File.join(File.dirname(__FILE__),"data"))
+    Object.const_set(:Rails, rails)
+
     configuration = Sevendigital::ClientConfiguration.new()
     configuration.api_url.should == 'test-yml-rails-common.7digital.com'
-    Object.instance_eval{ remove_const :RAILS_ROOT }
+    Object.instance_eval{ remove_const :Rails }
   end
 
 end

@@ -49,12 +49,12 @@ module Sevendigital
     end
     
     def default_configuration_file
-      return nil unless defined?(RAILS_ROOT)
-      "#{RAILS_ROOT}/config/sevendigital.yml"
+      return nil unless defined?(Rails.root)
+      Rails.root.join('config', 'sevendigital.yml').to_s
     end
 
     def current_environment
-      defined?(RAILS_ENV) ? RAILS_ENV  : nil
+      defined?(Rails.env) ? Rails.env  : nil
     end
 
     def load_configuration_from_yml(file_name, environment=nil)
@@ -77,7 +77,7 @@ module Sevendigital
     def transform_keys_to_symbols(hash)
       return hash if not hash.is_a?(Hash)
       new_hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = transform_keys_to_symbols(v); memo}
-      return new_hash
+      new_hash
     end
 
 
