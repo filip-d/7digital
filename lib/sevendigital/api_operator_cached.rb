@@ -15,8 +15,8 @@ class ApiOperatorCached < ApiOperator # :nodoc:
   def call_api(api_request)
     request_cache_key = create_request_uri(api_request)
     api_response = @cache.get(request_cache_key.to_s) if !api_request.requires_signature?
-    puts "ApiOperatorCached: Got from cache #{request_cache_key}" if @client.verbose? && http_response
-    puts "but the response is out of date" if @client.verbose? && http_response && response_out_of_date?(http_response)
+    puts "ApiOperatorCached: Got from cache #{request_cache_key}" if @client.verbose? && api_response
+    puts "but the response is out of date" if @client.verbose? && api_response && response_out_of_date?(api_response)
     if (!api_response || response_out_of_date?(api_response)) then
       api_response = digest_http_response(make_http_request(api_request))
       @cache.set(request_cache_key.to_s, api_response) if !api_request.requires_signature?
