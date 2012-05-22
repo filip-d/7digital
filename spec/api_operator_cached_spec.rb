@@ -1,5 +1,6 @@
 require "spec_helper"
 require 'ostruct'
+require 'time'
 
 describe "ApiOperatorCached" do
 
@@ -40,7 +41,7 @@ describe "ApiOperatorCached" do
     @cache.stub!(:get).with("key").and_return(http_response)
     @cached_operator.stub!(:response_out_of_date?).with(http_response).and_return(false)
     @cached_operator.should_not_receive(:make_http_request)
-    @cached_operator.should_receive(:digest_http_response).with(http_response)
+    @cached_operator.should_not_receive(:digest_http_response).with(http_response)
     @cached_operator.call_api(@stub_api_request)
   end
 
@@ -74,13 +75,14 @@ describe "ApiOperatorCached" do
 
   it "should cache uncached api response if request was not signed" do
     http_response = stub_http_response()
+    api_response = stub_api_response()
 
     @cached_operator.stub(:create_request_uri).and_return("key")
     @cache.stub!(:get).with("key").and_return(nil)
     @cached_operator.stub!(:make_http_request).and_return(http_response)
-    @cached_operator.stub!(:digest_http_response)
+    @cached_operator.stub!(:digest_http_response).with(http_response).and_return(api_response)
 
-    @cache.should_receive(:set).with("key", http_response).and_return(nil)
+    @cache.should_receive(:set).with("key", api_response).and_return(nil)
     @cached_operator.call_api(@stub_api_request)
   end
 
@@ -90,7 +92,7 @@ describe "ApiOperatorCached" do
     max_age = 12*60*60
 
     http_response = stub_http_response
-    http_response.stub!(:header).and_return({
+    http_response.stub!(:headers).and_return({
       "cache-control" => "private, max-age=#{max_age}",
       "Date" => yesterday.httpdate
     })
@@ -106,7 +108,7 @@ describe "ApiOperatorCached" do
     max_age = 48*60*60
 
     http_response = stub_http_response
-    http_response.stub!(:header).and_return({
+    http_response.stub!(:headers).and_return({
       "cache-control" => "private, max-age=#{max_age}",
       "Date" => yesterday.httpdate
     })
@@ -118,10 +120,10 @@ describe "ApiOperatorCached" do
   it "response should be out of date if it is missing caching headers" do
 
     http_response = stub_http_response
-    http_response.stub!(:header).and_return({})
+    http_response.stub!(:headers).and_return({})
     @cached_operator.response_out_of_date?(http_response, Time.now.utc).should == true
 
-    http_response.stub!(:header).and_return({
+    http_response.stub!(:headers).and_return({
       "Date" => Time.now.utc.httpdate
     })
     @cached_operator.response_out_of_date?(http_response, Time.now.utc).should == true
@@ -131,7 +133,7 @@ describe "ApiOperatorCached" do
   it "response should be out of date if no max-age has been specified" do
 
     http_response = stub_http_response
-    http_response.stub!(:header).and_return({"cache-control" => "no-cache", "Date" => Time.now.utc.httpdate})
+    http_response.stub!(:headers).and_return({"cache-control" => "no-cache", "Date" => Time.now.utc.httpdate})
     @cached_operator.response_out_of_date?(http_response, Time.now.utc).should == true
 
   end
@@ -139,7 +141,7 @@ describe "ApiOperatorCached" do
   it "response should be out of date if it is missing Date header" do
 
     http_response = stub_http_response
-    http_response.stub!(:header).and_return({"cache-control" => "private, max-age=#{2**30}"})
+    http_response.stub!(:headers).and_return({"cache-control" => "private, max-age=#{2**30}"})
     @cached_operator.response_out_of_date?(http_response, Time.now.utc).should == true
     
   end

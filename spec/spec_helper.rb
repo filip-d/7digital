@@ -13,7 +13,7 @@ end
 
 =end
 
-require 'spec'
+require 'rspec'
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib sevendigital]))
 
@@ -21,7 +21,7 @@ require "peachy_spec_helper_patch"
 
 Peachy.whine
 
-Spec::Runner.configure do |config|
+Rspec.configure do |config|
   # == Mock Framework 
   #
   # RSpec uses it's own mocking framework by default. If you prefer to
