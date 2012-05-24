@@ -16,8 +16,22 @@ module Sevendigital
       return pager
     end
 
+    def from_xml_doc(xml_doc)
+      make_sure_eating_nokogiri_node(xml_doc)
+      return nil unless paging_info_available_xml?(xml_doc)
+      pager = Pager.new
+      pager.page = xml_doc.at_xpath("./page").content.to_i
+      pager.page_size = xml_doc.at_xpath("./pageSize").content.to_i
+      pager.total_items = xml_doc.at_xpath("./totalItems").content.to_i
+      pager
+    end
+
     def paging_info_available?(pager_proxy)
       pager_proxy.page && pager_proxy.page_size && pager_proxy.total_items
+    end
+
+    def paging_info_available_xml?(xml_doc)
+      xml_doc.at_xpath("./page") && xml_doc.at_xpath("./pageSize") && xml_doc.at_xpath("./totalItems")
     end
 
   end

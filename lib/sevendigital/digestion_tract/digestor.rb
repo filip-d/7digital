@@ -14,6 +14,11 @@ module Sevendigital
         return from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
       end
 
+      def from_xml_nokogiri(xml, element_name = default_element_name)
+        xml_doc = Nokogiri::XML(xml)
+        from_xml_doc(xml_doc.at_xpath("./#{element_name}"))
+      end
+
       def list_from_xml(xml_or_proxy, list_element_name = default_list_element_name)
         list_from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, list_element_name))
       end
@@ -27,6 +32,18 @@ module Sevendigital
         end
         paginate_results(object_list_proxy, list)
       end
+
+      def list_from_xml_nokogiri(xml, list_element_name = default_list_element_name)
+         xml_doc = Nokogiri::XML(xml)
+         list_from_xml_doc(xml_doc.at_xpath("./#{list_element_name}"))
+       end
+
+       def list_from_xml_doc(list_node)
+         make_sure_eating_nokogiri_node(list_node)
+         list = []
+         list_node.xpath("./#{default_element_name}").each { |node| list << from_xml_doc(node)}
+         paginate_results_nokogiri(list_node, list)
+       end
 
       #nested parsing for api methods that return standard object inside containers with no additional (useful) information
       #e.g. tagged_item.artist, recommendation.release, search_result.track, etc
@@ -52,8 +69,19 @@ module Sevendigital
         pager.paginate_list(list)
       end
 
-      def make_sure_not_eating_nil(proxy)
-        raise DigestiveProblem, "There's nothing i can digest" unless proxy
+      def paginate_results_nokogiri(xml_results, list)
+        pager = @api_client.pager_digestor.from_xml_doc(xml_results)
+        return list if !pager
+        pager.paginate_list(list)
+      end
+
+      def make_sure_not_eating_nil(xml)
+        raise DigestiveProblem, "There's nothing i can digest" unless xml
+      end
+
+      def make_sure_eating_nokogiri_node(xml)
+        raise DigestiveProblem, "There's nothing i can digest" unless xml
+        raise DigestiveProblem, "I'm not eating this! It's not a Nokogiri XML node.'" unless xml.kind_of?(Nokogiri::XML::Node)
       end
 
       def value_present?(proxy_node)
@@ -62,6 +90,10 @@ module Sevendigital
 
       def content_present?(proxy_node)
         !proxy_node.nil?
+      end
+
+      def get_optional_value(node, element_name)
+        node.at_xpath("./#{element_name}").content unless node.at_xpath("./#{element_name}").nil?
       end
 
   end

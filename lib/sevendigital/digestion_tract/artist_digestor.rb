@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module Sevendigital
 
   #@private
@@ -7,25 +9,29 @@ module Sevendigital
     def default_list_element_name; :artists end
 
     def from_proxy(artist_proxy)
-      make_sure_not_eating_nil(artist_proxy)
+      from_xml_nokogiri(artist_proxy.to_s)
+    end
+
+    def from_xml_doc(xml_doc)
+      make_sure_eating_nokogiri_node(xml_doc)
       artist = Artist.new(@api_client)
-      populate_required_properties(artist, artist_proxy)
-      populate_optional_properties(artist, artist_proxy)
-      return artist
+      populate_required_properties(artist, xml_doc)
+      populate_optional_properties(artist, xml_doc)
+      artist
     end
 
     private
     
-    def populate_required_properties(artist, artist_proxy)
-      artist.id = artist_proxy.id.to_i
-      artist.name = artist_proxy.name.value.to_s
+    def populate_required_properties(artist, artist_node)
+      artist.id = artist_node["id"].to_i
+      artist.name = artist_node.at_xpath("./name").content.to_s
     end
 
-    def populate_optional_properties(artist, artist_proxy)
-      artist.sort_name = artist_proxy.sort_name.value.to_s if artist_proxy.sort_name
-      artist.appears_as = artist_proxy.appears_as.value.to_s if artist_proxy.appears_as
-      artist.image = artist_proxy.image.value.to_s if artist_proxy.image
-      artist.url = artist_proxy.url.value.to_s if artist_proxy.url
+    def populate_optional_properties(artist, artist_node)
+      artist.sort_name =  get_optional_value(artist_node, :sortName)
+      artist.appears_as = get_optional_value(artist_node, :appearsAs)
+      artist.image = get_optional_value(artist_node, :image)
+      artist.url = get_optional_value(artist_node, :url)
     end
 
   end
