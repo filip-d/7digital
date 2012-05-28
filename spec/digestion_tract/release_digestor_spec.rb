@@ -16,7 +16,7 @@ describe "ReleaseDigestor" do
     </artist>
 XML
 
-    running {@release_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@release_digestor.from_xml_doc(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest release xml and populate minimum available properties" do
@@ -31,7 +31,7 @@ XML
     </release>
 XML
 
-    release = @release_digestor.from_xml(xml_response)
+    release = @release_digestor.from_xml_nokogiri(xml_response)
     release.id.should == 123
     release.title.should == "expected release title"
     release.artist.id.should == 345
@@ -43,7 +43,7 @@ XML
 
     xml_response = load_sample_object_xml("release")
 
-    release = @release_digestor.from_xml(xml_response)
+    release = @release_digestor.from_xml_nokogiri(xml_response)
 
     release.id.should == 155408
     release.title.should == "Dreams"

@@ -93,7 +93,21 @@ module Sevendigital
       end
 
       def get_optional_value(node, element_name)
-        node.at_xpath("./#{element_name}").content unless node.at_xpath("./#{element_name}").nil?
+        if node.at_xpath("./#{element_name}") then
+          content = node.at_xpath("./#{element_name}").content
+          return yield(content) if block_given?
+          return content
+        end
+        nil
+      end
+
+      def get_optional_node(node, element_name)
+        if node.at_xpath("./#{element_name}") then
+          subnode = node.at_xpath("./#{element_name}")
+          return yield(subnode) if block_given?
+          return subnode
+        end
+        nil
       end
 
   end
