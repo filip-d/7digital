@@ -78,7 +78,7 @@ XML
 
     xml_response = load_sample_object_xml("release_list")
 
-    releases = @release_digestor.list_from_xml(xml_response, :results)
+    releases = @release_digestor.list_from_xml_nokogiri(xml_response, :results)
     releases[0].id.should == 123
     releases[0].artist.id.should == 345
     releases[1].id.should == 456
