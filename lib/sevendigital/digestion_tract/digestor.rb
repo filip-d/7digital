@@ -11,16 +11,15 @@ module Sevendigital
       end
 
       def from_xml(xml_or_proxy, element_name = default_element_name)
-        return from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
+        from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
       end
 
       def from_xml_nokogiri(xml, element_name = default_element_name)
         xml_doc = Nokogiri::XML(xml)
+        puts xml_doc.inspect
+        puts "XML #{element_name}"
+        puts xml_doc.at_xpath("./#{element_name}").inspect
         from_xml_doc(xml_doc.at_xpath("./#{element_name}"))
-      end
-
-      def list_from_xml(xml_or_proxy, list_element_name = default_list_element_name)
-        list_from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, list_element_name))
       end
 
       def list_from_proxy(object_list_proxy)
@@ -33,7 +32,7 @@ module Sevendigital
         paginate_results(object_list_proxy, list)
       end
 
-      def list_from_xml_nokogiri(xml, list_element_name = default_list_element_name)
+      def list_from_xml_string(xml, list_element_name = default_list_element_name)
          xml_doc = Nokogiri::XML(xml)
          list_from_xml_doc(xml_doc.at_xpath("./#{list_element_name}"))
        end
@@ -92,6 +91,33 @@ module Sevendigital
         !proxy_node.nil?
       end
 
+      def get_required_value(node, element_name)
+        if node.at_xpath("./#{element_name}") then
+          content = node.at_xpath("./#{element_name}").content
+          return yield(content) if block_given?
+          return content
+        end
+        raise DigestiveProblem, "I need #{element_name} element to digest the response"
+      end
+
+      def get_required_node(node, element_name)
+        if node.at_xpath("./#{element_name}") then
+          subnode = node.at_xpath("./#{element_name}")
+          return yield(subnode) if block_given?
+          return subnode
+        end
+        raise DigestiveProblem, "I need #{element_name} element to digest the response"
+      end
+
+      def get_required_attribute(node, attribute_name)
+        if node.at_xpath("@#{attribute_name}") then
+          content = node.at_xpath("@#{attribute_name}").content
+          return yield(content) if block_given?
+          return content
+        end
+        raise DigestiveProblem, "I need #{attribute_name} attribute to digest the response"
+      end
+
       def get_optional_value(node, element_name)
         if node.at_xpath("./#{element_name}") then
           content = node.at_xpath("./#{element_name}").content
@@ -106,6 +132,15 @@ module Sevendigital
           subnode = node.at_xpath("./#{element_name}")
           return yield(subnode) if block_given?
           return subnode
+        end
+        nil
+      end
+
+      def get_optional_attribute(node, attribute_name)
+        if node.at_xpath("@#{attribute_name}") then
+          content = node.at_xpath("@#{attribute_name}").content
+          return yield(content) if block_given?
+          return content
         end
         nil
       end

@@ -5,13 +5,13 @@ module Sevendigital
 
     def default_element_name; :basket end
 
-    def from_proxy(basket_proxy)
-        make_sure_not_eating_nil (basket_proxy)
+    def from_xml_doc(xml_node)
+        make_sure_eating_nokogiri_node(xml_node)
         basket = Sevendigital::Basket.new(@api_client)
-        basket.id = basket_proxy.id.to_s
-        basket.basket_items = @api_client.basket_item_digestor.list_from_proxy(basket_proxy.basket_items)
+        basket.id = get_required_attribute(xml_node, "id")
+        basket.basket_items = get_required_node(xml_node, "basketItems") { |v| @api_client.basket_item_digestor.list_from_xml_doc(v) }
 
-        return basket
+        basket
     end
 
   end

@@ -47,7 +47,7 @@ XML
 
     xml_response = load_sample_object_xml("artist_list")
 
-    artists = @artist_digestor.list_from_xml_nokogiri(xml_response, :artists)
+    artists = @artist_digestor.list_from_xml_string(xml_response, :artists)
     artists[0].id.should == 14
     artists[1].id.should == 20
     artists[2].id.should == 106
@@ -60,7 +60,7 @@ XML
 
     xml_response = load_sample_object_xml("artist_list_empty")
 
-    artists = @artist_digestor.list_from_xml_nokogiri(xml_response, :artists)
+    artists = @artist_digestor.list_from_xml_string(xml_response, :artists)
     artists.size.should == 0
     artists.total_entries.should == 0
 
@@ -74,7 +74,7 @@ XML
     </release>
 XML
 
-    running {@artist_digestor.list_from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@artist_digestor.list_from_xml_string(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
 
   end
 

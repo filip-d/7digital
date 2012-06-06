@@ -16,14 +16,14 @@ describe "BasketItemDigestor" do
     </artist>
 XML
 
-    running {@basket_item_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@basket_item_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest basket item xml and populate all properties" do
 
     xml_response = load_sample_object_xml("basket_item")
 
-    basket_item = @basket_item_digestor.from_xml(xml_response)
+    basket_item = @basket_item_digestor.from_xml_nokogiri(xml_response)
     basket_item.id.should == 15284882
     basket_item.type.should == :track
     basket_item.item_name.should == "Test"
@@ -37,7 +37,7 @@ XML
 
     xml_response = load_sample_object_xml("basket_item_list")
 
-    basket_items = @basket_item_digestor.list_from_xml(xml_response)
+    basket_items = @basket_item_digestor.list_from_xml_string(xml_response)
     basket_items[0].id.should == 15284882
     basket_items[0].type.should == :track
     basket_items[1].id.should == 15284883
@@ -50,7 +50,7 @@ XML
 
     xml_response = load_sample_object_xml("basket_item_list_empty")
 
-    basket_items = @basket_item_digestor.list_from_xml(xml_response)
+    basket_items = @basket_item_digestor.list_from_xml_string(xml_response)
     basket_items.size.should == 0
 
   end

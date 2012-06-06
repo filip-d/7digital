@@ -16,14 +16,14 @@ describe "LockerReleaseDigestor" do
     </artist>
 XML
 
-    running {@locker_release_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@locker_release_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
    it "should digest locker release xml and populate all available properties" do
 
     xml_response = load_sample_object_xml("locker_release")
     
-    locker_release = @locker_release_digestor.from_xml(xml_response)
+    locker_release = @locker_release_digestor.from_xml_nokogiri(xml_response)
 
     locker_release.release.id.should == 302123
     locker_release.release.title.should == "Original Album Classics"
@@ -39,7 +39,7 @@ XML
 
     xml_response = load_sample_object_xml("locker_release_list")
 
-    locker_releases = @locker_release_digestor.list_from_xml(xml_response, :locker_releases)
+    locker_releases = @locker_release_digestor.list_from_xml_string(xml_response)
     locker_releases[0].release.id.should == 302123
     locker_releases[0].locker_tracks[0].track.id.should == 3544116
     locker_releases.size.should == 2
@@ -51,7 +51,7 @@ XML
 
     xml_response = load_sample_object_xml("locker_release_one_item_list")
 
-    locker_releases = @locker_release_digestor.list_from_xml(xml_response, :locker_releases)
+    locker_releases = @locker_release_digestor.list_from_xml_string(xml_response)
     locker_releases[0].release.id.should == 302123
     locker_releases[0].locker_tracks[0].track.id.should == 3544116
     locker_releases.size.should == 1
@@ -61,7 +61,7 @@ XML
 
     xml_response = load_sample_object_xml("locker_release_list_empty")
 
-    locker_releases = @locker_release_digestor.list_from_xml(xml_response, :locker_releases)
+    locker_releases = @locker_release_digestor.list_from_xml_string(xml_response)
     locker_releases.size.should == 0
     locker_releases.total_entries.should == 0
 

@@ -3,17 +3,20 @@ module Sevendigital
   #@private
   class DownloadUrlDigestor < Digestor # :nodoc:
 
-    def default_element_name; :download_url end
-    def default_list_element_name; :download_urls end
+    def default_element_name; :downloadUrl end
+    def default_list_element_name; :downloadUrls end
 
-    def from_proxy(download_url_proxy)
-        make_sure_not_eating_nil (download_url_proxy)
+    def from_xml_doc(xml_node)
+        make_sure_eating_nokogiri_node(xml_node)
+
         download_url = DownloadUrl.new()
-        download_url.url = download_url_proxy.url.value.to_s
-        download_url.format = @api_client.format_digestor.from_proxy(download_url_proxy.format)
 
-        return download_url
+        download_url.url = get_required_value(xml_node,"url")
+        download_url.format = get_required_node(xml_node, "format") {|v| @api_client.format_digestor.from_xml_doc(v)}
+
+        download_url
     end
+
 
   end
 

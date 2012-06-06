@@ -16,14 +16,14 @@ describe "LockerDigestor" do
 </zzz>
 XML
 
-    running {@locker_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@locker_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate all properties" do
 
     xml_response = load_sample_object_xml("locker")
 
-    locker = @locker_digestor.from_xml(xml_response)
+    locker = @locker_digestor.from_xml_nokogiri(xml_response)
     locker.locker_releases.size.should == 1
     locker.locker_releases[0].release.id.should == 302123
   end

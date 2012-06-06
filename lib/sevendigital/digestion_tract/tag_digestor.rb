@@ -6,16 +6,17 @@ module Sevendigital
     def default_element_name; :tag end
     def default_list_element_name; :tags end
     
-    def from_proxy(tag_proxy)
-      make_sure_not_eating_nil(tag_proxy)
+    def from_xml_doc(xml_node)
+      make_sure_eating_nokogiri_node(xml_node)
 
       tag = Tag.new()
-      tag.id = tag_proxy.id.to_s
-      tag.text = tag_proxy.text.value.to_s
-      tag.url = tag_proxy.url.value.to_s if value_present?(tag_proxy.url)
-      tag.count = tag_proxy.count_.value.to_i  if value_present?(tag_proxy.count_)
 
-      return tag
+      tag.id = get_required_attribute(xml_node, "id")
+      tag.text = get_required_value(xml_node, "text")
+      tag.url = get_optional_value(xml_node, "url")
+      tag.count = get_optional_value(xml_node, "count") {|v| v.to_i}
+
+      tag
     end
 
   end

@@ -7,19 +7,22 @@ module Sevendigital
     def default_element_name; :price end
     def default_list_element_name; nil end
   
-    def from_proxy(price_proxy)
-        make_sure_not_eating_nil(price_proxy)
-        price = Sevendigital::Price.new()
-        price.currency_code = price_proxy.currency.code.to_s.upcase.to_sym
-        price.currency_symbol= price_proxy.currency.value
-        price.value= price_proxy.value.value.to_f if !price_proxy.value.value.to_s.empty?
-        price.formatted_price= price_proxy.formatted_price.value
-        price.rrp= price_proxy.rrp.value.to_f if price_proxy.rrp
-        price.formatted_rrp= price_proxy.formatted_rrp.value if price_proxy.formatted_rrp
-        price.on_sale = price_proxy.on_sale.value.to_s.downcase == "true" if price_proxy.on_sale
-
-        return price
+    def from_xml_doc(xml_node)
+      make_sure_eating_nokogiri_node(xml_node)
+      price = Sevendigital::Price.new()
+      get_required_node(xml_node, "currency") do |c|
+        price.currency_code = get_required_attribute(c, "code") {|v| v.upcase.to_sym}
       end
+      price.currency_symbol = get_required_value(xml_node, "currency")
+      price.value = get_required_value(xml_node,"value") {|v| v.to_f unless v.empty?}
+      price.formatted_price = get_required_value(xml_node,"formattedPrice")
+      price.rrp = get_optional_value(xml_node,"rrp") {|v| v.to_f unless v.empty?}
+      price.formatted_rrp = get_optional_value(xml_node,"formattedRrp")
+      price.on_sale = get_optional_value(xml_node,"onSale") {|v| v.downcase == "true"}
+
+      price
+    end
+
 
     end
 

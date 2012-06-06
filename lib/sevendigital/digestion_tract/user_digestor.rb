@@ -4,16 +4,17 @@ module Sevendigital
   class UserDigestor < Digestor # :nodoc:
 
     def default_element_name; :user end
-    
-    def from_proxy(user_proxy)
-      make_sure_not_eating_nil(user_proxy)
+
+    def from_xml_doc(xml_node)
+      make_sure_eating_nokogiri_node(xml_node)
 
       user = User.new(@api_client)
-      user.id = user_proxy.id.to_s  if !user_proxy.nil?
-      user.type = user_proxy.type.value.to_sym
-      user.email_address = user_proxy.email_address.value.to_s if value_present?(user_proxy.email_address)
 
-      return user
+      user.id = get_optional_attribute(xml_node, "id")
+      user.type = get_required_value(xml_node, "type").to_sym
+      user.email_address = get_optional_value(xml_node, "emailAddress")
+
+      user
     end
 
   end

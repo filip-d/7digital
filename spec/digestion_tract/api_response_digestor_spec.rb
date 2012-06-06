@@ -49,20 +49,17 @@ describe "ApiResponseDigestor" do
 
   it "should create a response with body from xml ok response" do
 
-    xml_response = <<XML
-    <response status="ok"><test>aaa</test></response>
-XML
-    response = @api_response_digestor.from_xml(xml_response)
+    xml_response = "<response status=\"ok\">body</response>"
+    response = @api_response_digestor.from_xml_nokogiri(xml_response)
     response.error_code.should == 0
-    response.content.test.should_not == nil
-    response.content.nothing.should == nil
+    response.content.to_s.should == xml_response
   end
 
 
   it "should create a response with error details from xml error response" do
 
     xml_response = '<response status="error"><error code="1000"><errorMessage>expected error message</errorMessage></error></response>'
-    response = @api_response_digestor.from_xml(xml_response)
+    response = @api_response_digestor.from_xml_nokogiri(xml_response)
     response.error_code.should == 1000
     response.error_message.should == 'expected error message'
   end
@@ -70,12 +67,12 @@ XML
   it "should create a response with error details from invalid xml response" do
 
     xml_response = '<wrongresponse status="ok"><test /></wrongresponse>'
-    response = @api_response_digestor.from_xml(xml_response)
+    response = @api_response_digestor.from_xml_nokogiri(xml_response)
     response.error_code.should == 10000
     response.error_message.should == 'Invalid 7digital API response'
 
     xml_response = '<response><test /></response>'
-    response = @api_response_digestor.from_xml(xml_response)
+    response = @api_response_digestor.from_xml_nokogiri(xml_response)
     response.error_code.should == 10000
     response.error_message.should == 'Invalid 7digital API response'
   end
@@ -84,7 +81,7 @@ XML
     it "should create a response with error details from valid xml response with invalid status" do
 
     xml_response = '<response status="unkown"><test></test></response>'
-    response = @api_response_digestor.from_xml(xml_response)
+    response = @api_response_digestor.from_xml_nokogiri(xml_response)
     response.error_code.should == 10000
     response.error_message.should == 'Invalid 7digital API response'
   end

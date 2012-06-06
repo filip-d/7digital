@@ -16,14 +16,14 @@ describe "LockerTrackDigestor" do
     </artist>
 XML
 
-    running {@locker_track_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@locker_track_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
    it "should digest locker track xml and populate all available properties" do
 
     xml_response = load_sample_object_xml("locker_track")
     
-    locker_track = @locker_track_digestor.from_xml(xml_response)
+    locker_track = @locker_track_digestor.from_xml_nokogiri(xml_response)
 
     locker_track.track.id.should == 3544116
     locker_track.track.title.should == "Gloria"
@@ -38,7 +38,7 @@ XML
 
     xml_response = load_sample_object_xml("locker_track_list")
 
-    locker_tracks = @locker_track_digestor.list_from_xml(xml_response, :locker_tracks)
+    locker_tracks = @locker_track_digestor.list_from_xml_string(xml_response)
     locker_tracks[0].track.id.should == 3544116
     locker_tracks[0].download_urls[0].url.should == "http://media3.7digital.com/media/user/downloadtrack?"
     locker_tracks.size.should == 1
@@ -48,7 +48,7 @@ XML
 
     xml_response = load_sample_object_xml("locker_track_list_empty")
 
-    locker_tracks = @locker_track_digestor.list_from_xml(xml_response, :locker_tracks)
+    locker_tracks = @locker_track_digestor.list_from_xml_string(xml_response)
     locker_tracks.size.should == 0
 
   end

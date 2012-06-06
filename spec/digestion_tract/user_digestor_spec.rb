@@ -15,7 +15,7 @@ describe "UserDigestor" do
      </xxx>
 XML
 
-    running {@user_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@user_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate minimum available properties" do
@@ -26,7 +26,7 @@ XML
 </user>
 XML
 
-    user = @user_digestor.from_xml(xml_response)
+    user = @user_digestor.from_xml_nokogiri(xml_response)
     user.type.should == :"7digital"
     
   end
@@ -35,7 +35,7 @@ XML
 
     xml_response = load_sample_object_xml("user")
 
-    user = @user_digestor.from_xml(xml_response)
+    user = @user_digestor.from_xml_nokogiri(xml_response)
     user.id.should == "123456"
     user.type.should == :"7digital"
     user.email_address.should == "user@example.com"

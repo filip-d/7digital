@@ -3,42 +3,53 @@ module Sevendigital
   #@private
   class ApiResponseDigestor < Digestor # :nodoc:
 
-    def from_xml(xml_or_proxy, element_name = :response)
-      return from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
-    end
+    def default_element_name; :response end
 
-    def from_proxy(proxy)
-      if proxy && proxy.status then
-        return from_ok_response(proxy)  if proxy.status == 'ok'
-        return from_error_response(proxy.error) if proxy.status == 'error' && proxy.error
-      end
-      return from_invalid_xml
+    def from_xml_doc(xml_node)
+      return from_invalid_xml unless xml_node
+
+      status = get_optional_attribute(xml_node, "status")
+
+      return from_ok_response(xml_node)  if status == 'ok'
+
+      return from_error_response(xml_node) if status == 'error'
+
+      from_invalid_xml
     end
 
     def from_invalid_xml
       response = ApiResponse.new
+
       response.error_code = 10000
       response.error_message = 'Invalid 7digital API response'
-      return response
+
+      response
     end
 
-    def from_error_response(error)
+    def from_error_response(xml_node)
+
+      error_node = get_required_node(xml_node, "error")
+
       response = ApiResponse.new
-      response.error_code = error.code.to_i
-      response.error_message = error.error_message.value.to_s
-      return response
+
+      response.error_code = get_required_attribute(error_node, "code").to_i
+      response.error_message = get_required_value(error_node, "errorMessage")
+
+      response
     end
 
     def from_ok_response(response_content)
       response = ApiResponse.new
+
       response.error_code = 0
       response.content = response_content
-      return response
+
+      response
     end
 
     def from_http_response(http_response)
       if http_response.is_a?(Net::HTTPSuccess) then
-        response = from_xml(http_response.body.to_s)
+        response = from_xml_nokogiri(http_response.body.to_s)
       else
         response = from_invalid_http_response(http_response)
       end
@@ -48,9 +59,11 @@ module Sevendigital
 
     def from_invalid_http_response(http_response)
       response = ApiResponse.new
+
       response.error_code = Integer(http_response.code)
       response.error_message= http_response.body.to_s
-      return response
+
+      response
     end
   
   end

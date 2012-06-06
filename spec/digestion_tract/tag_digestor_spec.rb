@@ -15,7 +15,7 @@ describe "TagDigestor" do
      </xxx>
 XML
 
-    running {@tag_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@tag_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate minimum available properties" do
@@ -26,7 +26,7 @@ XML
 </tag>
 XML
 
-    tag = @tag_digestor.from_xml(xml_response)
+    tag = @tag_digestor.from_xml_nokogiri(xml_response)
     tag.id.should == 'rock'
     tag.text.should == "ROCK"
     
@@ -36,7 +36,7 @@ XML
 
     xml_response = load_sample_object_xml("tag")
 
-    tag = @tag_digestor.from_xml(xml_response)
+    tag = @tag_digestor.from_xml_nokogiri(xml_response)
     tag.id.should == "pop"
     tag.text.should == "pop"
     tag.url.should == "http://www.7digital.com/tags/pop?partner=123"

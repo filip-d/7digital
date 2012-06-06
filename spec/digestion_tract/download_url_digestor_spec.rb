@@ -16,7 +16,7 @@ describe "DownloadUrlDigestor" do
 </zzz>
 XML
 
-    running {@download_url_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@download_url_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate all properties" do
@@ -32,7 +32,7 @@ XML
 </downloadUrl>
 XML
 
-    download_url = @download_url_digestor.from_xml(xml_response)
+    download_url = @download_url_digestor.from_xml_nokogiri(xml_response)
     download_url.url.should == "http://media3.7digital.com/media/user/downloadtrack?"
     download_url.format.id.should == 17
     download_url.format.file_format.should == :MP3

@@ -15,7 +15,7 @@ describe "PriceDigestor" do
      </xxx>
 XML
 
-    running {@price_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@price_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate minimum available properties" do
@@ -29,7 +29,7 @@ XML
 </price>
 XML
 
-    price = @price_digestor.from_xml(xml_response)
+    price = @price_digestor.from_xml_nokogiri(xml_response)
     price.currency_code.should == :GBP
     price.currency_symbol.should == "£"
     price.value.should == 1.79
@@ -48,7 +48,7 @@ XML
 </price>
 XML
 
-    price = @price_digestor.from_xml(xml_response)
+    price = @price_digestor.from_xml_nokogiri(xml_response)
     price.currency_code.should == :GBP
     price.currency_symbol.should == "£"
     price.value.should == nil
@@ -60,7 +60,7 @@ XML
 
     xml_response = load_sample_object_xml("price")
 
-    price = @price_digestor.from_xml(xml_response)
+    price = @price_digestor.from_xml_nokogiri(xml_response)
     price.currency_code.should == :GBP
     price.currency_symbol.should == "£"
     price.value.should == 1.79

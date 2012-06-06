@@ -14,13 +14,13 @@ describe "ChartItemDigestor" do
     </release>
 XML
 
-    running {@chart_item_digestor.from_xml(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@chart_item_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest artist chart item" do
     xml_response = load_sample_object_xml("artist_chart_item")
 
-    chart_item = @chart_item_digestor.from_xml(xml_response)
+    chart_item = @chart_item_digestor.from_xml_nokogiri(xml_response)
     chart_item.position.should == 2
     chart_item.change.should == :up
     chart_item.item.id.should == 33154
@@ -31,7 +31,7 @@ XML
   it "should digest release chart item" do
     xml_response = load_sample_object_xml("release_chart_item")
 
-    chart_item = @chart_item_digestor.from_xml(xml_response)
+    chart_item = @chart_item_digestor.from_xml_nokogiri(xml_response)
     chart_item.position.should == 1
     chart_item.change.should == :up
     chart_item.item.id.should == 932151
@@ -42,7 +42,7 @@ XML
 
     xml_response = load_sample_object_xml("track_chart_item")
 
-    chart_item = @chart_item_digestor.from_xml(xml_response)
+    chart_item = @chart_item_digestor.from_xml_nokogiri(xml_response)
     chart_item.position.should == 99
     chart_item.change.should == :down
     chart_item.item.id.should == 2825304
