@@ -17,8 +17,8 @@ describe "OAuthManager" do
     digestor = mock(Sevendigital::OAuthRequestTokenDigestor)
     @client.stub!(:oauth_request_token_digestor).and_return(digestor)
     
-    digestor.should_receive(:from_xml) \
-      .with(an_api_response.content.oauth_request_token, :oauth_request_token) \
+    digestor.should_receive(:from_xml_doc) \
+      .with(an_api_response.item_xml("oauth_request_token"), :oauth_request_token) \
       .and_return(fake_token)
 
     @client.should_receive(:make_signed_api_request) \
@@ -39,8 +39,8 @@ describe "OAuthManager" do
     digestor = mock(Sevendigital::OAuthAccessTokenDigestor)
     @client.stub!(:oauth_access_token_digestor).and_return(digestor)
 
-    digestor.should_receive(:from_xml) \
-      .with(an_api_response.content.oauth_access_token, :oauth_access_token) \
+    digestor.should_receive(:from_xml_doc) \
+      .with(an_api_response.item_xml("oauth_access_token"), :oauth_access_token) \
       .and_return(fake_token)
 
     @client.should_receive(:make_signed_api_request) \

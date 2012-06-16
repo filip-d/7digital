@@ -15,7 +15,7 @@ describe "UserCardManager" do
     options = {:pagesize => 20 }
 
     mock_client_digestor(@client, :user_card_digestor) \
-          .should_receive(:list_from_xml).with(an_api_response.content.cards).and_return(a_card_list)
+          .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("cards")).and_return(a_card_list)
 
     @client.should_receive(:make_signed_api_request) \
               .with(:GET, "user/payment/card", {}, options, a_token) \
@@ -41,7 +41,7 @@ describe "UserCardManager" do
     options = {:pagesize => 20 }
 
     mock_client_digestor(@client, :user_card_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.card).and_return(a_card)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("card")).and_return(a_card)
 
     @client.should_receive(:make_signed_api_request) \
               .with(:POST, "user/payment/card/add", {

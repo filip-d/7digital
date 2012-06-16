@@ -18,7 +18,7 @@ describe "ReleaseManager" do
     a_release = Sevendigital::Release.new(@client)
 
     mock_client_digestor(@client, :release_digestor) \
-      .should_receive(:from_xml).with(api_response.content.release).and_return(a_release)
+      .should_receive(:from_xml_doc).with(api_response.item_xml("release")).and_return(a_release)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "release/details", {:releaseId => expected_release_id}, {}) \
@@ -35,7 +35,7 @@ describe "ReleaseManager" do
     a_track_list = []
 
     mock_client_digestor(@client, :track_digestor) \
-      .should_receive(:list_from_xml).with(api_response.content.tracks).and_return(a_track_list)
+      .should_receive(:list_from_xml_doc).with(api_response.item_xml("tracks")).and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "release/tracks", {:releaseId=>a_release_id}, expected_options) \
@@ -53,7 +53,7 @@ describe "ReleaseManager" do
     a_track_list = []
 
     mock_client_digestor(@client, :track_digestor) \
-      .should_receive(:list_from_xml).with(api_response.content.tracks).and_return(a_track_list)
+      .should_receive(:list_from_xml_doc).with(api_response.item_xml("tracks")).and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "release/tracks", {:releaseId => a_release_id}, {:page_size => 100}) \
@@ -71,7 +71,7 @@ describe "ReleaseManager" do
     a_chart = []
 
     mock_client_digestor(@client, :chart_item_digestor) \
-        .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
+        .should_receive(:list_from_xml_doc).with(api_response.item_xml("chart")).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "release/chart", {}, {}) \
@@ -89,7 +89,7 @@ describe "ReleaseManager" do
     a_release_list = []
 
     mock_client_digestor(@client, :release_digestor) \
-      .should_receive(:list_from_xml).with(api_response.content.releases).and_return(a_release_list)
+      .should_receive(:list_from_xml_doc).with(api_response.item_xml("releases")).and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
          .with(:GET, "release/byDate", {:fromDate => from_date.strftime("%Y%m%d"), :toDate => to_date.strftime("%Y%m%d")}, {}) \
@@ -106,7 +106,7 @@ describe "ReleaseManager" do
     a_release_list = []
 
     mock_client_digestor(@client, :release_digestor) \
-      .should_receive(:list_from_xml).with(api_response.content.releases).and_return(a_release_list)
+      .should_receive(:list_from_xml_doc).with(api_response.item_xml("releases")).and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
          .with(:GET, "release/byDate", {}, {}) \
@@ -124,8 +124,8 @@ describe "ReleaseManager" do
     a_release_list = []
 
     mock_client_digestor(@client, :release_digestor) \
-      .should_receive(:nested_list_from_xml) \
-      .with(api_response.content.recommendations, :recommended_item, :recommendations) \
+      .should_receive(:nested_list_from_xml_doc) \
+      .with(api_response.item_xml("recommendations"), :recommendedItem, :release) \
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
@@ -144,8 +144,8 @@ describe "ReleaseManager" do
     a_release_list = []
 
     mock_client_digestor(@client, :release_digestor) \
-      .should_receive(:nested_list_from_xml) \
-      .with(api_response.content.tagged_results, :tagged_item, :tagged_results) \
+      .should_receive(:nested_list_from_xml_doc) \
+      .with(api_response.item_xml("taggedResults"), :taggedItem, :release) \
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
@@ -164,8 +164,8 @@ describe "ReleaseManager" do
       a_release_list = []
 
       mock_client_digestor(@client, :release_digestor) \
-        .should_receive(:nested_list_from_xml) \
-        .with(api_response.content.search_results, :search_result, :search_results) \
+        .should_receive(:nested_list_from_xml_doc) \
+        .with(api_response.item_xml("searchResults"), :searchResult, :release) \
         .and_return(a_release_list)
 
       @client.should_receive(:make_api_request) \
@@ -184,7 +184,7 @@ describe "ReleaseManager" do
     a_tag_list = []
 
     mock_client_digestor(@client, :tag_digestor) \
-      .should_receive(:list_from_xml).with(api_response.content.tags).and_return(a_tag_list)
+      .should_receive(:list_from_xml_doc).with(api_response.item_xml("tags")).and_return(a_tag_list)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "release/tags", {:releaseId=>a_release_id}, expected_options) \

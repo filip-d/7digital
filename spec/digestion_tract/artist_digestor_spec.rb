@@ -14,7 +14,7 @@ describe "ArtistDigestor" do
     </release>
 XML
 
-    running {@artist_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@artist_digestor.from_xml_string(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
 
   end
 
@@ -26,7 +26,7 @@ XML
     </artist>
 XML
 
-    artist = @artist_digestor.from_xml_nokogiri(xml_response)
+    artist = @artist_digestor.from_xml_string(xml_response)
     artist.id.should == 123
     artist.name.should == "expected artist name"
   end
@@ -34,7 +34,7 @@ XML
    it "should digest artist xml and populate all available properties" do
 
     xml_response = load_sample_object_xml("artist")
-    artist = @artist_digestor.from_xml_nokogiri(xml_response)
+    artist = @artist_digestor.from_xml_string(xml_response)
     artist.id.should == 123
     artist.name.should == "The Expected Artist"
     artist.sort_name.should == "Expected Artist, The"

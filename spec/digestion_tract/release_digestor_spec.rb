@@ -31,7 +31,7 @@ XML
     </release>
 XML
 
-    release = @release_digestor.from_xml_nokogiri(xml_response)
+    release = @release_digestor.from_xml_string(xml_response)
     release.id.should == 123
     release.title.should == "expected release title"
     release.artist.id.should == 345
@@ -43,7 +43,7 @@ XML
 
     xml_response = load_sample_object_xml("release")
 
-    release = @release_digestor.from_xml_nokogiri(xml_response)
+    release = @release_digestor.from_xml_string(xml_response)
 
     release.id.should == 155408
     release.title.should == "Dreams"
@@ -95,6 +95,20 @@ XML
     releases = @release_digestor.list_from_xml_string(xml_response, :results)
     releases.size.should == 0
     releases.total_entries.should == 0
+
+  end
+
+  it "should digest xml containing nested list of releases and return a paginated array" do
+
+    xml_response = load_sample_object_xml("nested_release_list")
+
+    releases = @release_digestor.nested_list_from_xml_string(xml_response, :results, :result)
+    releases[0].id.should == 123
+    releases[0].artist.id.should == 345
+    releases[1].id.should == 456
+    releases[1].artist.id.should == 789
+    releases.size.should == 2
+    releases.total_entries.should == 50
 
   end
 

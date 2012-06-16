@@ -11,10 +11,10 @@ describe "ArtistManager" do
   it "get_details should call artist/details api method and return digested artist" do
     an_artist_id = 123
     an_artist = Sevendigital::Artist.new(@client)
-    an_api_response = fake_api_response("release/details")
+    an_api_response = fake_api_response("artist/details")
 
     mock_client_digestor(@client, :artist_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.artist).and_return(an_artist)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("artist")).and_return(an_artist)
 
     @client.should_receive(:make_api_request) \
             .with(:GET, "artist/details", {:artistId => an_artist_id}, {}) \
@@ -30,7 +30,7 @@ describe "ArtistManager" do
     an_api_response = fake_api_response("artist/releases")
 
     mock_client_digestor(@client, :release_digestor) \
-         .should_receive(:list_from_xml).with(an_api_response.content.releases).and_return(a_list_of_releases)
+         .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("releases")).and_return(a_list_of_releases)
 
     @client.should_receive(:make_api_request) \
             .with(:GET, "artist/releases", {:artistId => an_artist_id}, {}) \
@@ -46,7 +46,7 @@ describe "ArtistManager" do
     an_api_response = fake_api_response("artist/toptracks")
     
     mock_client_digestor(@client, :track_digestor) \
-        .should_receive(:list_from_xml).with(an_api_response.content.tracks).and_return(a_top_tracks_list)
+        .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("tracks")).and_return(a_top_tracks_list)
 
     @client.should_receive(:make_api_request) \
             .with(:GET, "artist/topTracks", {:artistId => an_artist_id}, {}) \
@@ -63,7 +63,7 @@ describe "ArtistManager" do
     an_api_response = fake_api_response("artist/similar")
 
     mock_client_digestor(@client, :artist_digestor) \
-        .should_receive(:list_from_xml).with(an_api_response.content.artists).and_return(a_similar_artists_list)
+        .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("artists")).and_return(a_similar_artists_list)
 
     @client.should_receive(:make_api_request) \
             .with(:GET, "artist/similar", {:artistId => an_artist_id}, {}) \
@@ -81,8 +81,8 @@ describe "ArtistManager" do
     a_release_list = []
 
     mock_client_digestor(@client, :artist_digestor) \
-      .should_receive(:nested_list_from_xml) \
-      .with(an_api_response.content.tagged_results, :tagged_item, :tagged_results) \
+      .should_receive(:nested_list_from_xml_doc) \
+      .with(an_api_response.item_xml("taggedResults"), :taggedItem, :artist) \
       .and_return(a_release_list)
 
     @client.should_receive(:make_api_request) \
@@ -94,6 +94,27 @@ describe "ArtistManager" do
 
   end
 
+  it "search should call artist/search api method and digest the nested artist list from response" do
+
+    query = "radiohead"
+    api_response = fake_api_response("artist/search")
+    an_artist_list = []
+
+    mock_client_digestor(@client, :artist_digestor) \
+        .should_receive(:nested_list_from_xml_doc) \
+        .with(api_response.item_xml("searchResults"), :searchResult, :artist) \
+        .and_return(an_artist_list)
+
+    @client.should_receive(:make_api_request) \
+           .with(:GET, "artist/search", {:q => query}, {}) \
+           .and_return(api_response)
+
+    artists = @artist_manager.search(query)
+    artists.should == an_artist_list
+
+  end
+
+
   it "browse should call artist/browse api method and digest the artist list from response" do
 
     letter = "ra"
@@ -101,8 +122,8 @@ describe "ArtistManager" do
     an_artist_list = []
 
     mock_client_digestor(@client, :artist_digestor) \
-      .should_receive(:list_from_xml) \
-      .with(an_api_response.content.artists) \
+      .should_receive(:list_from_xml_doc) \
+      .with(an_api_response.item_xml("artists")) \
       .and_return(an_artist_list)
 
     @client.should_receive(:make_api_request) \
@@ -121,7 +142,7 @@ describe "ArtistManager" do
     a_chart = [Sevendigital::ChartItem.new(@client)]
 
     mock_client_digestor(@client, :chart_item_digestor) \
-        .should_receive(:list_from_xml).with(api_response.content.chart).and_return(a_chart)
+        .should_receive(:list_from_xml_doc).with(api_response.item_xml("chart")).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "artist/chart", {}, {}) \
@@ -139,7 +160,7 @@ describe "ArtistManager" do
     options = {:page => 1}
 
     mock_client_digestor(@client, :tag_digestor) \
-         .should_receive(:list_from_xml).with(an_api_response.content.tags).and_return(a_list_of_tags)
+         .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("tags")).and_return(a_list_of_tags)
 
     @client.should_receive(:make_api_request) \
             .with(:GET, "artist/tags", {:artistId => an_artist_id}, options) \

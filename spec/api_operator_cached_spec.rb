@@ -152,8 +152,7 @@ describe "ApiOperatorCached" do
   end
   
   def stub_http_response
-    http_response = stub(Net::HTTP)
-    http_response
+    stub(Net::HTTP)
   end
   
   def stub_time(time)

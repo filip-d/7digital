@@ -18,7 +18,7 @@ describe "TrackManager" do
     a_track = Sevendigital::Track.new(@client)
 
     mock_client_digestor(@client, :track_digestor) \
-      .should_receive(:from_xml).with(an_api_response.content.track).and_return(a_track)
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("track")).and_return(a_track)
 
     @client.should_receive(:make_api_request) \
                  .with(:GET, "track/details", {:trackId => a_track_id}, {}) \
@@ -54,7 +54,7 @@ describe "TrackManager" do
     a_chart = []
 
     mock_client_digestor(@client, :chart_item_digestor) \
-        .should_receive(:list_from_xml).with(an_api_response.content.chart).and_return(a_chart)
+        .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("chart")).and_return(a_chart)
 
     @client.should_receive(:make_api_request) \
                    .with(:GET, "track/chart", {}, {}) \
@@ -90,8 +90,8 @@ describe "TrackManager" do
     a_track_list = [Sevendigital::Track.new(@client)]
 
     mock_client_digestor(@client, :track_digestor) \
-      .should_receive(:nested_list_from_xml) \
-      .with(an_api_response.content.search_results, :search_result, :search_results) \
+      .should_receive(:nested_list_from_xml_doc) \
+      .with(an_api_response.item_xml("searchResults"), :searchResult, :track) \
       .and_return(a_track_list)
 
     @client.should_receive(:make_api_request) \

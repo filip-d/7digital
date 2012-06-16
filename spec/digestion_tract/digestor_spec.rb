@@ -28,7 +28,7 @@ describe "Digestor" do
     result = @digestor.get_optional_value(Nokogiri::XML(xml), "release") {|v| v.to_i}
     result.should == 123
 
- end
+  end
 
 
 end

@@ -20,14 +20,14 @@ module Sevendigital
     def sign_up(email, password, options={})
       api_response = @api_client.make_signed_api_request(:POST, "user/signUp", \
         {:emailAddress => email, :password=> password}, options)
-      user = @api_client.user_digestor.from_xml(api_response.content.user)
+      user = @api_client.user_digestor.from_xml_doc(api_response.item_xml("user"))
       user.oauth_access_token = authenticate(email, password).oauth_access_token
       user
     end
 
     def get_locker(token, options={})
       api_response = @api_client.make_signed_api_request(:GET, "user/locker", {}, options, token)
-      @locker = @api_client.locker_digestor.from_xml(api_response.content.locker)
+      @locker = @api_client.locker_digestor.from_xml_doc(api_response.item_xml("locker"))
     end
 
     # <b>DEPRECATED:</b> Please use <tt>purchase_item</tt> instead.
@@ -39,13 +39,13 @@ module Sevendigital
     def purchase_item(release_id, track_id, price, token, options={})
       api_response = @api_client.make_signed_api_request(:GET, "user/purchase/item", \
         {:releaseId => release_id, :trackId => track_id, :price => price}, options, token)
-      @api_client.locker_digestor.from_xml(api_response.content.purchase)
+      @api_client.locker_digestor.from_xml_doc(api_response.item_xml("purchase"))
     end
 
     def purchase_basket(basket_id, token, options={})
       api_response = @api_client.make_signed_api_request(:GET, "user/purchase/basket", \
         {:basketId => basket_id}, options, token)
-      @api_client.locker_digestor.from_xml(api_response.content.purchase)
+      @api_client.locker_digestor.from_xml_doc(api_response.item_xml("purchase"))
     end
 
     def get_stream_track_url(release_id, track_id, token, options={})

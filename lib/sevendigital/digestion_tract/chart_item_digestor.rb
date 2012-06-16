@@ -8,7 +8,7 @@ module Sevendigital
     
     def from_proxy(chart_item_proxy)
       
-      from_xml_nokogiri(chart_item_proxy.to_s)
+      from_xml_string(chart_item_proxy.to_s)
 
     end
 

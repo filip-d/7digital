@@ -2,24 +2,17 @@
 #$: << 'spec'
 
 =begin
-
 require 'simplecov'
-
 SimpleCov.start do
   add_group 'Management', 'lib/sevendigital/management'
   add_group 'Digestion', 'lib/sevendigital/digestion_tract'
   add_group 'Model', 'lib/sevendigital/model'
 end
-
 =end
 
 require 'rspec'
 require File.expand_path(
     File.join(File.dirname(__FILE__), %w[.. lib sevendigital]))
-
-require "peachy_spec_helper_patch"
-
-Peachy.whine
 
 Rspec.configure do |config|
   # == Mock Framework 
@@ -34,6 +27,8 @@ end
 
   alias running lambda
 
+  VALID_7DIGITAL_URL = /http\:\/\/.+7digital\..+partner=[\d]+/
+
   def load_sample_method_xml(method_name)
     method_name = "test-xml/methods/" + method_name + ".xml"
       IO.read( File.join(File.dirname(__FILE__), method_name.split('/')))
@@ -45,11 +40,15 @@ end
   end
 
   def fake_api_response(method_name)
-    Sevendigital::ApiResponseDigestor.new(nil).from_xml(load_sample_method_xml(method_name))
+    response = Sevendigital::ApiResponse.new
+    response.content = load_sample_method_xml(method_name)
+    response.stub(:ok?).and_return true
+#    Sevendigital::ApiResponseDigestor.new(nil).from_xml_string(load_sample_method_xml(method_name))
+  response
   end
 
   def fake_api_error_response(code)
-    Sevendigital::ApiResponseDigestor.new(nil).from_xml("<response status=\"error\"><error code=\"#{code}\"></error></response>")
+    Sevendigital::ApiResponseDigestor.new(nil).from_xml_string("<response status=\"error\"><error code=\"#{code}\"></error></response>")
   end
 
   def mock_client_digestor(client, digestor_class)

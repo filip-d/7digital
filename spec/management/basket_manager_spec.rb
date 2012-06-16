@@ -14,7 +14,7 @@ describe "BasketManager" do
     an_api_response = fake_api_response("basket/index")
 
     mock_client_digestor(@client, :basket_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("basket")).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
               .with(:GET, "basket", {:basketId => a_basket_id}, {}) \
@@ -29,7 +29,7 @@ describe "BasketManager" do
     an_api_response = fake_api_response("basket/create")
 
     mock_client_digestor(@client, :basket_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("basket")).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
               .with(:GET, "basket/create", {}, {}) \
@@ -47,7 +47,7 @@ describe "BasketManager" do
     an_api_response = fake_api_response("basket/additem")
 
     mock_client_digestor(@client, :basket_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("basket")).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
       .with(:GET, "basket/addItem", {:basketId => a_basket_id, :releaseId => a_release_id, :trackId => a_track_id}, {}) \
@@ -64,7 +64,7 @@ describe "BasketManager" do
     an_api_response = fake_api_response("basket/removeitem")
 
     mock_client_digestor(@client, :basket_digestor) \
-          .should_receive(:from_xml).with(an_api_response.content.basket).and_return(a_basket)
+          .should_receive(:from_xml_doc).with(an_api_response.item_xml("basket")).and_return(a_basket)
 
     @client.should_receive(:make_api_request) \
               .with(:GET, "basket/removeItem", {:basketId => a_basket_id, :itemId => an_item_id}, {}) \

@@ -7,17 +7,25 @@ module Sevendigital
 
     #True if no API error has been returned
     def ok?
-      return (@error_code == 0 && !@content.nil?)
+      (@error_code == 0 && !@content.nil?)
+    end
+
+    def content_xml
+      puts @content
+      @content_xml ||= Nokogiri::XML(@content)
+    end
+
+    def item_xml(element_name)
+      content_xml.at_xpath("./response/#{element_name}")
     end
 
     def _dump(depth)
-      Marshal.dump([@error_code, @error_message, @headers, @content.to_s])
+      Marshal.dump([@error_code, @error_message, @headers, @content])
     end
     
     def self._load(properties)
       response = ApiResponse.new
-      response.error_code, response.error_message, response.headers, content_xml = Marshal.load(properties)
-      response.content = Peachy::Proxy.new(content_xml).response
+      response.error_code, response.error_message, response.headers, response.content = Marshal.load(properties)
       response
     end
 

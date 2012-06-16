@@ -16,7 +16,7 @@ describe "FormatDigestor" do
 </zzz>
 XML
 
-    running {@format_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@format_digestor.from_xml_string(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should parse from xml and populate all properties" do
@@ -29,7 +29,7 @@ XML
 </format>
 XML
 
-    format = @format_digestor.from_xml_nokogiri(xml_response)
+    format = @format_digestor.from_xml_string(xml_response)
     format.id.should == 17
     format.file_format.should == :MP3
     format.bit_rate.should == 320

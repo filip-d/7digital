@@ -15,7 +15,7 @@ describe "PagerDigestor" do
     </release>
 XML
 
-    running {@pager_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@pager_digestor.from_xml_string(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
     end
 
  it "should not digest if paging info is missing from xml but spit out nil" do
@@ -28,7 +28,7 @@ XML
     </results>
 XML
 
-    pager = @pager_digestor.from_xml_nokogiri(xml_response, :results)
+    pager = @pager_digestor.from_xml_string(xml_response, :results)
     pager.should == nil
   end
 
@@ -42,7 +42,7 @@ XML
     </pager>
 XML
 
-    pager = @pager_digestor.from_xml_nokogiri(xml_response, :pager)
+    pager = @pager_digestor.from_xml_string(xml_response, :pager)
     pager.page.should == 3
     pager.page_size.should == 22
     pager.total_items.should == 99

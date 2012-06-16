@@ -16,7 +16,7 @@ describe "TrackDigestor" do
     </artist>
 XML
 
-    running {@track_digestor.from_xml_nokogiri(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
+    running {@track_digestor.from_xml_string(xml_response)}.should raise_error(Sevendigital::DigestiveProblem)
   end
 
   it "should digest track xml and populate minimum available properties" do
@@ -31,7 +31,7 @@ XML
     </track>
 XML
 
-    track = @track_digestor.from_xml_nokogiri(xml_response)
+    track = @track_digestor.from_xml_string(xml_response)
     track.id.should == 123
     track.title.should == "expected track title"
     track.artist.id.should == 345
@@ -43,7 +43,7 @@ XML
 
     xml_response = load_sample_object_xml("track")
 
-    track = @track_digestor.from_xml_nokogiri(xml_response)
+    track = @track_digestor.from_xml_string(xml_response)
     track.id.should == 1628015
     track.title.should == "Burning"
     track.version.should == ""

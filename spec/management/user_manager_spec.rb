@@ -39,7 +39,7 @@ describe "UserManager" do
     options = {:country => "XX"}
 
     mock_client_digestor(@client, :user_digestor) \
-      .should_receive(:from_xml).with(an_api_response.content.user).and_return(fake_user)
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("user")).and_return(fake_user)
 
     @client.should_receive(:make_signed_api_request) \
         .with(:POST, "user/signUp", {:emailAddress => @an_email, :password => @a_password}, options) \
@@ -101,7 +101,7 @@ describe "UserManager" do
     options = {:sort => "random"}
 
     mock_client_digestor(@client, :locker_digestor) \
-      .should_receive(:from_xml).with(an_api_response.content.locker).and_return(fake_locker)
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("locker")).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
         .with(:GET, "user/locker", {}, options, a_token) \
@@ -120,7 +120,7 @@ describe "UserManager" do
     fake_locker = [Sevendigital::LockerRelease.new(@client)]
 
     mock_client_digestor(@client, :locker_digestor) \
-      .should_receive(:from_xml).with(an_api_response.content.purchase).and_return(fake_locker)
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("purchase")).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
            .with(:GET, "user/purchase/item", \
@@ -139,7 +139,7 @@ describe "UserManager" do
     fake_locker = [Sevendigital::LockerRelease.new(@client)]
 
     mock_client_digestor(@client, :locker_digestor) \
-      .should_receive(:from_xml).with(an_api_response.content.purchase).and_return(fake_locker)
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("purchase")).and_return(fake_locker)
 
     @client.should_receive(:make_signed_api_request) \
            .with(:GET, "user/purchase/basket", \

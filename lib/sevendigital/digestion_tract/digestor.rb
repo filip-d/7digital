@@ -10,26 +10,9 @@ module Sevendigital
         @api_client = api_client
       end
 
-      def from_xml(xml_or_proxy, element_name = default_element_name)
-        from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, element_name))
-      end
-
-      def from_xml_nokogiri(xml, element_name = default_element_name)
+      def from_xml_string(xml, element_name = default_element_name)
         xml_doc = Nokogiri::XML(xml)
-        puts xml_doc.inspect
-        puts "XML #{element_name}"
-        puts xml_doc.at_xpath("./#{element_name}").inspect
         from_xml_doc(xml_doc.at_xpath("./#{element_name}"))
-      end
-
-      def list_from_proxy(object_list_proxy)
-        make_sure_not_eating_nil(object_list_proxy)
-        list = []
-        return list if object_list_proxy.kind_of?(Peachy::SimpleContent)
-        if object_list_proxy.send(default_element_name) then
-          object_list_proxy.send(default_element_name).each { |object_proxy| list << from_proxy(object_proxy) }
-        end
-        paginate_results(object_list_proxy, list)
       end
 
       def list_from_xml_string(xml, list_element_name = default_list_element_name)
@@ -41,41 +24,31 @@ module Sevendigital
          make_sure_eating_nokogiri_node(list_node)
          list = []
          list_node.xpath("./#{default_element_name}").each { |node| list << from_xml_doc(node)}
-         paginate_results_nokogiri(list_node, list)
+         paginate_results(list_node, list)
        end
 
       #nested parsing for api methods that return standard object inside containers with no additional (useful) information
       #e.g. tagged_item.artist, recommendation.release, search_result.track, etc
 
-      def nested_list_from_xml(xml_or_proxy, container_element_name, list_element_name = default_list_element_name)
-        nested_list_from_proxy(ProxyPolice.ensure_is_proxy(xml_or_proxy, list_element_name), container_element_name)
+      def nested_list_from_xml_string(xml, container_element_name, list_element_name = default_list_element_name)
+        xml_doc = Nokogiri::XML(xml)
+        nested_list_from_xml_doc(xml_doc.at_xpath("./#{container_element_name}"), list_element_name)
       end
 
-      def nested_list_from_proxy(object_list_proxy, container_element_name)
-        make_sure_not_eating_nil(object_list_proxy)
+      def nested_list_from_xml_doc(list_node, list_element_name = default_list_element_name, element_name = default_element_name)
+        puts list_element_name
+        puts element_name
+        puts list_node.inspect
+        make_sure_eating_nokogiri_node(list_node)
         list = []
-        if object_list_proxy.send(container_element_name) then
-          object_list_proxy.send(container_element_name).each do
-            |object_proxy| list << from_proxy(object_proxy.send(default_element_name))
-          end 
-        end
-        return paginate_results(object_list_proxy, list)
+        list_node.xpath("./#{list_element_name}/#{element_name}").each { |node| list << from_xml_doc(node)}
+        paginate_results(list_node, list)
       end
 
-      def paginate_results(xml_results, list)
-        pager = @api_client.pager_digestor.from_xml(xml_results)
+      def paginate_results(results_xml_node, list)
+        pager = @api_client.pager_digestor.from_xml_doc(results_xml_node)
         return list if !pager
         pager.paginate_list(list)
-      end
-
-      def paginate_results_nokogiri(xml_results, list)
-        pager = @api_client.pager_digestor.from_xml_doc(xml_results)
-        return list if !pager
-        pager.paginate_list(list)
-      end
-
-      def make_sure_not_eating_nil(xml)
-        raise DigestiveProblem, "There's nothing i can digest" unless xml
       end
 
       def make_sure_eating_nokogiri_node(xml)

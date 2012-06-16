@@ -16,7 +16,7 @@ module Sevendigital
       paged_list = WillPaginate::Collection.create(@page, @page_size, @total_items) do |pager|
         pager.replace(list)
       end
-      return paged_list
+      paged_list
     end
 
   end

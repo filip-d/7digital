@@ -304,9 +304,9 @@ describe "ApiOperator" do
   end
 
   def fake_digested_response(is_ok = true)
-    proxy =  stub(Peachy::Proxy)#.new('<response status="ok"><content>test</content></response>')
-    proxy.stub!(:ok?).and_return(is_ok)
-    proxy
+    r = stub(Sevendigital::ApiResponse)
+    r.stub(:ok?).and_return(is_ok)
+    r
   end
 
   def stub_api_client(configuration, response_digestor)

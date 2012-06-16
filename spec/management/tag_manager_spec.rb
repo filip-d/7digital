@@ -19,7 +19,7 @@ describe "TagManager" do
     a_tag_list = [Sevendigital::Tag.new]
 
     mock_client_digestor(@client, :tag_digestor) \
-        .should_receive(:list_from_xml).with(an_api_response.content.tags).and_return(a_tag_list)
+        .should_receive(:list_from_xml_doc).with(an_api_response.item_xml("tags") ).and_return(a_tag_list)
 
     @client.should_receive(:make_api_request) \
                    .with(:GET, "tag", {}, {}) \
