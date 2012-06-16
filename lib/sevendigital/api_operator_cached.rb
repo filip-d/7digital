@@ -26,12 +26,17 @@ class ApiOperatorCached < ApiOperator # :nodoc:
   end
 
   def response_out_of_date?(api_response, current_time=nil)
-    return true if api_response.headers.nil? || api_response.headers["Date"].nil? || api_response.headers["cache-control"].nil?
-    puts "cache headers present"
-    return true if  !(api_response.headers["cache-control"] =~ /max-age=([0-9]+)/)
+    header_invalid?(api_response.headers) || cache_expired?(api_response.headers, current_time)
+  end
+
+  def header_invalid?(header)
+    header.nil? || header["Date"].nil? || header["cache-control"].nil? ||  !(header["cache-control"] =~ /max-age=([0-9]+)/)
+  end
+
+  def cache_expired?(header, current_time=nil)
     current_time ||= Time.now.utc
-    response_time = Time.parse(api_response.headers["Date"])
-    max_age = /max-age=([0-9]+)/.match(api_response.headers["cache-control"])[1].to_i
+    response_time = Time.parse(header["Date"])
+    max_age = /max-age=([0-9]+)/.match(header["cache-control"])[1].to_i
     response_time + max_age < current_time
   end
 

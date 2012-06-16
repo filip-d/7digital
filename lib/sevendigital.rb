@@ -44,6 +44,8 @@ module Sevendigital
 end  # module 7digital
 
 require 'nokogiri'
+require 'bigdecimal'
+require 'bigdecimal/util'
 require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'client_configuration')
 require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'management', 'manager')
 require File.join( File.dirname( File.expand_path(__FILE__)), 'sevendigital', 'digestion_tract', 'digestor')

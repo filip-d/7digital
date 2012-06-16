@@ -28,6 +28,7 @@ module Sevendigital
       artist.appears_as = get_optional_value(artist_node, :appearsAs)
       artist.image = get_optional_value(artist_node, :image)
       artist.url = get_optional_value(artist_node, :url)
+      artist.popularity = get_optional_value(artist_node, :popularity) {|v| v.to_s.to_d}
     end
 
   end

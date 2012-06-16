@@ -32,6 +32,10 @@ class Artist < SevendigitalObject
   #@return [String]
   sevendigital_basic_property :url
 
+  #popularity of the artist (lazy loaded using #get_tags)
+  #@return [decimal] similar
+  sevendigital_basic_property :popularity
+
   #artist's releases (lazy loaded using get_releases)
   #@return [Array<Release>] 
   sevendigital_extended_property :releases

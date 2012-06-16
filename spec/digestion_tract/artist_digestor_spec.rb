@@ -31,7 +31,7 @@ XML
     artist.name.should == "expected artist name"
   end
 
-   it "should digest artist xml and populate all available properties" do
+  it "should digest artist xml and populate all available properties" do
 
     xml_response = load_sample_object_xml("artist")
     artist = @artist_digestor.from_xml_string(xml_response)
@@ -41,7 +41,8 @@ XML
     artist.appears_as.should == "The E.A."
     artist.image.should == "http://somewhere.com/tea.jpg"
     artist.url.should == "http://7digital.com/artists/tea?partner=1"
-   end
+    artist.popularity.should == 0.55
+  end
 
     it "should digest xml containing list of artists and return a paginated array" do
 

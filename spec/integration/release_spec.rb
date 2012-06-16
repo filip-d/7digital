@@ -2,7 +2,7 @@
 require File.expand_path('../../spec_helper', __FILE__)
 require 'date'
 
-describe "Relase integration tests" do
+describe "Release integration tests" do
 
   before do
     @api_client = Sevendigital::Client.new(
