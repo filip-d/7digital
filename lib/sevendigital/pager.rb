@@ -4,11 +4,9 @@ rescue LoadError
 end
 
 module Sevendigital
-
   #@private
   #internal class used to page array results if will_paginate is available
   class Pager # :nodoc:
-
     attr_accessor :page, :page_size, :total_items
 
     def paginate_list(list)
@@ -18,7 +16,5 @@ module Sevendigital
       end
       paged_list
     end
-
   end
-
 end

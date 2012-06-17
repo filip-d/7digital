@@ -79,8 +79,5 @@ module Sevendigital
       new_hash = hash.inject({}){|memo,(k,v)| memo[k.to_sym] = transform_keys_to_symbols(v); memo}
       new_hash
     end
-
-
   end
-
 end

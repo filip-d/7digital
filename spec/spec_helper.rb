@@ -61,3 +61,24 @@ end
     str.split('_').map {|w| w.capitalize}.join
   end
 
+  def stub_api_client(configuration, response_digestor=nil)
+    @client = stub(Sevendigital::Client)
+    @client.stub!(:configuration).and_return(configuration)
+    @client.stub!(:oauth_consumer).and_return(OAuth::Consumer.new( configuration.oauth_consumer_key, configuration.oauth_consumer_secret))
+    @client.stub!(:api_response_digestor).and_return(response_digestor)
+    @client.stub!(:default_parameters).and_return({:country => 'sk'})
+    @client.stub!(:user_agent_info).and_return("7digital")
+    @client.stub!(:verbose?).and_return(false)
+    @client.stub!(:very_verbose?).and_return(false)
+    @client.stub!(:api_host_and_version).and_return(["base.api.url","version"])
+    @client.stub!(:log).and_yield()
+    @client
+  end
+
+  def test_configuration
+    configuration = OpenStruct.new
+    configuration.oauth_consumer_key = "oauth_consumer_key"
+    configuration
+  end
+
+

@@ -1,7 +1,5 @@
 module Sevendigital
-
   class TrackManager < Manager
-
     def get_details(id, options={})
       api_response = @api_client.make_api_request(:GET, "track/details", {:trackId => id}, options)
       @api_client.track_digestor.from_xml_doc(api_response.item_xml("track"))

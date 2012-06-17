@@ -5,9 +5,8 @@ require 'time'
 describe "ApiOperatorCached" do
 
   before do
-    @client = stub(Sevendigital::Client)
-    @client.stub!(:verbose?).and_return(false)
-    @client.stub!(:very_verbose?).and_return(false)
+    conf = test_configuration
+    @client = stub_api_client(conf)
     @cache = stub(Hash)
     @cached_operator = Sevendigital::ApiOperatorCached.new(@client, @cache)
     @stub_api_request = stub_api_request()

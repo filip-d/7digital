@@ -53,7 +53,13 @@ module Sevendigital
     end
 
     def configuration
-      return @configuration
+      @configuration
+    end
+
+    def log(severity, &block)
+      if self.send("#{severity}?")
+        logger.info(yield) if block_given?
+      end
     end
 
     def operator
@@ -61,17 +67,17 @@ module Sevendigital
     end
 
     def verbose?
-     !!(@verbose || @configuration.verbose)
+     very_verbose? || !!@verbose || !!@configuration.verbose
     end
 
     def very_verbose?
-      verbose? && (@verbose || @configuration.verbose).to_s == "very_verbose"
+      @very_verbose || @configuration.verbose.to_s == "very_verbose"
     end
 
   #@private
   def api_host_and_version(api_service=nil)
      service = api_service && !api_service.to_s.empty? ? "#{api_service}_" : ""
-     return configuration.send("#{service}api_url".to_sym), configuration.send("#{service}api_version".to_sym)
+     [configuration.send("#{service}api_url".to_sym), configuration.send("#{service}api_version".to_sym)]
   end
 
   #@private
@@ -107,7 +113,10 @@ module Sevendigital
       params
     end
 
-
+    #@private
+    def logger
+      path = (@configuration.logfile_path.nil? || @configuration.logfile_path.blank?) ? STDOUT : @configuration.logfile_path
+      @logger ||= Logger.new(path)
+    end
   end
-
 end

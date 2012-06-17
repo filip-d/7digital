@@ -38,7 +38,7 @@ module Sevendigital
       begin
         demand_price(options) if @api_client.configuration.lazy_load
       rescue Sevendigital::SevendigitalError => error
-        puts "Error whilst lazyloading price - #{error.error_code} #{error.error_message}" if @api_client.verbose?
+        @api_client.log(:verbose) { "Release: Error while lazyloading price - #{error.error_code} #{error.error_message}" }
         raise error if !@api_client.configuration.ignorant_lazy_load
       end
       @price

@@ -6,11 +6,11 @@ describe "ApiOperator" do
 
   before do
     response_digestor = stub(Sevendigital::ApiResponseDigestor)
-    response_digestor.stub!(:from_http_response). and_return(fake_digested_response)
+    response_digestor.stub!(:from_http_response). and_return(fake_api_response)
 
     stub_api_client(test_configuration, response_digestor)
 
-    Net::HTTP.stub!(:get_response).and_return(fake_api_response)
+    Net::HTTP.stub!(:get_response).and_return(fake_http_response)
 
     @api_operator = Sevendigital::ApiOperator.new(@client)
 
@@ -140,7 +140,7 @@ describe "ApiOperator" do
 
   it "should make HTTP request and get http response" do
 
-    http_response = fake_api_response
+    http_response = fake_http_response
 
     @stub_http_request = stub(Net::HTTP::Get)
     @stub_http_client =  stub(Net::HTTP)
@@ -157,8 +157,8 @@ describe "ApiOperator" do
 
   it "should digest the HTTP response and get it out" do
 
-    http_response = fake_api_response
-    digested_response = fake_digested_response
+    http_response = fake_http_response
+    digested_response = fake_api_response
 
     @client.api_response_digestor.should_receive(:from_http_response).with(http_response).and_return(digested_response)
 
@@ -170,8 +170,8 @@ describe "ApiOperator" do
 
     it "should call API by making an http request and digesting the response" do
 
-    http_response = fake_api_response
-    digested_response = fake_digested_response
+    http_response = fake_http_response
+    digested_response = fake_api_response
 
     @api_operator.should_receive(:make_http_request).and_return(http_response)
 
@@ -185,10 +185,10 @@ describe "ApiOperator" do
 
   it "should throw an exception if response is not ok" do
 
-    failed_response = fake_digested_response(false)
+    failed_response = fake_api_response(false)
     failed_response.stub!(:error_code).and_return(4000)
     failed_response.stub!(:error_message).and_return("error")
-    @api_operator.should_receive(:make_http_request).and_return(fake_api_response)
+    @api_operator.should_receive(:make_http_request).and_return(fake_http_response)
     @client.api_response_digestor.stub!(:from_http_response).and_return(failed_response)
     
     running { @api_operator.call_api(@stub_api_request) }.should raise_error(Sevendigital::SevendigitalError) { |error|
@@ -293,34 +293,18 @@ describe "ApiOperator" do
     signed_uri.should =~ /https:\/\/base.api.url\/version\/api\/method/
   end
 
-  def test_configuration
-    configuration = OpenStruct.new
-    configuration.oauth_consumer_key = "oauth_consumer_key"
-    return configuration
+  def fake_http_response(code = 200, body = "response_body")
+    http_stub = stub('Net::HTTPResponse')
+    http_stub.stub!(:code => code, :body => body, :header => {})
+    http_stub
+    #Net::HTTP.new("1.1", code, body).tap {|r| puts r.inspect}
   end
 
-  def fake_api_response(code = 200, body = "response_body")
-    return Net::HTTP.new("1.1", code, body)
-  end
-
-  def fake_digested_response(is_ok = true)
+  def fake_api_response(is_ok = true)
     r = stub(Sevendigital::ApiResponse)
     r.stub(:ok?).and_return(is_ok)
     r
   end
-
-  def stub_api_client(configuration, response_digestor)
-  @client = stub(Sevendigital::Client)
-  @client.stub!(:configuration).and_return(configuration)
-  @client.stub!(:oauth_consumer).and_return(OAuth::Consumer.new( configuration.oauth_consumer_key, configuration.oauth_consumer_secret))
-  @client.stub!(:api_response_digestor).and_return(response_digestor)
-  @client.stub!(:default_parameters).and_return({:country => 'sk'})
-  @client.stub!(:user_agent_info).and_return("7digital")
-  @client.stub!(:verbose?).and_return(false)
-  @client.stub!(:very_verbose?).and_return(false)
-  @client.stub!(:api_host_and_version).and_return(["base.api.url","version"])
-
-end
 
 def stub_api_request
   api_request = stub(Sevendigital::ApiRequest)

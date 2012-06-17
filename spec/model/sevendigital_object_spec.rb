@@ -5,11 +5,11 @@ describe "SevendigitalObject" do
 
   before do
 
-    @configuration = stub(Sevendigital::ClientConfiguration)
-    @configuration.stub!(:lazy_load).and_return(true)
+    @configuration = test_configuration
+    @configuration.lazy_load = true
 
-    @client = stub(Sevendigital::Client)
-    @client.stub!(:configuration).and_return(@configuration)
+    stub_api_client(@configuration)
+
     @client.stub!(:verbose?).and_return(true)
     @test_object = Sevendigital::SevendigitalObject.new(@client)
   end
