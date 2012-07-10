@@ -11,7 +11,7 @@ module Sevendigital
       user = User.new(@api_client)
 
       user.id = get_optional_attribute(xml_node, "id")
-      user.type = get_required_value(xml_node, "type").to_sym
+      user.type = get_optional_value(xml_node, "type") {|v| v.to_sym}
       user.email_address = get_optional_value(xml_node, "emailAddress")
 
       user

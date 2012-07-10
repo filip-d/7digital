@@ -22,13 +22,11 @@ XML
 
     xml_response = <<XML
 <user>
-  <type>7digital</type>
 </user>
 XML
 
     user = @user_digestor.from_xml_string(xml_response)
-    user.type.should == :"7digital"
-    
+    user.should_not be_nil
   end
 
   it "should parse from xml and populate all properties" do
