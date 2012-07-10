@@ -2,6 +2,11 @@ module Sevendigital
 
   class UserManager < Manager
 
+    def get_details(token, options={})
+      api_response = @api_client.make_signed_api_request(:GET, "user/details", {}, options, token)
+      @locker = @api_client.user_digestor.from_xml_doc(api_response.item_xml("user"))
+    end
+
     def login(access_token)
       raise Sevendigital::SevendigitalError if !access_token.kind_of? OAuth::AccessToken
       user = Sevendigital::User.new(@api_client)

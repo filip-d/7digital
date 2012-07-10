@@ -1,0 +1,5 @@
+<response status="ok" version="1.2">
+	<user>
+		<emailAddress>user@example.com</emailAddress>
+	</user>
+</response>

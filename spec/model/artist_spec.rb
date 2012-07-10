@@ -21,7 +21,7 @@ describe "Artist" do
       (options.keys & expected_options.keys).should == expected_options.keys
       fresh_artist
     }
-    @artist.get_details(expected_options)
+    @artist.get_details(expected_options).should == fresh_artist
     
     @artist.sort_name.should == fresh_artist.sort_name
     @artist.image.should == fresh_artist.image
@@ -151,5 +151,5 @@ describe "Artist" do
     artist.image = "image"
     artist.url = "url"
     artist
-end
+  end
 end

@@ -57,6 +57,7 @@ class Artist < SevendigitalObject
     def get_details(options={})
       artist_with_details = @api_client.artist.get_details(@id, options)
       copy_basic_properties_from(artist_with_details)
+      artist_with_details
     end
 
     #releases by this artist retrieved by calling *artist/releases* API method

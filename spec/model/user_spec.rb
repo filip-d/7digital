@@ -13,6 +13,21 @@ describe "User" do
     @user = Sevendigital::User.new(@client)
   end
 
+  it "get_details should get user's basic details from manager" do
+    @user.oauth_access_token = OAuth::AccessToken.new(nil, "TOKEN", "SECRET")
+    fresh_user = fake_user_with_details
+    expected_options = {:page => 2}
+
+    @user_manager.should_receive(:get_details) { |token, options|
+      token.should == @user.oauth_access_token
+      (options.keys & expected_options.keys).should == expected_options.keys
+      fresh_user
+    }
+    @user.get_details(expected_options).should == fresh_user
+    @user.email_address.should == fresh_user.email_address
+
+  end
+
   it "should not be authorised if does not have access_token" do
     @user.oauth_access_token = nil
     @user.authenticated?.should == false
@@ -156,6 +171,12 @@ describe "User" do
 
   it "should not get a stream tack url but raise Sevendigital::Error if user is not authenticated" do
     running {@user.get_locker}.should raise_error(Sevendigital::SevendigitalError)
+  end
+
+  def fake_user_with_details
+    user = Sevendigital::User.new(@client)
+    user.email_address = "user@7digital.com"
+    user
   end
 
 end

@@ -21,6 +21,22 @@ describe "UserManager" do
     @user_manager = Sevendigital::UserManager.new(@client)
   end
 
+  it "get_details should call user/details api method and return user's email" do
+    an_api_response = fake_api_response("user/details")
+    a_token = OAuth::AccessToken.new(nil, "token", "token_secret")
+    fake_user = [Sevendigital::User.new(@client)]
+    options = {:sort => "random"}
+
+    mock_client_digestor(@client, :user_digestor) \
+      .should_receive(:from_xml_doc).with(an_api_response.item_xml("user")).and_return(fake_user)
+
+    @client.should_receive(:make_signed_api_request) \
+        .with(:GET, "user/details", {}, options, a_token) \
+        .and_return(an_api_response)
+
+    @user_manager.get_details(a_token, options).should == fake_user
+  end
+
   it "should log in user using an existing access token" do
     an_access_token = OAuth::AccessToken.new("aaa", "bbb", nil)
     @user = @user_manager.login(an_access_token)

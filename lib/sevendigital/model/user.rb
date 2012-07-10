@@ -2,7 +2,11 @@ module Sevendigital
 
   class User < SevendigitalObject
 
-    attr_accessor :oauth_access_token, :id, :type, :email_address
+    attr_accessor :oauth_access_token, :id, :type
+
+    #Artist image URL (optional lazy-loaded property)
+    #@return [String]
+    sevendigital_basic_property :email_address
 
     sevendigital_extended_property :locker
 
@@ -10,6 +14,13 @@ module Sevendigital
 
     def authenticated?
       return !@oauth_access_token.nil?
+    end
+
+    def get_details(options={})
+      raise Sevendigital::SevendigitalError if !authenticated?
+      user_with_details = @api_client.user.get_details(@oauth_access_token, options)
+      copy_basic_properties_from(user_with_details)
+      user_with_details
     end
 
     def get_locker(options={})
