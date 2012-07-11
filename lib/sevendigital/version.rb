@@ -1,5 +1,5 @@
 module Sevendigital
   # The version of the gem
   NAME = "7digital"
-  VERSION = '0.0.7'
+  VERSION = '0.1.0'
 end
