@@ -16,7 +16,7 @@ describe "Artist integration test" do
     artists.current_page.should == 1
     artists.total_entries.should >= 1
     artists.each do |artist|
-      artist.name[0..2].should == "Kea"
+      artist.name[0..2].downcase.should == "kea"
       artist.id.should >= 1
       artist.url.should =~ VALID_7DIGITAL_URL
     end

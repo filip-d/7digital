@@ -1,0 +1,89 @@
+  <list id="3202">
+    <key>featured_albums</key>
+    <listItems>
+      <listItem id="1879539">
+        <type>release</type>
+        <release id="1879539">
+          <title>Coexist</title>
+          <version/>
+          <type>Album</type>
+          <barcode>634904608057</barcode>
+          <year>2012</year>
+          <explicitContent>false</explicitContent>
+          <artist id="382774">
+            <name>The xx</name>
+            <appearsAs>The xx</appearsAs>
+            <url>http://www.7digital.com/artists/the-xx/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/the-xx/coexist/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/795/0001879539_50.jpg</image>
+          <releaseDate>2012-09-10T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+            <format id="33">
+              <fileFormat>M4A</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="10983">
+            <name>Young Turks</name>
+          </label>
+        </release>
+      </listItem>
+      <listItem id="1879543">
+        <type>release</type>
+        <release id="1879543">
+          <title>Love This Giant</title>
+          <version/>
+          <type>Album</type>
+          <barcode>652637323160</barcode>
+          <year>2012</year>
+          <explicitContent>false</explicitContent>
+          <artist id="2640">
+            <name>David Byrne</name>
+            <appearsAs>David Byrne &amp; St. Vincent</appearsAs>
+            <url>http://www.7digital.com/artists/david-byrne/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/david-byrne/love-this-giant/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/795/0001879543_50.jpg</image>
+          <releaseDate>2012-09-10T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+            <format id="33">
+              <fileFormat>M4A</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="905">
+            <name>4AD</name>
+          </label>
+        </release>
+      </listItem>
+    </listItems>
+  </list>

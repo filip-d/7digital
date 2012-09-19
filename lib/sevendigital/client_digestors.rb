@@ -58,6 +58,16 @@ module Sevendigital
     end
 
     #@private
+    def list_digestor
+      @list_digestor ||= ListDigestor.new(self)
+    end
+
+    #@private
+    def list_item_digestor
+      @list_item_digestor ||= ListItemDigestor.new(self)
+    end
+
+    #@private
     def oauth_request_token_digestor
       @oauth_request_token_digestor ||= OAuthRequestTokenDigestor.new(self)
     end

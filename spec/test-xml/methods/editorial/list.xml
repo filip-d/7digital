@@ -1,0 +1,171 @@
+<response status="ok" version="1.2" xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <list id="3202">
+    <key>featured_albums</key>
+    <listItems>
+      <listItem id="1889735">
+        <type>release</type>
+        <release id="1889735">
+          <title>Battle Born</title>
+          <version/>
+          <type>Album</type>
+          <barcode>00602537147700</barcode>
+          <year>2009</year>
+          <explicitContent>false</explicitContent>
+          <artist id="616">
+            <name>The Killers</name>
+            <appearsAs>The Killers</appearsAs>
+            <url>http://www.7digital.com/artists/the-killers/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/the-killers/battle-born-2/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/897/0001889735_50.jpg</image>
+          <releaseDate>2012-09-17T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="133987">
+            <name>Digital Distribution Turkey</name>
+          </label>
+        </release>
+      </listItem>
+      <listItem id="1863720">
+        <type>release</type>
+        <release id="1863720">
+          <title>Shields</title>
+          <version/>
+          <type>Album</type>
+          <barcode>0801061022938</barcode>
+          <year>2012</year>
+          <explicitContent>false</explicitContent>
+          <artist id="171648">
+            <name>Grizzly Bear</name>
+            <appearsAs>Grizzly Bear</appearsAs>
+            <url>http://www.7digital.com/artists/grizzly-bear/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/grizzly-bear/shields/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/637/0001863720_50.jpg</image>
+          <releaseDate>2012-09-16T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+            <format id="33">
+              <fileFormat>M4A</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="811">
+            <name>Warp Records</name>
+          </label>
+        </release>
+      </listItem>
+      <listItem id="1848275">
+        <type>release</type>
+        <release id="1848275">
+          <title>Total Loss</title>
+          <version/>
+          <type>Album</type>
+          <barcode>5055453701450</barcode>
+          <year>2012</year>
+          <explicitContent>false</explicitContent>
+          <artist id="766646">
+            <name>How To Dress Well</name>
+            <appearsAs>How To Dress Well</appearsAs>
+            <url>http://www.7digital.com/artists/how-to-dress-well/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/how-to-dress-well/total-loss/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/482/0001848275_50.jpg</image>
+          <releaseDate>2012-09-17T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+            <format id="33">
+              <fileFormat>M4A</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="74276">
+            <name>Weird World</name>
+          </label>
+        </release>
+      </listItem>
+      <listItem id="1896829">
+        <type>release</type>
+        <release id="1896829">
+          <title>Maybe Today, Maybe Tomorrow</title>
+          <version/>
+          <type>Album</type>
+          <barcode>5060246123500</barcode>
+          <year>2012</year>
+          <explicitContent>false</explicitContent>
+          <artist id="479133">
+            <name>We Are The Ocean</name>
+            <appearsAs>We Are The Ocean</appearsAs>
+            <url>http://www.7digital.com/artists/we-are-the-ocean/?partner=1401</url>
+          </artist>
+          <url>http://www.7digital.com/artists/we-are-the-ocean/maybe-today-maybe-tomorrow-2/?partner=1401</url>
+          <image>http://cdn.7static.com/static/img/sleeveart/00/018/968/0001896829_50.jpg</image>
+          <releaseDate>2012-09-17T00:00:00+01:00</releaseDate>
+          <price>
+            <currency code="GBP"/>
+            <value>5</value>
+            <formattedPrice>£5.00</formattedPrice>
+            <rrp>7.99</rrp>
+            <formattedRrp>£7.99</formattedRrp>
+            <onSale>true</onSale>
+          </price>
+          <formats availableDrmFree="true">
+            <format id="17">
+              <fileFormat>MP3</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+            <format id="33">
+              <fileFormat>M4A</fileFormat>
+              <bitRate>320</bitRate>
+              <drmFree>true</drmFree>
+            </format>
+          </formats>
+          <label id="838">
+            <name>Hassle Records</name>
+          </label>
+        </release>
+      </listItem>
+    </listItems>
+  </list>
+</response>

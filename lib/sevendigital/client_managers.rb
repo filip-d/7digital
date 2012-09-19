@@ -4,12 +4,17 @@ module Sevendigital
 
     #@return [ArtistManager]
     def artist
-      @artist_manager ||= ArtistManager.new(self) 
+      @artist_manager ||= ArtistManager.new(self)
     end
 
     #@return [BasketManager]
     def basket
       @basket_manager ||= BasketManager.new(self)
+    end
+
+    #@return [ListManager]
+    def list
+      @list_manager ||= ListManager.new(self)
     end
 
     #@return [ReleaseManager]
