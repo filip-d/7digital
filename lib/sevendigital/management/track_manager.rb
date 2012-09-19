@@ -24,10 +24,5 @@ module Sevendigital
       @api_client.track_digestor.nested_list_from_xml_doc(api_response.item_xml("searchResults"), :searchResult, :track)
     end
 
-    def search_beta(query, options={})
-      api_response = @api_client.make_api_request(:GET, "track/search/beta", {:q => query}, options)
-      @api_client.track_digestor.nested_list_from_xml_doc(api_response.item_xml("searchResults"), :searchResult, :track)
-    end
-
   end
 end
