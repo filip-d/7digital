@@ -1,0 +1,7 @@
+<response status="ok" version="1.2" xsi:noNamespaceSchemaLocation="http://api.7digital.com/1.2/static/7digitalAPI.xsd"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <GeoIpLookup>
+    <ipaddress>1.2.3.4</ipaddress>
+    <countryCode>AU</countryCode>
+  </GeoIpLookup>
+</response>

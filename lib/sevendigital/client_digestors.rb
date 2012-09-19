@@ -28,6 +28,11 @@ module Sevendigital
     end
 
     #@private
+    def country_digestor
+      @country_digestor ||= CountryDigestor.new(self)
+    end
+
+    #@private
     def download_url_digestor
       @download_url_digestor ||= DownloadUrlDigestor.new(self)
     end

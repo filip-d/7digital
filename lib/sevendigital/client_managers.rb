@@ -12,6 +12,11 @@ module Sevendigital
       @basket_manager ||= BasketManager.new(self)
     end
 
+    #@return [CountrytManager]
+    def country
+      @country_manager ||= CountryManager.new(self)
+    end
+
     #@return [ListManager]
     def list
       @list_manager ||= ListManager.new(self)
