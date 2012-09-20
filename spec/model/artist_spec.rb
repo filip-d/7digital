@@ -122,7 +122,15 @@ describe "Artist" do
 
   end
 
+  it "image should return link to image with specified image size" do
+    release = fake_release_with_details
+    release.image(333).should == "http://cdn.7static.com/static/img/artistimages/00/000/000/0000000001_333.jpg"
+  end
 
+  it "image should return link to image with returned image size" do
+    release = fake_release_with_details
+    release.image.should == "http://cdn.7static.com/static/img/artistimages/00/000/000/0000000001_300.jpg"
+  end
 
   def fake_track_list
     tracks = Array.new
@@ -148,7 +156,7 @@ describe "Artist" do
   def fake_artist_with_details
     artist = Sevendigital::Artist.new(@client)
     artist.sort_name = "The, The"
-    artist.image = "image"
+    artist.image = "http://cdn.7static.com/static/img/artistimages/00/000/000/0000000001_300.jpg"
     artist.url = "url"
     artist
   end

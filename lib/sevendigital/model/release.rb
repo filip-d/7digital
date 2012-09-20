@@ -17,6 +17,11 @@ module Sevendigital
       @price = release_with_details.instance_variable_get("@price")
       release_with_details
     end
+
+    def image(image_size = nil)
+      return @image.gsub(/_\d+\.jpg/, "_#{image_size}.jpg") if image_size
+      @image
+    end
     
     def get_tracks(options={})
       @api_client.release.get_tracks(@id, options)

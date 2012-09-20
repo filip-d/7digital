@@ -52,6 +52,11 @@ class Artist < SevendigitalObject
   #@return [Array<Artist>] similar
   sevendigital_extended_property :tags
 
+    def image(image_size = nil)
+      return @image.gsub(/_\d+\.jpg/, "_#{image_size}.jpg") if image_size
+      @image
+    end
+
     #populates all available details on artist by calling *artist/details* API method
     #@return [Artist] 
     def get_details(options={})

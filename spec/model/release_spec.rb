@@ -85,7 +85,18 @@ describe "Release" do
     }
     @release.get_tags(expected_options)
 
+    end
+
+  it "image should return link to image with specified image size" do
+    release = fake_release_with_details
+    release.image(333).should == "http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809794_333.jpg"
   end
+
+  it "image should return link to image with returned image size" do
+    release = fake_release_with_details
+    release.image(333).should == "http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809794_100.jpg"
+  end
+
 
   def fake_releases_list
     releases = Array.new
@@ -106,7 +117,7 @@ describe "Release" do
     release.version = "(release version)"
     release.type = :album
     release.artist = Sevendigital::Artist.new(@client)
-    release.image = "image"
+    release.image = "http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809794_100.jpg"
     release.url = "url"
     release.release_date = DateTime.new(2010, 1, 1)
     release.added_date = DateTime.new(2000, 1, 1)

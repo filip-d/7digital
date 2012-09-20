@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.rdoc"]
   s.add_dependency('oauth', '>= 0.4.5')
   s.add_dependency('nokogiri', '>= 1.5.0')
-  s.add_dependency('will_paginate', '>= 2.3.15')
+  s.add_development_dependency('will_paginate', '>= 2.3.15')
   s.add_development_dependency('yard', '>= 0.6.0')
   s.homepage = "http://github.com/filip7d/7digital"
   s.rdoc_options = ["--main", "README.rdoc"]

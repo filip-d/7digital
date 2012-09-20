@@ -4,21 +4,28 @@ This is a ruby wrapper for the 7digital API.
 
 ==About 7digital
 
-7digital.com is an online music store operating in over 16 countries and offering more than 11 million high quality DRM free MP3s (320kbps) from all major labels and wide range of idependent labels and distributors. 7digital API will give you access to the full catalogue including high quality album art, 30s preview clips for all tracks, commissions on sales, integrated purchasing and full length streaming. More details at http://developer.7digital.net
+7digital.com is an online music store operating in over 30 countries and offering more than 20 million high quality DRM free MP3s (320kbps) from all major labels and wide range of idependent labels and distributors. 7digital API will give you access to the full catalogue including high quality album art, 30s preview clips for all tracks, commissions on sales, integrated purchasing and full length streaming. More details at http://developer.7digital.net
 
 ==Installation
 
 	gem install 7digital
 
+
 ==Quick start example
 
 
 	require "sevendigital"
+
 	api_client = Sevendigital::Client.new(:oauth_consumer_key => "YOUR_KEY_HERE", :country => "GB")
+
 	an_artist = api_client.artist.search("radiohead").first
+
 	a_release = an_artist.releases(:page_size=>100).sort_by{|release| release.year}.last
+
 	puts "the latest #{an_artist.name} release is #{a_release.title} from #{a_release.year}"
+
 	puts "go and buy it at #{a_release.url} !"
+
 
 ==Usage details
 
