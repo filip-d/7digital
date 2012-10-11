@@ -19,7 +19,7 @@ module Sevendigital
 
     def call_api(api_request)
       make_http_request_and_digest(api_request).tap do |api_response|
-        @client.log(:verbose) { "ApiOperator: API Response: #{api_response}" }
+        @client.log(:very_verbose) { "ApiOperator: API Response: #{api_response}" }
       end
     end
 
@@ -41,7 +41,7 @@ module Sevendigital
       http_client, http_request = create_http_request(api_request)
       @client.log(:verbose) { "ApiOperator: Making HTTP Request..." }
       http_client.request(http_request).tap do |http_response|
-        @client.log(:verbose) { "ApiOperator: Response Headers: #{http_response.header.to_yaml}" }
+        @client.log(:very_verbose) { "ApiOperator: Response Headers: #{http_response.header.to_yaml}" }
       end
     end
 

@@ -15,7 +15,7 @@ module Sevendigital
       api_response = cache_response(api_request) if response_out_of_date?(api_response)
 
       api_response.tap do |api_response|
-        @client.log(:verbose) { "ApiOperatorCached: API Response: #{api_response}" }
+        @client.log(:very_verbose) { "ApiOperatorCached: API Response: #{api_response}" }
       end
     end
 
