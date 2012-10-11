@@ -41,8 +41,6 @@ module Sevendigital
       http_client, http_request = create_http_request(api_request)
       @client.log(:verbose) { "ApiOperator: Making HTTP Request..." }
       http_client.request(http_request).tap do |http_response|
-        puts @client.inspect
-        puts http_response.inspect
         @client.log(:verbose) { "ApiOperator: Response Headers: #{http_response.header.to_yaml}" }
       end
     end

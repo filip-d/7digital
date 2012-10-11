@@ -36,9 +36,6 @@ module Sevendigital
       end
 
       def nested_list_from_xml_doc(list_node, list_element_name = default_list_element_name, element_name = default_element_name)
-        puts list_element_name
-        puts element_name
-        puts list_node.inspect
         make_sure_eating_nokogiri_node(list_node)
         list = []
         list_node.xpath("./#{list_element_name}/#{element_name}").each { |node| list << from_xml_doc(node)}

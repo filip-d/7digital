@@ -48,7 +48,6 @@ describe "Client" do
     request.parameters[:releaseId].should == 456
     request.parameters[:country].should == "CU"
     request.parameters[:page].should == 1
-    puts request.parameters.inspect
     request.parameters.keys.size.should == 4 # page_size == null
 
   end

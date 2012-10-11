@@ -56,8 +56,7 @@ describe "ClientConfiguration" do
 
   it "should use environment specific configuration file with environment specific settings" do
     conf_file = File.join(File.dirname(__FILE__),"data", "configuration_env_override.yml")
-    puts conf_file
-
+    
     rails = OpenStruct.new
     rails.env = "development"
     Object.const_set(:Rails, rails)

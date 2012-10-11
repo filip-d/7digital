@@ -28,7 +28,6 @@ module Sevendigital
       response_node = xml_doc.at_xpath("./response")
       response_status = nil
       response_status = get_optional_attribute(response_node, "status") if response_node
-      puts xml.inspect
       if response_status == 'ok' then
         response.error_code = 0
       else

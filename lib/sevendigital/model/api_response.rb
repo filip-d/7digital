@@ -11,7 +11,6 @@ module Sevendigital
     end
 
     def content_xml
-      puts @content
       @content_xml ||= Nokogiri::XML(@content)
     end
 

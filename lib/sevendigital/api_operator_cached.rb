@@ -21,7 +21,6 @@ module Sevendigital
 
 
     def response_out_of_date?(api_response, current_time=nil)
-      puts @client.inspect
       (api_response.nil? || header_invalid?(api_response.headers) || cache_expired?(api_response.headers, current_time)).tap do |expired|
         @client.log(:verbose) { "ApiOperatorCached: Cache response out of date" if expired }
       end
