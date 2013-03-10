@@ -194,7 +194,7 @@ describe "ApiOperatorCached" do
 
   it "should read default cache max age value from configuration" do
     conf = test_configuration
-    conf.cache_max_age = {"m" => 1000}
+    conf.cache_max_age = {:"m" => 1000}
     @client = stub_api_client(conf)
     @cached_operator = Sevendigital::ApiOperatorCached.new(@client, @cache)
     @cached_operator.default_cache_max_age(@stub_api_request).should == 1000
