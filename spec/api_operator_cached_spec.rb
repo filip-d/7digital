@@ -38,23 +38,37 @@ describe "ApiOperatorCached" do
     http_response = stub_http_response
     @cached_operator.stub(:create_request_uri).and_return("key")
     @cache.stub!(:get).with("key").and_return(http_response)
-    @cached_operator.stub!(:response_out_of_date?).with(http_response).and_return(false)
+    @cached_operator.stub!(:response_out_of_date?).with(http_response, nil).and_return(false)
     @cached_operator.should_not_receive(:make_http_request)
     @cached_operator.should_not_receive(:digest_http_response).with(http_response)
     @cached_operator.call_api(@stub_api_request)
   end
 
   it "should make an http request if cached response is out of date " do
-
     expired_http_response = stub_http_response
     fresh_http_response = stub_http_response
     @cached_operator.stub(:create_request_uri).and_return("key")
     @cache.stub!(:get).with("key").and_return(expired_http_response)
-    @cached_operator.stub!(:response_out_of_date?).with(expired_http_response).and_return(true)
+    @cached_operator.stub!(:response_out_of_date?).with(expired_http_response, nil).and_return(true)
 
     @cache.stub!(:set).and_return(nil)
     @cached_operator.should_receive(:make_http_request).and_return(fresh_http_response)
     @cached_operator.should_receive(:digest_http_response).with(fresh_http_response)
+    @cached_operator.call_api(@stub_api_request)
+  end
+
+  it "should use overridden cache_max_age when checking if response out of date" do
+    @stub_api_request.stub!(:options).and_return({:cache_max_age => 123})
+    expired_http_response = stub_http_response
+    fresh_http_response = stub_http_response
+    @cached_operator.stub(:create_request_uri).and_return("key")
+    @cache.stub!(:get).with("key").and_return(expired_http_response)
+    @cache.stub!(:set).and_return(nil)
+    @cached_operator.stub(:make_http_request).and_return(fresh_http_response)
+    @cached_operator.stub(:digest_http_response).with(fresh_http_response)
+
+    @cached_operator.should_receive(:response_out_of_date?).with(expired_http_response, 123).and_return(true)
+
     @cached_operator.call_api(@stub_api_request)
   end
 
@@ -96,7 +110,7 @@ describe "ApiOperatorCached" do
       "Date" => yesterday.httpdate
     })
 
-    @cached_operator.response_out_of_date?(http_response, now).should == true
+    @cached_operator.response_out_of_date?(http_response, nil, now).should == true
 
   end
 
@@ -112,9 +126,42 @@ describe "ApiOperatorCached" do
       "Date" => yesterday.httpdate
     })
 
-    @cached_operator.response_out_of_date?(http_response, now).should == false
+    @cached_operator.response_out_of_date?(http_response, nil, now).should == false
 
   end
+
+  it "response should not be out of date if it's within overridden cache max age" do
+    now = Time.now.utc
+    yesterday = now - 24*60*60
+    max_age = 12*60*60
+    overridden_max_age = 48*60*60
+
+    http_response = stub_http_response
+    http_response.stub!(:headers).and_return({
+                                                 "cache-control" => "private, max-age=#{max_age}",
+                                                 "Date" => yesterday.httpdate
+                                             })
+
+    @cached_operator.response_out_of_date?(http_response, overridden_max_age, now).should == false
+
+  end
+
+  it "response should be out of date if it's not within overridden cache max age" do
+    now = Time.now.utc
+    yesterday = now - 24*60*60
+    max_age = 48*60*60
+    overridden_max_age = 12*60*60
+
+    http_response = stub_http_response
+    http_response.stub!(:headers).and_return({
+                                                 "cache-control" => "private, max-age=#{max_age}",
+                                                 "Date" => yesterday.httpdate
+                                             })
+
+    @cached_operator.response_out_of_date?(http_response, overridden_max_age, now).should == true
+
+  end
+
 
   it "response should be out of date if it is missing caching headers" do
 
@@ -145,6 +192,13 @@ describe "ApiOperatorCached" do
     
   end
 
+  it "should read default cache max age value from configuration" do
+    conf = test_configuration
+    conf.cache_max_age = {"m" => 1000}
+    @client = stub_api_client(conf)
+    @cached_operator = Sevendigital::ApiOperatorCached.new(@client, @cache)
+    @cached_operator.default_cache_max_age(@stub_api_request).should == 1000
+  end
 
   def fake_http_response
     return Net::HTTP.new("1.1", 200, "response_body")
@@ -168,6 +222,7 @@ describe "ApiOperatorCached" do
   api_request = stub(Sevendigital::ApiRequest)
 
   api_request.stub!(:parameters).and_return({})
+  api_request.stub!(:options).and_return({})
   api_request.stub!(:api_service).and_return(nil)
   api_request.stub!(:api_method).and_return("m")
   api_request.stub!(:requires_signature?).and_return(false)

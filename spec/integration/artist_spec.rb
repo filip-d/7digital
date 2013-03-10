@@ -36,6 +36,7 @@ describe "Artist integration test" do
     artist = @api_client.artist.get_details(1)
     artist.name.should == "Keane"
     artist.id.should == 1
+    artist.image.should =~ VALID_7DIGITAL_IMAGE
   end
 
   it "should get artist releases" do
@@ -80,6 +81,18 @@ describe "Artist integration test" do
       artist.name.should_not be_empty
       artist.id.should >= 1
       artist.url.should =~ VALID_7DIGITAL_URL
+    end
+  end
+
+  it "should get top by tag" do
+    artists = @api_client.artist.get_top_by_tag("pop")
+    artists.current_page.should == 1
+    artists.total_entries.should >= 1
+    artists.each do |artist|
+      artist.name.should_not be_empty
+      artist.id.should >= 1
+      artist.url.should =~ VALID_7DIGITAL_URL
+      artist.image.should =~ VALID_7DIGITAL_IMAGE
     end
   end
 

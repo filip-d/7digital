@@ -25,7 +25,7 @@ class Class # :nodoc:
       begin
         send(demand_method, *options) if instance_variable_get("@#{accessor}").nil? && @api_client.configuration.lazy_load
       rescue Sevendigital::SevendigitalError => error
-        @api_client.log(:verbose) { "Class: Error whilse lazyloading #{accessor} - #{error.error_code} #{error.error_message}" }
+        @api_client.log(:verbose) { "Class: Error while lazyloading #{accessor} - #{error.error_code} #{error.error_message}" }
         raise error if !@api_client.configuration.ignorant_lazy_load
       end
       instance_variable_get("@#{accessor}")

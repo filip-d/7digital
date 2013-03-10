@@ -12,8 +12,8 @@ describe "List integration tests" do
   end
 
   it "should get editorial list" do
-    list = @api_client.list.get_editorial_list("featured_albums")
-    list.key.should == "featured_albums"
+    list = @api_client.list.get_editorial_list("new_releases")
+    list.key.should == "new_releases"
     list.id.should > 0
     list.list_items.size.should > 1
     list.list_items[0].release.type.should == :album

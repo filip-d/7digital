@@ -28,4 +28,19 @@ describe "ApiRequest" do
 
   end
 
+  it "parameters should not contain wrapper options" do
+
+    request = Sevendigital::ApiRequest.new(:METHOD, 'method', {:key1 => "value", :cache_max_age => 123})
+    request.parameters[:key1].should == "value"
+    request.parameters.has_key?(:cache_max_age).should == false
+
+  end
+
+  it "options should be populated with wrapper options from parameters" do
+
+    request = Sevendigital::ApiRequest.new(:METHOD, 'method', {:key1 => "value", :cache_max_age => 123})
+    request.options[:cache_max_age].should == 123
+
+  end
+
 end

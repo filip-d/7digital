@@ -19,7 +19,7 @@ ignorant_lazy_load: false
 #false or nil - (default) don't log anything
 #true or verbose - log basic info
 #very_verbose - include full request & api responses in the log
-#verbose: true
+verbose: very_verbose
 
 ## default settings for common API parameters ##
 
@@ -37,3 +37,10 @@ ignorant_lazy_load: false
 
 #number of items returned in API responses
 #page_size: 20
+
+#override default cache-control max-age time provided by API
+cache_max_age:
+#for all API methods
+  "*": 3600
+#for a specific method
+  "artist/byTag/top": 50

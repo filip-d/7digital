@@ -94,7 +94,7 @@ describe "Release" do
 
   it "image should return link to image with returned image size" do
     release = fake_release_with_details
-    release.image(333).should == "http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809794_100.jpg"
+    release.image.should == "http://cdn.7static.com/static/img/sleeveart/00/008/097/0000809794_100.jpg"
   end
 
 

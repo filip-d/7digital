@@ -28,6 +28,7 @@ end
   alias running lambda
 
   VALID_7DIGITAL_URL = /http\:\/\/.+7digital\..+partner=[\d]+/
+  VALID_7DIGITAL_IMAGE = /http\:\/\/.+/
 
   def load_sample_method_xml(method_name)
     method_name = "test-xml/methods/" + method_name + ".xml"
