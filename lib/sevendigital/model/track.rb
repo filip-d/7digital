@@ -46,6 +46,10 @@ module Sevendigital
     #@return [Price]
     sevendigital_basic_property :price
 
+    #Track type, e.g. :audio, :video, :pdf, etc
+    #@return [String]
+    sevendigital_basic_property :type
+
     #Retrieves and populates all track properties
     #
     #useful with lazy loading turned off

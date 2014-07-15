@@ -64,6 +64,7 @@ XML
     track.price.formatted_rrp.should == "£0.79"
     track.price.on_sale.should == false
     track.url.should == "http://www.7digital.com/artists/the-whitest-boy-alive/dreams-1/01-Burning/?partner=123"
+    track.type.should == :audio
     track
   end
 

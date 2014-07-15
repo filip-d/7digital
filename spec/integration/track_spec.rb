@@ -17,6 +17,7 @@ describe "Track integration tests" do
     tracks.current_page.should == 1
     tracks.first.artist.appears_as.should == "Radiohead"
     tracks.first.release.should_not be_nil
+    tracks.first.type.should == :audio
 # not working yet on 7digital API    tracks.first.price.value.should > 0
   end
 

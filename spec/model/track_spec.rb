@@ -33,6 +33,7 @@ describe "Track" do
     @track.isrc.should == fresh_track.isrc
     @track.release.id.should == fresh_track.release.id
     @track.url.should == fresh_track.url
+    @track.type.should == fresh_track.type
 
   end
 
@@ -140,6 +141,7 @@ describe "Track" do
     track.release = Sevendigital::Release.new(@client)
     track.release.id = 5678
     track.url = "http://aaa.bbb.ccc/"
+    track.type = :audio
     track
   end
 end

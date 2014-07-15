@@ -32,6 +32,7 @@ module Sevendigital
          track.isrc = get_optional_value(xml_node, "isrc")
          track.url = get_optional_value(xml_node, "url")
          track.price =  get_optional_node(xml_node, "price") {|v| @api_client.price_digestor.from_xml_doc(v)}
+         track.type = get_optional_value(xml_node, "type") {|v| v.to_s.downcase.to_sym}
        end
   end
 end
