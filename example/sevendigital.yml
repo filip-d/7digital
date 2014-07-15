@@ -7,6 +7,10 @@ oauth_consumer_secret: "YOUR_SECRET_HERE"
 app_name: 7digital API Example
 app_version: 0.0.1
 
+#Override base URL for specific APIs
+media_api_version: 
+media_api_url: stream.svc.7digital.net
+
 #automatically populate properties
 lazy_load: true
 
