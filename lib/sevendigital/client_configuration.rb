@@ -6,8 +6,8 @@ module Sevendigital
   DEFAULT_CONFIGURATION = {
       :api_url =>  "api.7digital.com",
       :api_version => "1.2",
-      :media_api_url =>  "media-eu.7digital.com",
-      :media_api_version => "media",
+      :media_api_url =>  "stream.svc.7digital.net",
+      :media_api_version => "",
       :account_api_url =>  "account.7digital.com",
       :account_api_version => "web"
     }.freeze
