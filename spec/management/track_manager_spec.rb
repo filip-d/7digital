@@ -71,8 +71,12 @@ describe "TrackManager" do
     fake_api_request = stub(Sevendigital::ApiRequest)
 
     @client.should_receive(:create_api_request) \
-                   .with(:GET, "track/preview", {:trackId => track_id}, {}) \
+                   .with(:GET, "clip/#{track_id}", {}, {}) \
                    .and_return(fake_api_request)
+
+    fake_api_request.should_receive(:api_service=).with(:previews)
+    fake_api_request.should_receive(:require_signature)
+
 
     @client.operator.should_receive(:get_request_uri) \
       .with(fake_api_request) \

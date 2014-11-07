@@ -15,7 +15,9 @@ module Sevendigital
     end
 
     def build_preview_url(id, options={})
-      api_request = @api_client.create_api_request(:GET, "track/preview", {:trackId => id}, options)
+      api_request = @api_client.create_api_request(:GET, "clip/#{id}", {}, options)
+      api_request.api_service = :previews
+      api_request.require_signature
       @api_client.operator.get_request_uri(api_request)
     end
 

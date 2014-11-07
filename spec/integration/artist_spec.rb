@@ -18,7 +18,7 @@ describe "Artist integration test" do
     artists.each do |artist|
       artist.name[0..2].downcase.should == "kea"
       artist.id.should >= 1
-      artist.url.should =~ VALID_7DIGITAL_URL
+      artist.url.should =~ VALID_7DIGITAL_URL_WITH_PARTNERID
     end
   end
 
@@ -91,7 +91,7 @@ describe "Artist integration test" do
     artists.each do |artist|
       artist.name.should_not be_empty
       artist.id.should >= 1
-      artist.url.should =~ VALID_7DIGITAL_URL
+      artist.url.should =~ VALID_7DIGITAL_URL_WITH_PARTNERID
       artist.image.should =~ VALID_7DIGITAL_IMAGE
     end
   end

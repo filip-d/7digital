@@ -8,6 +8,8 @@ module Sevendigital
       :api_version => "1.2",
       :media_api_url =>  "stream.svc.7digital.net",
       :media_api_version => "",
+      :previews_api_url =>  "previews.7digital.com",
+      :previews_api_version => "",
       :account_api_url =>  "account.7digital.com",
       :account_api_version => "web"
     }.freeze
