@@ -5,8 +5,8 @@ module Sevendigital
     attr_accessor :id, :title
 
     sevendigital_basic_property  :version, :type, :artist, :image, :url, :release_date,
-                      :added_date, :barcode, :year, :explicit_content, :formats, :label
-                         
+                      :added_date, :barcode, :year, :explicit_content, :formats, :label, :track_count
+
     sevendigital_extended_property :tracks
     sevendigital_extended_property :recommendations
     sevendigital_extended_property :tags
@@ -22,7 +22,7 @@ module Sevendigital
       return @image.gsub(/_\d+\.jpg/, "_#{image_size}.jpg") if image_size
       @image
     end
-    
+
     def get_tracks(options={})
       @api_client.release.get_tracks(@id, options)
     end
@@ -54,5 +54,5 @@ module Sevendigital
     end
 
   end
-  
+
 end

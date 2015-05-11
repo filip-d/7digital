@@ -4,7 +4,7 @@ module Sevendigital
 
   #@private
   class ReleaseDigestor < Digestor # :nodoc:
-    
+
     def default_element_name; :release end
     def default_list_element_name; :releases end
 
@@ -38,6 +38,7 @@ module Sevendigital
       release.url = get_optional_value(xml_node, "url")
       release.price = get_optional_node(xml_node, "price") {|v| @api_client.price_digestor.from_xml_doc(v)}
       release.formats = get_optional_node(xml_node, "formats") {|v| @api_client.format_digestor.list_from_xml_doc(v)}
+      release.track_count = get_optional_value(xml_node, "trackCount") {|v| v.to_i}
     end
 
   end
